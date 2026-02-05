@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean Cabinet and Countertops — Kitchen & Bathroom Renovation | Cherry Hill, NJ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS Variables & Reset
+        ======================================== */
+        :root {
+            --color-bg: #FAF9F7;
+            --color-bg-alt: #F5F4F1;
+            --color-heading: #2A2A2A;
+            --color-body: #4A4A4A;
+            --color-muted: #6B6B6B;
+            --color-accent: #B8977E;
+            --color-accent-dark: #9A7D66;
+            --color-divider: #E8E6E3;
+
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            --max-width: 1280px;
+            --section-padding: 120px;
+            --section-padding-tablet: 72px;
+            --section-padding-mobile: 48px;
+
+            --transition-slow: 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-medium: 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition-fast: 300ms ease-out;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--color-body);
+            background-color: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ========================================
+           Typography
+        ======================================== */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            color: var(--color-heading);
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            line-height: 1.15;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            line-height: 1.2;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 2.5vw, 1.75rem);
+            line-height: 1.3;
+        }
+
+        p {
+            max-width: 600px;
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        .text-muted {
+            color: var(--color-muted);
+            font-size: 0.875rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* ========================================
+           Navigation
+        ======================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            transition: background var(--transition-fast), padding var(--transition-fast);
+        }
+
+        .nav.scrolled {
+            background: rgba(250, 249, 247, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 16px 48px;
+        }
+
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--color-heading);
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.8125rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--color-body);
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-accent);
+            transition: width var(--transition-fast);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-heading);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 1px;
+            background: var(--color-heading);
+            transition: var(--transition-fast);
+        }
+
+        /* ========================================
+           Hero Section
+        ======================================== */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: flex-end;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-media {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .hero-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(250, 249, 247, 0.1) 0%,
+                rgba(250, 249, 247, 0.3) 60%,
+                rgba(250, 249, 247, 0.7) 100%
+            );
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 0 48px 80px;
+            max-width: var(--max-width);
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .hero-statement {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 300;
+            line-height: 1.15;
+            color: var(--color-heading);
+            max-width: 800px;
+        }
+
+        .hero-subline {
+            margin-top: 24px;
+            font-size: 1.0625rem;
+            color: var(--color-body);
+            max-width: 480px;
+        }
+
+        /* ========================================
+           Sections Base
+        ======================================== */
+        section {
+            padding: var(--section-padding) 48px;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity var(--transition-medium), transform var(--transition-medium);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           Philosophy Section
+        ======================================== */
+        .philosophy {
+            background: var(--color-bg);
+        }
+
+        .philosophy-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 120px;
+            align-items: center;
+        }
+
+        .philosophy-text .label {
+            margin-bottom: 24px;
+        }
+
+        .philosophy-text h2 {
+            margin-bottom: 32px;
+        }
+
+        .philosophy-text p {
+            margin-bottom: 24px;
+        }
+
+        .philosophy-visual {
+            position: relative;
+        }
+
+        .philosophy-visual img {
+            aspect-ratio: 4/5;
+            object-fit: cover;
+        }
+
+        /* ========================================
+           Projects Section
+        ======================================== */
+        .projects {
+            background: var(--color-bg-alt);
+        }
+
+        .projects-header {
+            margin-bottom: 80px;
+        }
+
+        .projects-header .label {
+            margin-bottom: 16px;
+        }
+
+        .projects-grid {
+            display: grid;
+            gap: 48px;
+        }
+
+        .project-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .project-item.large {
+            grid-column: 1 / -1;
+        }
+
+        .project-image-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image {
+            aspect-ratio: 16/10;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .project-item.large .project-image {
+            aspect-ratio: 21/9;
+        }
+
+        .project-item:hover .project-image {
+            transform: scale(1.03);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(42, 42, 42, 0.6) 0%,
+                transparent 50%
+            );
+            opacity: 0;
+            transition: opacity var(--transition-medium);
+            display: flex;
+            align-items: flex-end;
+            padding: 32px;
+        }
+
+        .project-item:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-info h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+        }
+
+        .project-info span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        .projects-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 32px;
+        }
+
+        .projects-two-col .project-image {
+            aspect-ratio: 4/3;
+        }
+
+        /* ========================================
+           Materials Section
+        ======================================== */
+        .materials {
+            background: var(--color-bg);
+        }
+
+        .materials-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .materials-header .label {
+            margin-bottom: 16px;
+        }
+
+        .materials-header h2 {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .material-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 120px;
+        }
+
+        .material-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .material-item:nth-child(even) {
+            direction: rtl;
+        }
+
+        .material-item:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .material-image-wrapper {
+            overflow: hidden;
+        }
+
+        .material-image {
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .material-item:hover .material-image {
+            transform: scale(1.03);
+        }
+
+        .material-content h3 {
+            font-size: 1.75rem;
+            margin-bottom: 32px;
+        }
+
+        .material-attributes {
+            list-style: none;
+        }
+
+        .material-attributes li {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--color-divider);
+            font-size: 0.9375rem;
+            color: var(--color-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .material-attributes li::before {
+            content: '';
+            width: 16px;
+            height: 1px;
+            background: var(--color-accent);
+        }
+
+        /* ========================================
+           Collections Section
+        ======================================== */
+        .collections {
+            background: var(--color-bg-alt);
+        }
+
+        .collections-header {
+            margin-bottom: 80px;
+        }
+
+        .collections-header .label {
+            margin-bottom: 16px;
+        }
+
+        .collections-header p {
+            margin-top: 24px;
+            max-width: 500px;
+        }
+
+        .collection-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .collection-item {
+            display: grid;
+            grid-template-columns: 200px 1fr auto;
+            gap: 48px;
+            align-items: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--color-divider);
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+
+        .collection-item:last-child {
+            border-bottom: 1px solid var(--color-divider);
+        }
+
+        .collection-item:hover {
+            background: rgba(184, 151, 126, 0.05);
+        }
+
+        .collection-image-wrapper {
+            overflow: hidden;
+        }
+
+        .collection-image {
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            transition: transform var(--transition-medium);
+        }
+
+        .collection-item:hover .collection-image {
+            transform: scale(1.03);
+        }
+
+        .collection-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .collection-content p {
+            font-size: 0.9375rem;
+            color: var(--color-muted);
+        }
+
+        .collection-cta {
+            font-size: 0.8125rem;
+            letter-spacing: 0.04em;
+            color: var(--color-accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap var(--transition-fast);
+        }
+
+        .collection-item:hover .collection-cta {
+            gap: 12px;
+        }
+
+        .collection-cta svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ========================================
+           Craft Section
+        ======================================== */
+        .craft {
+            background: var(--color-bg);
+        }
+
+        .craft-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .craft-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .craft-gallery .craft-image-wrapper:first-child {
+            grid-column: 1 / -1;
+        }
+
+        .craft-image-wrapper {
+            overflow: hidden;
+        }
+
+        .craft-image {
+            aspect-ratio: 1;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .craft-gallery .craft-image-wrapper:first-child .craft-image {
+            aspect-ratio: 21/9;
+        }
+
+        .craft-image-wrapper:hover .craft-image {
+            transform: scale(1.03);
+        }
+
+        .craft-text .label {
+            margin-bottom: 24px;
+        }
+
+        .craft-text h2 {
+            margin-bottom: 32px;
+        }
+
+        .craft-text p {
+            margin-bottom: 24px;
+        }
+
+        .craft-highlights {
+            list-style: none;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--color-divider);
+        }
+
+        .craft-highlights li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+            font-size: 0.9375rem;
+        }
+
+        .craft-highlights li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           Contact Section
+        ======================================== */
+        .contact {
+            background: var(--color-bg-alt);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 120px;
+        }
+
+        .contact-text .label {
+            margin-bottom: 24px;
+        }
+
+        .contact-text h2 {
+            margin-bottom: 32px;
+        }
+
+        .contact-text p {
+            margin-bottom: 48px;
+        }
+
+        .contact-details {
+            list-style: none;
+        }
+
+        .contact-details li {
+            margin-bottom: 24px;
+        }
+
+        .contact-details .detail-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            margin-bottom: 4px;
+        }
+
+        .contact-details a {
+            transition: color var(--transition-fast);
+        }
+
+        .contact-details a:hover {
+            color: var(--color-accent);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 0;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--color-body);
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--color-divider);
+            outline: none;
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--color-accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 32px;
+            font-family: var(--font-sans);
+            font-size: 0.8125rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: #fff;
+            background: var(--color-heading);
+            border: none;
+            cursor: pointer;
+            transition: background var(--transition-fast), gap var(--transition-fast);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-dark);
+            gap: 16px;
+        }
+
+        .btn-primary svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ========================================
+           Footer
+        ======================================== */
+        .footer {
+            background: var(--color-heading);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 80px 48px;
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .footer-tagline {
+            font-size: 0.875rem;
+            max-width: 300px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 64px;
+        }
+
+        .footer-column h4 {
+            font-family: var(--font-sans);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            font-size: 0.875rem;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-column a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            max-width: var(--max-width);
+            margin: 60px auto 0;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8125rem;
+        }
+
+        /* ========================================
+           Responsive Design
+        ======================================== */
+        @media (max-width: 1024px) {
+            section {
+                padding: var(--section-padding-tablet) 32px;
+            }
+
+            .nav {
+                padding: 20px 32px;
+            }
+
+            .nav.scrolled {
+                padding: 16px 32px;
+            }
+
+            .philosophy-content,
+            .material-item,
+            .craft-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .material-item:nth-child(even) {
+                direction: ltr;
+            }
+
+            .collection-item {
+                grid-template-columns: 160px 1fr auto;
+                gap: 32px;
+            }
+
+            .projects-two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 48px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: var(--section-padding-mobile) 24px;
+            }
+
+            .nav {
+                padding: 16px 24px;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-bg);
+                flex-direction: column;
+                padding: 24px;
+                gap: 24px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero-content {
+                padding: 0 24px 48px;
+            }
+
+            .collection-item {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 32px 0;
+            }
+
+            .collection-image-wrapper {
+                max-width: 200px;
+            }
+
+            .collection-cta {
+                justify-self: start;
+            }
+
+            .craft-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .craft-gallery .craft-image-wrapper:first-child .craft-image {
+                aspect-ratio: 4/3;
+            }
+
+            .footer {
+                padding: 48px 24px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 32px;
+            }
+        }
+
+        /* ========================================
+           Scroll Progress Indicator
+        ======================================== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            background: var(--color-accent);
+            z-index: 1001;
+            width: 0%;
+            transition: width 100ms linear;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo">Ocean Cabinet</a>
+        <ul class="nav-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#materials">Materials</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-media">
+            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&q=80"
+                 alt="Modern kitchen with custom cabinetry and countertops"
+                 loading="eager">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-statement fade-in">Your Dream Kitchen & Bathroom, From Design to Reality</h1>
+            <p class="hero-subline fade-in">Full-service kitchen and bathroom renovation in Cherry Hill, NJ. Custom cabinets, countertops, and complete remodeling solutions.</p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="philosophy" id="services">
+        <div class="container">
+            <div class="philosophy-content">
+                <div class="philosophy-text">
+                    <span class="text-muted label fade-in">Our Services</span>
+                    <h2 class="fade-in">Complete Kitchen & Bathroom Solutions</h2>
+                    <p class="fade-in">From initial design consultation to final installation, we provide comprehensive renovation services. Our team handles every aspect of your project, ensuring a seamless and stress-free experience.</p>
+                    <p class="fade-in">We specialize in custom cabinetry, premium countertops (quartz, granite, marble), bathroom vanities, smart toilets, shower panels, flooring, and all the hardware to complete your space.</p>
+                </div>
+                <div class="philosophy-visual fade-in">
+                    <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800&q=80"
+                         alt="Modern kitchen with custom cabinetry"
+                         loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <div class="projects-header">
+                <span class="text-muted label fade-in">Project Gallery</span>
+                <h2 class="fade-in">Our Completed Work</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-item large fade-in">
+                    <div class="project-image-wrapper">
+                        <img class="project-image"
+                             src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80"
+                             alt="Modern kitchen renovation in Cherry Hill"
+                             loading="lazy">
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h3>Modern Kitchen Remodel</h3>
+                                <span>Cherry Hill, NJ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="projects-two-col">
+                    <div class="project-item fade-in">
+                        <div class="project-image-wrapper">
+                            <img class="project-image"
+                                 src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
+                                 alt="Luxury bathroom renovation"
+                                 loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-info">
+                                    <h3>Spa-Style Bathroom</h3>
+                                    <span>Marlton, NJ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-item fade-in">
+                        <div class="project-image-wrapper">
+                            <img class="project-image"
+                                 src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80"
+                                 alt="Custom cabinet installation"
+                                 loading="lazy">
+                            <div class="project-overlay">
+                                <div class="project-info">
+                                    <h3>Custom Cabinet Installation</h3>
+                                    <span>Haddonfield, NJ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Materials Section -->
+    <section class="materials" id="materials">
+        <div class="container">
+            <div class="materials-header">
+                <span class="text-muted label fade-in">Materials & Products</span>
+                <h2 class="fade-in">Premium Quality Selection</h2>
+            </div>
+
+            <div class="material-item fade-in">
+                <div class="material-image-wrapper">
+                    <img class="material-image"
+                         src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80"
+                         alt="Custom kitchen cabinets"
+                         loading="lazy">
+                </div>
+                <div class="material-content">
+                    <h3>Custom Cabinets</h3>
+                    <ul class="material-attributes">
+                        <li>Multiple Styles & Finishes</li>
+                        <li>Soft-Close Hardware</li>
+                        <li>Quality Brand Options</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="material-item fade-in">
+                <div class="material-image-wrapper">
+                    <img class="material-image"
+                         src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80"
+                         alt="Quartz and granite countertops"
+                         loading="lazy">
+                </div>
+                <div class="material-content">
+                    <h3>Countertops</h3>
+                    <ul class="material-attributes">
+                        <li>Quartz & Granite</li>
+                        <li>Marble & Natural Stone</li>
+                        <li>Custom Edge Profiles</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="material-item fade-in">
+                <div class="material-image-wrapper">
+                    <img class="material-image"
+                         src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80"
+                         alt="Flooring materials"
+                         loading="lazy">
+                </div>
+                <div class="material-content">
+                    <h3>Flooring & Hardware</h3>
+                    <ul class="material-attributes">
+                        <li>Hardwood & Tile</li>
+                        <li>Vinyl & Laminate</li>
+                        <li>Handles & Pulls</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bathroom Products Section -->
+    <section class="collections" id="bathroom">
+        <div class="container">
+            <div class="collections-header">
+                <span class="text-muted label fade-in">Bathroom Renovation</span>
+                <h2 class="fade-in">Complete Bathroom Solutions</h2>
+                <p class="fade-in">From vanities to smart toilets, we supply and install everything you need for your dream bathroom.</p>
+            </div>
+
+            <div class="collection-list">
+                <div class="collection-item fade-in">
+                    <div class="collection-image-wrapper">
+                        <img class="collection-image"
+                             src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&q=80"
+                             alt="Bathroom vanity"
+                             loading="lazy">
+                    </div>
+                    <div class="collection-content">
+                        <h3>Vanities & Sinks</h3>
+                        <p>Custom bathroom vanities and wash basins for every style.</p>
+                    </div>
+                    <span class="collection-cta">
+                        Learn More
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </div>
+
+                <div class="collection-item fade-in">
+                    <div class="collection-image-wrapper">
+                        <img class="collection-image"
+                             src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&q=80"
+                             alt="Smart toilet"
+                             loading="lazy">
+                    </div>
+                    <div class="collection-content">
+                        <h3>Smart Toilets</h3>
+                        <p>Modern bidet toilets with advanced comfort features.</p>
+                    </div>
+                    <span class="collection-cta">
+                        Learn More
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </div>
+
+                <div class="collection-item fade-in">
+                    <div class="collection-image-wrapper">
+                        <img class="collection-image"
+                             src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80"
+                             alt="Shower panel"
+                             loading="lazy">
+                    </div>
+                    <div class="collection-content">
+                        <h3>Shower Systems</h3>
+                        <p>Premium shower panels and enclosures for a spa-like experience.</p>
+                    </div>
+                    <span class="collection-cta">
+                        Learn More
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="craft" id="about">
+        <div class="container">
+            <div class="craft-content">
+                <div class="craft-gallery">
+                    <div class="craft-image-wrapper fade-in">
+                        <img class="craft-image"
+                             src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=1200&q=80"
+                             alt="Kitchen design consultation"
+                             loading="lazy">
+                    </div>
+                    <div class="craft-image-wrapper fade-in">
+                        <img class="craft-image"
+                             src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+                             alt="Professional installation"
+                             loading="lazy">
+                    </div>
+                    <div class="craft-image-wrapper fade-in">
+                        <img class="craft-image"
+                             src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80"
+                             alt="Quality craftsmanship"
+                             loading="lazy">
+                    </div>
+                </div>
+                <div class="craft-text">
+                    <span class="text-muted label fade-in">About Us</span>
+                    <h2 class="fade-in">Experienced Team, Quality Results</h2>
+                    <p class="fade-in">Our team brings years of design and installation experience to every project. We're committed to providing high-quality renovation services and work closely with each client from start to finish, ensuring a transparent and smooth process.</p>
+                    <ul class="craft-highlights fade-in">
+                        <li>Free kitchen measurement guide - draw your layout and get an estimate</li>
+                        <li>One-stop service from design to installation</li>
+                        <li>Transparent pricing and project timeline</li>
+                        <li>Dedicated project manager for each renovation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-text">
+                    <span class="text-muted label fade-in">Get In Touch</span>
+                    <h2 class="fade-in">Start Your Renovation Today</h2>
+                    <p class="fade-in">Ready to transform your kitchen or bathroom? Contact us for a free consultation. Visit our showroom or schedule an on-site design appointment.</p>
+                    <ul class="contact-details fade-in">
+                        <li>
+                            <div class="detail-label">Showroom</div>
+                            <div>2093 Marlton Pike East<br>Cherry Hill, NJ 08003</div>
+                        </li>
+                        <li>
+                            <div class="detail-label">Email</div>
+                            <a href="mailto:info@oceancabinet.com">info@oceancabinet.com</a>
+                        </li>
+                        <li>
+                            <div class="detail-label">Telephone</div>
+                            <a href="tel:+18561234567">+1 (856) 123-4567</a>
+                        </li>
+                    </ul>
+                </div>
+                <form class="contact-form fade-in">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Tell us about your project</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">
+                        Request Free Estimate
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">Ocean Cabinet</div>
+                <p class="footer-tagline">Kitchen & bathroom renovation specialists in Cherry Hill, NJ. From design to installation.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Kitchen Remodeling</a></li>
+                        <li><a href="#bathroom">Bathroom Renovation</a></li>
+                        <li><a href="#materials">Countertops</a></li>
+                        <li><a href="#materials">Flooring</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#projects">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Measurement Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Yelp</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2024 Ocean Cabinet and Countertops. All rights reserved.</span>
+            <span>Serving Cherry Hill, NJ & Surrounding Areas</span>
+        </div>
+    </footer>
+
+    <script>
+        // ========================================
+        // Navigation Scroll Effect
+        // ========================================
+        const nav = document.querySelector('.nav');
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const scrollProgress = document.querySelector('.scroll-progress');
+
+        window.addEventListener('scroll', () => {
+            // Nav background on scroll
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+
+            // Scroll progress indicator
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+        });
+
+        // Mobile nav toggle
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile nav on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // ========================================
+        // Scroll Reveal Animation
+        // ========================================
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // ========================================
+        // Smooth Scroll for Anchor Links
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = nav.offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ========================================
+        // Form Submission (Demo)
+        // ========================================
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const btn = this.querySelector('.btn-primary');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = 'Message Sent';
+                btn.style.background = 'var(--color-accent)';
+
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    this.reset();
+                }, 3000);
+            });
+        }
+
+        // ========================================
+        // Staggered Animation for Lists
+        // ========================================
+        const staggerElements = document.querySelectorAll('.collection-item, .material-item');
+        staggerElements.forEach((el, index) => {
+            el.style.transitionDelay = `${index * 100}ms`;
+        });
+    </script>
+</body>
+</html>
