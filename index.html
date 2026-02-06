@@ -565,6 +565,379 @@
         }
 
         /* ========================================
+           AI Kitchen Assistant Section
+        ======================================== */
+        .ai-assistant {
+            background: var(--color-bg);
+        }
+
+        .ai-assistant-content {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .ai-assistant-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .ai-assistant-header .label {
+            margin-bottom: 16px;
+        }
+
+        .ai-assistant-header p {
+            margin: 24px auto 0;
+            max-width: 520px;
+        }
+
+        /* Step Progress Indicator */
+        .step-progress {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 48px;
+        }
+
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-divider);
+            transition: background var(--transition-fast), transform var(--transition-fast);
+        }
+
+        .step-dot.active {
+            background: var(--color-accent);
+            transform: scale(1.25);
+        }
+
+        .step-dot.completed {
+            background: var(--color-accent-dark);
+        }
+
+        /* Question Card */
+        .question-card {
+            background: var(--color-bg-alt);
+            padding: 48px;
+            border: 1px solid var(--color-divider);
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .question-card[hidden] {
+            display: none;
+        }
+
+        .question-number {
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            margin-bottom: 16px;
+        }
+
+        .question-text {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--color-heading);
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+
+        /* Option Buttons */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-bottom: auto;
+        }
+
+        .option-btn {
+            padding: 16px 20px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-divider);
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            color: var(--color-body);
+            cursor: pointer;
+            transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+            text-align: center;
+        }
+
+        .option-btn:hover {
+            border-color: var(--color-accent);
+        }
+
+        .option-btn.selected {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: #fff;
+        }
+
+        /* Navigation Buttons */
+        .question-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-divider);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 0;
+            font-family: var(--font-sans);
+            font-size: 0.8125rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--color-muted);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: color var(--transition-fast);
+        }
+
+        .btn-secondary:hover {
+            color: var(--color-heading);
+        }
+
+        .btn-secondary:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .btn-next {
+            margin-left: auto;
+        }
+
+        .btn-next svg {
+            order: 1;
+        }
+
+        /* Summary Card */
+        .summary-card {
+            background: var(--color-bg-alt);
+            padding: 48px;
+            border: 1px solid var(--color-divider);
+        }
+
+        .summary-card[hidden] {
+            display: none;
+        }
+
+        .summary-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .summary-header svg {
+            width: 24px;
+            height: 24px;
+            color: var(--color-accent);
+        }
+
+        .summary-header h3 {
+            font-size: 1.25rem;
+            margin: 0;
+        }
+
+        .summary-content {
+            font-size: 0.9375rem;
+            line-height: 1.8;
+            color: var(--color-body);
+            margin-bottom: 32px;
+        }
+
+        .summary-content p {
+            margin-bottom: 16px;
+            max-width: none;
+        }
+
+        .summary-loading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--color-muted);
+            font-size: 0.875rem;
+        }
+
+        .summary-loading::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--color-divider);
+            border-top-color: var(--color-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .summary-disclaimer {
+            font-size: 0.8125rem;
+            color: var(--color-muted);
+            padding-top: 24px;
+            border-top: 1px solid var(--color-divider);
+            font-style: italic;
+        }
+
+        /* Measurement Guide */
+        .measurement-guide {
+            margin-top: 48px;
+            padding: 40px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-divider);
+        }
+
+        .measurement-guide[hidden] {
+            display: none;
+        }
+
+        .measurement-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .measurement-header svg {
+            width: 20px;
+            height: 20px;
+            color: var(--color-accent);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .measurement-header h4 {
+            font-family: var(--font-serif);
+            font-size: 1.125rem;
+            margin: 0;
+        }
+
+        .measurement-header p {
+            font-size: 0.875rem;
+            color: var(--color-muted);
+            margin-top: 4px;
+        }
+
+        .measurement-checklist {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .measurement-checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-divider);
+            font-size: 0.9375rem;
+        }
+
+        .measurement-checklist li:last-child {
+            border-bottom: none;
+        }
+
+        .measurement-checklist li::before {
+            content: '';
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--color-divider);
+            border-radius: 2px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .measurement-item-text strong {
+            display: block;
+            color: var(--color-heading);
+            margin-bottom: 2px;
+        }
+
+        .measurement-item-text span {
+            font-size: 0.8125rem;
+            color: var(--color-muted);
+        }
+
+        /* Summary Actions */
+        .summary-actions {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 24px;
+            font-family: var(--font-sans);
+            font-size: 0.8125rem;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--color-heading);
+            background: transparent;
+            border: 1px solid var(--color-heading);
+            cursor: pointer;
+            transition: background var(--transition-fast), color var(--transition-fast);
+        }
+
+        .btn-outline:hover {
+            background: var(--color-heading);
+            color: #fff;
+        }
+
+        .btn-outline svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .question-card,
+            .summary-card {
+                padding: 32px 24px;
+            }
+
+            .question-text {
+                font-size: 1.25rem;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-actions {
+                flex-direction: column;
+            }
+
+            .summary-actions .btn-primary,
+            .summary-actions .btn-outline {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .measurement-guide {
+                padding: 24px;
+            }
+        }
+
+        /* ========================================
            Craft Section
         ======================================== */
         .craft {
@@ -974,6 +1347,7 @@
             <li><a href="#projects">Projects</a></li>
             <li><a href="#materials">Materials</a></li>
             <li><a href="#about">About Us</a></li>
+            <li><a href="#ai-assistant">Get Started</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-toggle" aria-label="Toggle navigation">
@@ -1242,6 +1616,262 @@
         </div>
     </section>
 
+    <!-- AI Kitchen Assistant Section -->
+    <section class="ai-assistant" id="ai-assistant">
+        <div class="container">
+            <div class="ai-assistant-content">
+                <div class="ai-assistant-header">
+                    <span class="text-muted label fade-in">Design Assistant</span>
+                    <h2 class="fade-in">Help Us Understand Your Project</h2>
+                    <p class="fade-in">Answer a few questions to help our design team prepare for your consultation. This takes about 2 minutes.</p>
+                </div>
+
+                <!-- Step Progress -->
+                <div class="step-progress fade-in" id="stepProgress">
+                    <span class="step-dot active" data-step="1"></span>
+                    <span class="step-dot" data-step="2"></span>
+                    <span class="step-dot" data-step="3"></span>
+                    <span class="step-dot" data-step="4"></span>
+                    <span class="step-dot" data-step="5"></span>
+                    <span class="step-dot" data-step="6"></span>
+                    <span class="step-dot" data-step="7"></span>
+                </div>
+
+                <!-- Question Cards -->
+                <div id="questionContainer" class="fade-in">
+                    <!-- Question 1: Property Type -->
+                    <div class="question-card" data-step="1">
+                        <span class="question-number">Question 1 of 7</span>
+                        <h3 class="question-text">What type of property is this project for?</h3>
+                        <div class="options-grid">
+                            <button type="button" class="option-btn" data-value="condo">Condo</button>
+                            <button type="button" class="option-btn" data-value="townhouse">Townhouse</button>
+                            <button type="button" class="option-btn" data-value="single-family">Single Family Home</button>
+                            <button type="button" class="option-btn" data-value="other">Other</button>
+                        </div>
+                        <div class="question-nav">
+                            <button type="button" class="btn-secondary" disabled>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                </svg>
+                                Back
+                            </button>
+                            <button type="button" class="btn-secondary btn-next" data-next="2" disabled>
+                                Next
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 2: Primary Residence -->
+                    <div class="question-card" data-step="2" hidden>
+                        <span class="question-number">Question 2 of 7</span>
+                        <h3 class="question-text">Will this be your primary residence?</h3>
+                        <div class="options-grid">
+                            <button type="button" class="option-btn" data-value="primary">Yes, primary residence</button>
+                            <button type="button" class="option-btn" data-value="investment">Investment property</button>
+                            <button type="button" class="option-btn" data-value="vacation">Vacation home</button>
+                        </div>
+                        <div class="question-nav">
+                            <button type="button" class="btn-secondary btn-back" data-back="1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                </svg>
+                                Back
+                            </button>
+                            <button type="button" class="btn-secondary btn-next" data-next="3" disabled>
+                                Next
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 3: Kitchen Size -->
+                    <div class="question-card" data-step="3" hidden>
+                        <span class="question-number">Question 3 of 7</span>
+                        <h3 class="question-text">How would you describe your kitchen size?</h3>
+                        <div class="options-grid">
+                            <button type="button" class="option-btn" data-value="small">Small (under 100 sq ft)</button>
+                            <button type="button" class="option-btn" data-value="medium">Medium (100–200 sq ft)</button>
+                            <button type="button" class="option-btn" data-value="large">Large (over 200 sq ft)</button>
+                            <button type="button" class="option-btn" data-value="unsure">Not sure</button>
+                        </div>
+                        <div class="question-nav">
+                            <button type="button" class="btn-secondary btn-back" data-back="2">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                </svg>
+                                Back
+                            </button>
+                            <button type="button" class="btn-secondary btn-next" data-next="4" disabled>
+                                Next
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: Style Preference -->
+                    <div class="question-card" data-step="4" hidden>
+                        <span class="question-number">Question 4 of 7</span>
+                        <h3 class="question-text">What design style are you drawn to?</h3>
+                        <div class="options-grid">
+                            <button type="button" class="option-btn" data-value="modern">Modern / Contemporary</button>
+                            <button type="button" class="option-btn" data-value="transitional">Transitional</button>
+                            <button type="button" class="option-btn" data-value="traditional">Traditional / Classic</button>
+                            <button type="button" class="option-btn" data-value="undecided">Open to suggestions</button>
+                        </div>
+                        <div class="question-nav">
+                            <button type="button" class="btn-secondary btn-back" data-back="3">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                </svg>
+                                Back
+                            </button>
+                            <button type="button" class="btn-secondary btn-next" data-next="5" disabled>
+                                Next
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 5: Priority -->
+                    <div class="question-card" data-step="5" hidden>
+                        <span class="question-number">Question 5 of 7</span>
+                        <h3 class="question-text">What matters most to you in this project?</h3>
+                        <div class="options-grid">
+                            <button type="button" class="option-btn" data-value="design">Design & aesthetics</button>
+                            <button type="button" class="option-btn" data-value="durability">Durability & quality</button>
+                            <button type="button" class="option-btn" data-value="budget">Value for budget</button>
+                            <button type="button" class="option-btn" data-value="balanced">Balanced approach</button>
+                        </div>
+                        <div class="question-nav">
+                            <button type="button" class="btn-secondary btn-back" data-back="4">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                </svg>
+                                Back
+                            </button>
+                            <button type="button" class="btn-secondary btn-next" data-next="6" disabled>
+                                Next
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 6: Timeline -->
+                    <div class="question-card" data-step="6" hidden>
+                        <span class="question-number">Question 6 of 7</span>
+                        <h3 class="question-text">When are you hoping to start the project?</h3>
+                        <div class="options-grid">
+                            <button type="button" class="option-btn" data-value="asap">As soon as possible</button>
+                            <button type="button" class="option-btn" data-value="1-3months">Within 1–3 months</button>
+                            <button type="button" class="option-btn" data-value="3-6months">Within 3–6 months</button>
+                            <button type="button" class="option-btn" data-value="flexible">Flexible / Planning ahead</button>
+                        </div>
+                        <div class="question-nav">
+                            <button type="button" class="btn-secondary btn-back" data-back="5">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                </svg>
+                                Back
+                            </button>
+                            <button type="button" class="btn-secondary btn-next" data-next="7" disabled>
+                                Next
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Question 7: Budget Range -->
+                    <div class="question-card" data-step="7" hidden>
+                        <span class="question-number">Question 7 of 7</span>
+                        <h3 class="question-text">What budget range are you considering?</h3>
+                        <div class="options-grid">
+                            <button type="button" class="option-btn" data-value="value">Value-focused</button>
+                            <button type="button" class="option-btn" data-value="mid">Mid-range</button>
+                            <button type="button" class="option-btn" data-value="premium">Premium / High-end</button>
+                            <button type="button" class="option-btn" data-value="flexible">Flexible / Undecided</button>
+                        </div>
+                        <div class="question-nav">
+                            <button type="button" class="btn-secondary btn-back" data-back="6">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                </svg>
+                                Back
+                            </button>
+                            <button type="button" class="btn-primary btn-submit">
+                                Generate Summary
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Summary (shown after completion) -->
+                <div class="summary-card fade-in" id="summaryCard" hidden>
+                    <div class="summary-header">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <h3>Your Project Summary</h3>
+                    </div>
+                    <div class="summary-content" id="summaryContent">
+                        <p class="summary-loading">Preparing your personalized summary...</p>
+                    </div>
+                    <p class="summary-disclaimer">
+                        This summary is provided for consultation purposes only. Final design recommendations, pricing, and project specifications will be determined by our professional design team during your in-person consultation.
+                    </p>
+
+                    <!-- Smart Measurement Guide -->
+                    <div class="measurement-guide" id="measurementGuide" hidden>
+                        <div class="measurement-header">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 6h16M4 12h16M4 18h7"/>
+                                <path d="M15 15l3 3m0 0l3-3m-3 3V9"/>
+                            </svg>
+                            <div>
+                                <h4>Your Measurement Checklist</h4>
+                                <p>Bring these measurements to your consultation for a more accurate initial assessment.</p>
+                            </div>
+                        </div>
+                        <ul class="measurement-checklist" id="measurementChecklist">
+                            <!-- Dynamically populated based on answers -->
+                        </ul>
+                    </div>
+
+                    <div class="summary-actions">
+                        <a href="#contact" class="btn-primary">
+                            Schedule Consultation
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <button type="button" class="btn-outline" id="startOverBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            </svg>
+                            Start Over
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
@@ -1312,7 +1942,7 @@
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#projects">Gallery</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="#">Measurement Guide</a></li>
+                        <li><a href="#ai-assistant">Design Assistant</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -1436,6 +2066,433 @@
         staggerElements.forEach((el, index) => {
             el.style.transitionDelay = `${index * 100}ms`;
         });
+
+        // ========================================
+        // AI Kitchen Assistant
+        // ========================================
+        (function() {
+            // State management for the questionnaire
+            const assistantState = {
+                currentStep: 1,
+                totalSteps: 7,
+                answers: {}
+            };
+
+            // DOM Elements
+            const questionContainer = document.getElementById('questionContainer');
+            const stepProgress = document.getElementById('stepProgress');
+            const summaryCard = document.getElementById('summaryCard');
+            const summaryContent = document.getElementById('summaryContent');
+            const measurementGuide = document.getElementById('measurementGuide');
+            const measurementChecklist = document.getElementById('measurementChecklist');
+            const startOverBtn = document.getElementById('startOverBtn');
+
+            if (!questionContainer) return; // Exit if section not present
+
+            // Answer display labels (for human-readable summary)
+            const answerLabels = {
+                propertyType: {
+                    'condo': 'Condominium',
+                    'townhouse': 'Townhouse',
+                    'single-family': 'Single Family Home',
+                    'other': 'Other Property Type'
+                },
+                residence: {
+                    'primary': 'Primary Residence',
+                    'investment': 'Investment Property',
+                    'vacation': 'Vacation Home'
+                },
+                kitchenSize: {
+                    'small': 'Small Kitchen (under 100 sq ft)',
+                    'medium': 'Medium Kitchen (100–200 sq ft)',
+                    'large': 'Large Kitchen (over 200 sq ft)',
+                    'unsure': 'Size to be determined'
+                },
+                style: {
+                    'modern': 'Modern / Contemporary',
+                    'transitional': 'Transitional',
+                    'traditional': 'Traditional / Classic',
+                    'undecided': 'Open to design suggestions'
+                },
+                priority: {
+                    'design': 'Design & Aesthetics',
+                    'durability': 'Durability & Quality',
+                    'budget': 'Value for Budget',
+                    'balanced': 'Balanced Approach'
+                },
+                timeline: {
+                    'asap': 'As soon as possible',
+                    '1-3months': 'Within 1–3 months',
+                    '3-6months': 'Within 3–6 months',
+                    'flexible': 'Flexible timeline'
+                },
+                budget: {
+                    'value': 'Value-focused',
+                    'mid': 'Mid-range',
+                    'premium': 'Premium / High-end',
+                    'flexible': 'Flexible budget'
+                }
+            };
+
+            // Map step numbers to answer keys
+            const stepToKey = {
+                1: 'propertyType',
+                2: 'residence',
+                3: 'kitchenSize',
+                4: 'style',
+                5: 'priority',
+                6: 'timeline',
+                7: 'budget'
+            };
+
+            // Handle option selection
+            questionContainer.addEventListener('click', function(e) {
+                const optionBtn = e.target.closest('.option-btn');
+                if (optionBtn) {
+                    const card = optionBtn.closest('.question-card');
+                    const step = parseInt(card.dataset.step);
+                    const key = stepToKey[step];
+                    const value = optionBtn.dataset.value;
+
+                    // Deselect all options in this card
+                    card.querySelectorAll('.option-btn').forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+
+                    // Select this option
+                    optionBtn.classList.add('selected');
+
+                    // Store answer
+                    assistantState.answers[key] = value;
+
+                    // Enable next button
+                    const nextBtn = card.querySelector('.btn-next');
+                    if (nextBtn) {
+                        nextBtn.disabled = false;
+                    }
+                }
+
+                // Handle back button
+                const backBtn = e.target.closest('.btn-back');
+                if (backBtn) {
+                    const targetStep = parseInt(backBtn.dataset.back);
+                    navigateToStep(targetStep);
+                }
+
+                // Handle next button
+                const nextBtn = e.target.closest('.btn-next');
+                if (nextBtn && !nextBtn.disabled) {
+                    const targetStep = parseInt(nextBtn.dataset.next);
+                    navigateToStep(targetStep);
+                }
+
+                // Handle submit button
+                const submitBtn = e.target.closest('.btn-submit');
+                if (submitBtn) {
+                    // Ensure last question is answered
+                    if (assistantState.answers.budget) {
+                        showSummary();
+                    }
+                }
+            });
+
+            // Navigate between steps
+            function navigateToStep(step) {
+                // Hide all cards
+                questionContainer.querySelectorAll('.question-card').forEach(card => {
+                    card.hidden = true;
+                });
+
+                // Show target card
+                const targetCard = questionContainer.querySelector(`[data-step="${step}"]`);
+                if (targetCard) {
+                    targetCard.hidden = false;
+                }
+
+                // Update progress dots
+                stepProgress.querySelectorAll('.step-dot').forEach(dot => {
+                    const dotStep = parseInt(dot.dataset.step);
+                    dot.classList.remove('active', 'completed');
+                    if (dotStep < step) {
+                        dot.classList.add('completed');
+                    } else if (dotStep === step) {
+                        dot.classList.add('active');
+                    }
+                });
+
+                assistantState.currentStep = step;
+            }
+
+            // Show the summary
+            function showSummary() {
+                questionContainer.hidden = true;
+                stepProgress.style.display = 'none';
+                summaryCard.hidden = false;
+
+                // Show loading state
+                summaryContent.innerHTML = '<p class="summary-loading">Preparing your personalized summary...</p>';
+
+                // Generate summary (simulated delay for UX)
+                setTimeout(() => {
+                    generateAISummary(assistantState.answers)
+                        .then(summary => {
+                            summaryContent.innerHTML = summary;
+                            generateMeasurementGuide(assistantState.answers);
+                            measurementGuide.hidden = false;
+                        })
+                        .catch(error => {
+                            // Fallback to local generation if API fails
+                            summaryContent.innerHTML = generateLocalSummary(assistantState.answers);
+                            generateMeasurementGuide(assistantState.answers);
+                            measurementGuide.hidden = false;
+                        });
+                }, 800);
+            }
+
+            // ========================================
+            // AI Summary Generation
+            // ========================================
+
+            /**
+             * Generate AI-powered project summary
+             *
+             * INTEGRATION POINT: Replace this function body with actual API call.
+             *
+             * Example with Claude API:
+             *
+             * async function generateAISummary(answers) {
+             *     const response = await fetch('YOUR_BACKEND_ENDPOINT', {
+             *         method: 'POST',
+             *         headers: {
+             *             'Content-Type': 'application/json',
+             *             // Note: NEVER put API keys in client-side code
+             *             // Use a backend proxy to handle API authentication
+             *         },
+             *         body: JSON.stringify({
+             *             prompt: buildPromptFromAnswers(answers),
+             *             // Additional parameters as needed
+             *         })
+             *     });
+             *     const data = await response.json();
+             *     return formatAIResponse(data.content);
+             * }
+             *
+             * The backend should:
+             * 1. Receive the client request
+             * 2. Add the API key server-side
+             * 3. Call Claude/OpenAI API with a system prompt like:
+             *    "You are a professional kitchen design consultant writing an
+             *     internal lead summary. Be concise and professional. Never
+             *     mention specific prices or make guarantees. Focus on
+             *     understanding the client's needs."
+             * 4. Return the formatted response
+             */
+            async function generateAISummary(answers) {
+                // --------------------------------------------------------
+                // PLACEHOLDER: This uses local generation.
+                // Replace with API call to your backend proxy.
+                // --------------------------------------------------------
+
+                // Simulate API delay for realistic UX
+                await new Promise(resolve => setTimeout(resolve, 400));
+
+                // For now, use local generation
+                return generateLocalSummary(answers);
+            }
+
+            /**
+             * Local summary generation (fallback / demo mode)
+             * Produces professional consultant-style summary without AI API
+             */
+            function generateLocalSummary(answers) {
+                const labels = answerLabels;
+
+                // Build contextual summary paragraphs
+                let summary = '';
+
+                // Opening context
+                const propertyLabel = labels.propertyType[answers.propertyType] || 'property';
+                const residenceContext = answers.residence === 'primary'
+                    ? 'as their primary residence'
+                    : answers.residence === 'investment'
+                        ? 'as an investment property'
+                        : 'as a vacation home';
+
+                summary += `<p><strong>Project Overview:</strong> Client is considering a kitchen renovation for their ${propertyLabel.toLowerCase()} ${residenceContext}. `;
+
+                // Size context
+                if (answers.kitchenSize === 'unsure') {
+                    summary += 'Kitchen dimensions to be confirmed during on-site consultation.</p>';
+                } else {
+                    const sizeDesc = answers.kitchenSize === 'small' ? 'compact' :
+                                    answers.kitchenSize === 'medium' ? 'medium-sized' : 'spacious';
+                    summary += `The project involves a ${sizeDesc} kitchen space.</p>`;
+                }
+
+                // Style and priorities
+                const styleLabel = labels.style[answers.style] || 'undetermined';
+                const priorityLabel = labels.priority[answers.priority] || 'balanced';
+
+                summary += `<p><strong>Design Direction:</strong> Client expresses interest in ${styleLabel.toLowerCase()} design elements. `;
+
+                if (answers.priority === 'design') {
+                    summary += 'Primary emphasis on aesthetic impact and visual appeal. Recommend showcasing premium finish options and design-forward solutions.</p>';
+                } else if (answers.priority === 'durability') {
+                    summary += 'Primary emphasis on long-term durability and build quality. Recommend highlighting warranty coverage and material specifications.</p>';
+                } else if (answers.priority === 'budget') {
+                    summary += 'Primary emphasis on value optimization. Recommend presenting tiered options with clear value propositions at each level.</p>';
+                } else {
+                    summary += 'Looking for a balanced approach across design, quality, and value considerations.</p>';
+                }
+
+                // Timeline and budget signals
+                const timelineLabel = labels.timeline[answers.timeline];
+                const budgetLabel = labels.budget[answers.budget];
+
+                summary += `<p><strong>Project Readiness:</strong> `;
+
+                if (answers.timeline === 'asap') {
+                    summary += 'Client indicates urgency—ready to move forward promptly. ';
+                } else if (answers.timeline === '1-3months') {
+                    summary += 'Client is actively planning with a near-term start date in mind. ';
+                } else if (answers.timeline === '3-6months') {
+                    summary += 'Client is in planning phase with a medium-term timeline. ';
+                } else {
+                    summary += 'Client is exploring options with flexible timing. ';
+                }
+
+                if (answers.budget === 'premium') {
+                    summary += 'Budget positioning suggests interest in premium-tier solutions.</p>';
+                } else if (answers.budget === 'mid') {
+                    summary += 'Budget positioning aligns with mid-range product selection.</p>';
+                } else if (answers.budget === 'value') {
+                    summary += 'Budget positioning emphasizes value-conscious options.</p>';
+                } else {
+                    summary += 'Budget flexibility allows for presenting options across tiers.</p>';
+                }
+
+                // Consultation recommendation
+                summary += '<p><strong>Recommended Next Steps:</strong> Schedule in-person consultation to review space, discuss specific product preferences, and develop preliminary design concepts.</p>';
+
+                return summary;
+            }
+
+            /**
+             * Generate customized measurement checklist based on answers
+             */
+            function generateMeasurementGuide(answers) {
+                const measurements = [];
+
+                // Core measurements (always included)
+                measurements.push({
+                    title: 'Overall kitchen dimensions',
+                    detail: 'Length and width of the room, wall to wall'
+                });
+
+                measurements.push({
+                    title: 'Ceiling height',
+                    detail: 'Floor to ceiling measurement'
+                });
+
+                // Window and door measurements
+                measurements.push({
+                    title: 'Window locations and sizes',
+                    detail: 'Width, height, and distance from floor and adjacent walls'
+                });
+
+                measurements.push({
+                    title: 'Door openings',
+                    detail: 'Width and which direction doors swing'
+                });
+
+                // Based on kitchen size
+                if (answers.kitchenSize === 'large') {
+                    measurements.push({
+                        title: 'Island space (if applicable)',
+                        detail: 'Available floor area and clearance on all sides'
+                    });
+                }
+
+                // Appliance locations
+                measurements.push({
+                    title: 'Existing appliance locations',
+                    detail: 'Position of stove, refrigerator, dishwasher, and sink from walls'
+                });
+
+                // Electrical and plumbing
+                measurements.push({
+                    title: 'Electrical outlet positions',
+                    detail: 'Height from floor and distance from corners'
+                });
+
+                measurements.push({
+                    title: 'Plumbing rough-in location',
+                    detail: 'Distance from walls to center of drain pipe'
+                });
+
+                // Property-specific
+                if (answers.propertyType === 'condo') {
+                    measurements.push({
+                        title: 'Any fixed structural columns',
+                        detail: 'Location and dimensions of any columns or bulkheads'
+                    });
+                }
+
+                // Render checklist
+                measurementChecklist.innerHTML = measurements.map(item => `
+                    <li>
+                        <div class="measurement-item-text">
+                            <strong>${item.title}</strong>
+                            <span>${item.detail}</span>
+                        </div>
+                    </li>
+                `).join('');
+            }
+
+            // Start over functionality
+            if (startOverBtn) {
+                startOverBtn.addEventListener('click', function() {
+                    // Reset state
+                    assistantState.currentStep = 1;
+                    assistantState.answers = {};
+
+                    // Reset UI
+                    questionContainer.querySelectorAll('.option-btn').forEach(btn => {
+                        btn.classList.remove('selected');
+                    });
+                    questionContainer.querySelectorAll('.btn-next').forEach(btn => {
+                        btn.disabled = true;
+                    });
+
+                    // Show first question
+                    questionContainer.hidden = false;
+                    stepProgress.style.display = 'flex';
+                    summaryCard.hidden = true;
+                    measurementGuide.hidden = true;
+
+                    navigateToStep(1);
+
+                    // Scroll to section
+                    const section = document.getElementById('ai-assistant');
+                    if (section) {
+                        const navHeight = document.querySelector('.nav').offsetHeight;
+                        const targetPosition = section.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            }
+
+            // Re-observe new elements for fade-in animation
+            const aiSection = document.querySelector('.ai-assistant');
+            if (aiSection) {
+                aiSection.querySelectorAll('.fade-in').forEach(element => {
+                    observer.observe(element);
+                });
+            }
+        })();
     </script>
 </body>
 </html>
