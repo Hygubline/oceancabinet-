@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ocean Cabinet and Countertops — Kitchen & Bathroom Renovation | Cherry Hill, NJ</title>
+    <title>Ocean Cabinet and Countertops — Kitchen & Bathroom Renovation | Lindenwold, NJ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -130,18 +130,42 @@
             padding: 16px 48px;
         }
 
+        /* Hide entire nav bar when idle, only logo stays */
+        .nav {
+            transition: background 0.4s ease, padding 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .nav.nav-hidden {
+            background: transparent !important;
+            backdrop-filter: none;
+        }
+
+        .nav.nav-hidden .nav-links {
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+        }
+
+        .nav-links {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        /* Logo always visible with its own background when nav hidden */
         .nav-logo {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--color-heading);
-            letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo img {
+            height: 144px;
+            width: auto;
         }
 
         .nav-links {
             display: flex;
             gap: 40px;
             list-style: none;
+            /* Base styles for desktop - controlled by nav-visible class */
         }
 
         .nav-links a {
@@ -907,6 +931,304 @@
             height: 14px;
         }
 
+        /* ========================================
+           3D Photo Carousel (Drag-based)
+        ======================================== */
+        .carousel-section {
+            background: var(--color-heading);
+            overflow: hidden;
+        }
+
+        .carousel-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .carousel-header .label {
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 16px;
+        }
+
+        .carousel-header h2 {
+            color: #fff;
+        }
+
+        /* 3D Carousel Container */
+        .carousel-viewport {
+            width: 100%;
+            height: 480px;
+            position: relative;
+            perspective: 1200px;
+            perspective-origin: center center;
+            overflow: hidden;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .carousel-viewport:active {
+            cursor: grabbing;
+        }
+
+        .carousel-track {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        /* Individual Card */
+        .carousel-card {
+            position: absolute;
+            width: 320px;
+            height: 420px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--color-bg);
+            will-change: transform, opacity;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            /* GPU acceleration */
+            transform: translate3d(0, 0, 0);
+        }
+
+        .carousel-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            -webkit-user-drag: none;
+        }
+
+        /* Card overlay with title */
+        .carousel-card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 32px 24px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .carousel-card.active .carousel-card-info {
+            transform: translateY(0);
+        }
+
+        .carousel-card.active {
+            cursor: pointer;
+        }
+
+        .carousel-card.active::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            border-radius: 16px;
+            transition: border-color 0.3s ease;
+            pointer-events: none;
+        }
+
+        .carousel-card.active:hover::after {
+            border-color: var(--color-accent);
+        }
+
+        .carousel-card-info h4 {
+            color: #fff;
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+
+        .carousel-card-info span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        /* Drag hint */
+        .carousel-hint {
+            text-align: center;
+            margin-top: 32px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8125rem;
+            letter-spacing: 0.04em;
+        }
+
+        .carousel-hint svg {
+            width: 20px;
+            height: 20px;
+            margin-bottom: 8px;
+            opacity: 0.5;
+        }
+
+        /* Progress dots */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 32px;
+        }
+
+        .carousel-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--color-accent);
+            transform: scale(1.5);
+        }
+
+        /* ========================================
+           Lightbox / Zoom View
+        ======================================== */
+        .carousel-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: background 0.4s ease, opacity 0.4s ease;
+            cursor: zoom-out;
+        }
+
+        .carousel-lightbox.active {
+            opacity: 1;
+            visibility: visible;
+            background: rgba(0, 0, 0, 0.92);
+        }
+
+        .carousel-lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            transform: scale(0.8) translateY(40px);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .carousel-lightbox.active .carousel-lightbox-content {
+            transform: scale(1) translateY(0);
+        }
+
+        .carousel-lightbox-content img {
+            display: block;
+            max-width: 90vw;
+            max-height: 85vh;
+            object-fit: contain;
+        }
+
+        .carousel-lightbox-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 32px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+        }
+
+        .carousel-lightbox-info h3 {
+            color: #fff;
+            font-family: var(--font-serif);
+            font-size: 1.75rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .carousel-lightbox-info span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+
+        .carousel-lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .carousel-lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .carousel-lightbox-close svg {
+            width: 24px;
+            height: 24px;
+            color: #fff;
+        }
+
+        .carousel-lightbox-hint {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.8125rem;
+            pointer-events: none;
+        }
+
+        @media (max-width: 1024px) {
+            .carousel-viewport {
+                height: 420px;
+            }
+
+            .carousel-card {
+                width: 280px;
+                height: 360px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .carousel-viewport {
+                height: 380px;
+                perspective: 1000px;
+            }
+
+            .carousel-card {
+                width: 240px;
+                height: 320px;
+                border-radius: 12px;
+            }
+
+            .carousel-card-info {
+                padding: 24px 16px;
+            }
+
+            .carousel-card-info h4 {
+                font-size: 1.125rem;
+            }
+
+            .carousel-hint {
+                display: none;
+            }
+        }
+
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .question-card,
@@ -1264,7 +1586,6 @@
             }
 
             .nav-links {
-                display: none;
                 position: absolute;
                 top: 100%;
                 left: 0;
@@ -1272,12 +1593,24 @@
                 background: var(--color-bg);
                 flex-direction: column;
                 padding: 24px;
+                opacity: 0;
+                transform: translateY(-10px);
+                pointer-events: none;
+                visibility: hidden;
                 gap: 24px;
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             }
 
             .nav-links.active {
-                display: flex;
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+                visibility: visible;
+            }
+
+            /* On mobile, nav-hidden doesn't hide the toggle button */
+            .nav.nav-hidden .nav-toggle {
+                opacity: 1;
             }
 
             .nav-toggle {
@@ -1341,10 +1674,13 @@
 
     <!-- Navigation -->
     <nav class="nav">
-        <a href="#" class="nav-logo">Ocean Cabinet</a>
+        <a href="#" class="nav-logo">
+            <img src="ocean/logo.png" alt="Ocean Cabinet and Countertops">
+        </a>
         <ul class="nav-links">
             <li><a href="#services">Services</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#gallery">Gallery</a></li>
             <li><a href="#materials">Materials</a></li>
             <li><a href="#about">About Us</a></li>
             <li><a href="#ai-assistant">Get Started</a></li>
@@ -1360,14 +1696,14 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-media">
-            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1920&q=80"
+            <img src="ocean/kitchen.png"
                  alt="Modern kitchen with custom cabinetry and countertops"
                  loading="eager">
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-statement fade-in">Your Dream Kitchen & Bathroom, From Design to Reality</h1>
-            <p class="hero-subline fade-in">Full-service kitchen and bathroom renovation in Cherry Hill, NJ. Custom cabinets, countertops, and complete remodeling solutions.</p>
+            <p class="hero-subline fade-in">Full-service kitchen and bathroom renovation in Lindenwold, NJ. Custom cabinets, countertops, and complete remodeling solutions.</p>
         </div>
     </section>
 
@@ -1382,7 +1718,7 @@
                     <p class="fade-in">We specialize in custom cabinetry, premium countertops (quartz, granite, marble), bathroom vanities, smart toilets, shower panels, flooring, and all the hardware to complete your space.</p>
                 </div>
                 <div class="philosophy-visual fade-in">
-                    <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800&q=80"
+                    <img src="ocean/kitchen8.jpg"
                          alt="Modern kitchen with custom cabinetry"
                          loading="lazy">
                 </div>
@@ -1401,13 +1737,13 @@
                 <div class="project-item large fade-in">
                     <div class="project-image-wrapper">
                         <img class="project-image"
-                             src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1600&q=80"
-                             alt="Modern kitchen renovation in Cherry Hill"
+                             src="ocean/kitchen7.jpg"
+                             alt="Modern kitchen renovation in Lindenwold"
                              loading="lazy">
                         <div class="project-overlay">
                             <div class="project-info">
                                 <h3>Modern Kitchen Remodel</h3>
-                                <span>Cherry Hill, NJ</span>
+                                <span>Lindenwold, NJ</span>
                             </div>
                         </div>
                     </div>
@@ -1416,12 +1752,12 @@
                     <div class="project-item fade-in">
                         <div class="project-image-wrapper">
                             <img class="project-image"
-                                 src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"
-                                 alt="Luxury bathroom renovation"
+                                 src="ocean/kitchen2.png"
+                                 alt="Custom kitchen with navy island"
                                  loading="lazy">
                             <div class="project-overlay">
                                 <div class="project-info">
-                                    <h3>Spa-Style Bathroom</h3>
+                                    <h3>Navy Island Kitchen</h3>
                                     <span>Marlton, NJ</span>
                                 </div>
                             </div>
@@ -1430,7 +1766,7 @@
                     <div class="project-item fade-in">
                         <div class="project-image-wrapper">
                             <img class="project-image"
-                                 src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80"
+                                 src="ocean/kitchen1.png"
                                  alt="Custom cabinet installation"
                                  loading="lazy">
                             <div class="project-overlay">
@@ -1446,6 +1782,53 @@
         </div>
     </section>
 
+    <!-- 3D Photo Carousel Section -->
+    <section class="carousel-section" id="gallery">
+        <div class="container">
+            <div class="carousel-header">
+                <span class="text-muted label fade-in">Gallery</span>
+                <h2 class="fade-in">Explore Our Projects</h2>
+            </div>
+        </div>
+
+        <!-- Full-width carousel viewport -->
+        <div class="carousel-viewport fade-in" id="carouselViewport">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Cards populated by JavaScript -->
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="carousel-hint fade-in">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M8 7h12M8 12h12M8 17h12M4 7h.01M4 12h.01M4 17h.01"/>
+                </svg>
+                <div>Drag to explore</div>
+            </div>
+
+            <div class="carousel-dots fade-in" id="carouselDots">
+                <!-- Dots populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Lightbox for zoomed view -->
+        <div class="carousel-lightbox" id="carouselLightbox">
+            <button class="carousel-lightbox-close" id="lightboxClose" aria-label="Close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="carousel-lightbox-content" id="lightboxContent">
+                <img src="" alt="" id="lightboxImage">
+                <div class="carousel-lightbox-info">
+                    <h3 id="lightboxTitle"></h3>
+                    <span id="lightboxLocation"></span>
+                </div>
+            </div>
+            <div class="carousel-lightbox-hint">Click anywhere to close</div>
+        </div>
+    </section>
+
     <!-- Materials Section -->
     <section class="materials" id="materials">
         <div class="container">
@@ -1457,7 +1840,7 @@
             <div class="material-item fade-in">
                 <div class="material-image-wrapper">
                     <img class="material-image"
-                         src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80"
+                         src="ocean/kitchen9.jpg"
                          alt="Custom kitchen cabinets"
                          loading="lazy">
                 </div>
@@ -1474,7 +1857,7 @@
             <div class="material-item fade-in">
                 <div class="material-image-wrapper">
                     <img class="material-image"
-                         src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80"
+                         src="ocean/kitchen10.jpg"
                          alt="Quartz and granite countertops"
                          loading="lazy">
                 </div>
@@ -1491,7 +1874,7 @@
             <div class="material-item fade-in">
                 <div class="material-image-wrapper">
                     <img class="material-image"
-                         src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80"
+                         src="ocean/kitchen2.png"
                          alt="Flooring materials"
                          loading="lazy">
                 </div>
@@ -1520,7 +1903,7 @@
                 <div class="collection-item fade-in">
                     <div class="collection-image-wrapper">
                         <img class="collection-image"
-                             src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&q=80"
+                             src="ocean/kitchen1.png"
                              alt="Bathroom vanity"
                              loading="lazy">
                     </div>
@@ -1539,7 +1922,7 @@
                 <div class="collection-item fade-in">
                     <div class="collection-image-wrapper">
                         <img class="collection-image"
-                             src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=400&q=80"
+                             src="ocean/kitchen9.jpg"
                              alt="Smart toilet"
                              loading="lazy">
                     </div>
@@ -1558,7 +1941,7 @@
                 <div class="collection-item fade-in">
                     <div class="collection-image-wrapper">
                         <img class="collection-image"
-                             src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=80"
+                             src="ocean/kitchen10.jpg"
                              alt="Shower panel"
                              loading="lazy">
                     </div>
@@ -1584,19 +1967,19 @@
                 <div class="craft-gallery">
                     <div class="craft-image-wrapper fade-in">
                         <img class="craft-image"
-                             src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=1200&q=80"
+                             src="ocean/kitchen7.jpg"
                              alt="Kitchen design consultation"
                              loading="lazy">
                     </div>
                     <div class="craft-image-wrapper fade-in">
                         <img class="craft-image"
-                             src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+                             src="ocean/kitchen8.jpg"
                              alt="Professional installation"
                              loading="lazy">
                     </div>
                     <div class="craft-image-wrapper fade-in">
                         <img class="craft-image"
-                             src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80"
+                             src="ocean/kitchen1.png"
                              alt="Quality craftsmanship"
                              loading="lazy">
                     </div>
@@ -1883,7 +2266,7 @@
                     <ul class="contact-details fade-in">
                         <li>
                             <div class="detail-label">Showroom</div>
-                            <div>2093 Marlton Pike East<br>Cherry Hill, NJ 08003</div>
+                            <div>555 Blackwood-Clementon Road<br>Lindenwold, NJ 08021</div>
                         </li>
                         <li>
                             <div class="detail-label">Email</div>
@@ -1895,7 +2278,13 @@
                         </li>
                     </ul>
                 </div>
-                <form class="contact-form fade-in">
+                <!-- Form connected to Formspree for email delivery -->
+                <form class="contact-form fade-in" action="https://formspree.io/f/mwvneyzq" method="POST">
+                    <!-- Hidden field: redirect after submission -->
+                    <input type="hidden" name="_redirect" value="/thank-you.html">
+                    <!-- Hidden field: for AI-generated project summary (populated via JS if available) -->
+                    <input type="hidden" name="ai_summary" id="aiSummary">
+
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required>
@@ -1924,7 +2313,7 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <div class="footer-logo">Ocean Cabinet</div>
-                <p class="footer-tagline">Kitchen & bathroom renovation specialists in Cherry Hill, NJ. From design to installation.</p>
+                <p class="footer-tagline">Kitchen & bathroom renovation specialists in Lindenwold, NJ. From design to installation.</p>
             </div>
             <div class="footer-links">
                 <div class="footer-column">
@@ -1957,37 +2346,75 @@
         </div>
         <div class="footer-bottom">
             <span>&copy; 2024 Ocean Cabinet and Countertops. All rights reserved.</span>
-            <span>Serving Cherry Hill, NJ & Surrounding Areas</span>
+            <span>Serving Lindenwold, NJ & Surrounding Areas</span>
         </div>
     </footer>
 
     <script>
         // ========================================
-        // Navigation Scroll Effect
+        // Navigation: Hide on idle, show on scroll
         // ========================================
         const nav = document.querySelector('.nav');
         const navToggle = document.querySelector('.nav-toggle');
         const navLinks = document.querySelector('.nav-links');
         const scrollProgress = document.querySelector('.scroll-progress');
 
+        let hideTimeout = null;
+        const IDLE_DELAY = 1200; // Hide after 1.2s idle
+
+        function showNav() {
+            nav.classList.remove('nav-hidden');
+            if (hideTimeout) clearTimeout(hideTimeout);
+        }
+
+        function hideNavAfterDelay() {
+            if (hideTimeout) clearTimeout(hideTimeout);
+            hideTimeout = setTimeout(() => {
+                // Only hide if scrolled down and not hovering
+                if (window.scrollY > 100 && !nav.matches(':hover')) {
+                    nav.classList.add('nav-hidden');
+                }
+            }, IDLE_DELAY);
+        }
+
         window.addEventListener('scroll', () => {
-            // Nav background on scroll
+            // Background when scrolled
             if (window.scrollY > 100) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
+                nav.classList.remove('nav-hidden');
             }
 
-            // Scroll progress indicator
+            // Show nav while scrolling
+            showNav();
+
+            // Schedule hide after idle
+            if (window.scrollY > 100) {
+                hideNavAfterDelay();
+            }
+
+            // Progress bar
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             const scrollPercent = (scrollTop / docHeight) * 100;
             scrollProgress.style.width = scrollPercent + '%';
         });
 
+        // Show nav on hover
+        nav.addEventListener('mouseenter', showNav);
+
+        // Hide after mouse leaves
+        nav.addEventListener('mouseleave', () => {
+            if (window.scrollY > 100) {
+                hideNavAfterDelay();
+            }
+        });
+
         // Mobile nav toggle
         navToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            showNav();
         });
 
         // Close mobile nav on link click
@@ -2040,22 +2467,24 @@
         });
 
         // ========================================
-        // Form Submission (Demo)
+        // Form Submission
         // ========================================
-        const contactForm = document.querySelector('.contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const btn = this.querySelector('.btn-primary');
-                const originalText = btn.innerHTML;
-                btn.innerHTML = 'Message Sent';
-                btn.style.background = 'var(--color-accent)';
+        // REMOVED: Fake form handler that called preventDefault()
+        // Form now submits natively to Formspree (action/method on <form> tag)
+        // After submission, user is redirected to /thank-you.html
 
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                    this.reset();
-                }, 3000);
+        // Populate AI summary hidden field before form submits (if user completed questionnaire)
+        const contactFormElement = document.querySelector('.contact-form');
+        if (contactFormElement) {
+            contactFormElement.addEventListener('submit', function() {
+                // Copy AI summary content to hidden field if it exists
+                const summaryEl = document.getElementById('summaryContent');
+                const aiSummaryField = document.getElementById('aiSummary');
+                if (summaryEl && aiSummaryField && summaryEl.textContent.trim()) {
+                    // Only include if summary has content (user completed questionnaire)
+                    aiSummaryField.value = summaryEl.textContent.trim();
+                }
+                // Form continues to submit normally to Formspree
             });
         }
 
@@ -2066,6 +2495,339 @@
         staggerElements.forEach((el, index) => {
             el.style.transitionDelay = `${index * 100}ms`;
         });
+
+        // ========================================
+        // 3D Photo Carousel (Silky Smooth + Lightbox)
+        // ========================================
+        (function() {
+            const viewport = document.getElementById('carouselViewport');
+            const track = document.getElementById('carouselTrack');
+            const dotsContainer = document.getElementById('carouselDots');
+
+            // Lightbox elements
+            const lightbox = document.getElementById('carouselLightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxTitle = document.getElementById('lightboxTitle');
+            const lightboxLocation = document.getElementById('lightboxLocation');
+            const lightboxClose = document.getElementById('lightboxClose');
+            const lightboxContent = document.getElementById('lightboxContent');
+
+            if (!viewport || !track) return;
+
+            // ========================================
+            // Configuration - Tuned for silky feel
+            // ========================================
+            const images = [
+                { src: 'ocean/kitchen.png', title: 'Modern Blue Island', location: 'Lindenwold, NJ' },
+                { src: 'ocean/kitchen7.jpg', title: 'Open Concept Kitchen', location: 'Marlton, NJ' },
+                { src: 'ocean/kitchen8.jpg', title: 'White Transitional', location: 'Haddonfield, NJ' },
+                { src: 'ocean/kitchen1.png', title: 'Green Cabinet Design', location: 'Voorhees, NJ' },
+                { src: 'ocean/kitchen2.png', title: 'Navy Island Kitchen', location: 'Moorestown, NJ' },
+                { src: 'ocean/kitchen9.jpg', title: 'Navy Tall Cabinets', location: 'Lindenwold, NJ' },
+                { src: 'ocean/kitchen10.jpg', title: 'Gold Accent Kitchen', location: 'Medford, NJ' }
+            ];
+
+            const CARD_WIDTH = 320;
+            const CARD_GAP = 50;
+            const CARD_SPACING = CARD_WIDTH + CARD_GAP;
+            const PERSPECTIVE_DEPTH = 350;
+            const MAX_ROTATION = 40;
+
+            // Smoother physics parameters
+            const DRAG_MULTIPLIER = 1.0;      // Direct 1:1 drag feel
+            const VELOCITY_MULTIPLIER = 0.4;  // Velocity sensitivity
+            const FRICTION = 0.95;            // Higher = more slide (0.95 is silky)
+            const SNAP_SPEED = 0.08;          // Lower = smoother snap
+            const MIN_VELOCITY = 0.1;         // When to start snapping
+
+            // ========================================
+            // State
+            // ========================================
+            let offset = 0;
+            let targetOffset = 0;
+            let velocity = 0;
+            let isDragging = false;
+            let dragStartX = 0;
+            let dragStartOffset = 0;
+            let lastPointerX = 0;
+            let lastMoveTime = 0;
+            let activeIndex = 0;
+            let hasDragged = false;  // Track if user dragged (vs just clicked)
+            let pointerDownTime = 0;
+
+            // Velocity history for smoother inertia
+            let velocityHistory = [];
+            const VELOCITY_SAMPLES = 5;
+
+            // ========================================
+            // Create Cards & Dots
+            // ========================================
+            images.forEach((img, index) => {
+                const card = document.createElement('div');
+                card.className = 'carousel-card';
+                card.dataset.index = index;
+                card.innerHTML = `
+                    <img src="${img.src}" alt="${img.title}" loading="lazy">
+                    <div class="carousel-card-info">
+                        <h4>${img.title}</h4>
+                        <span>${img.location}</span>
+                    </div>
+                `;
+                track.appendChild(card);
+
+                const dot = document.createElement('button');
+                dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
+                dot.addEventListener('click', () => smoothSnapTo(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            const cards = track.querySelectorAll('.carousel-card');
+            const dots = dotsContainer.querySelectorAll('.carousel-dot');
+            const totalCards = images.length;
+
+            // ========================================
+            // Smooth easing function
+            // ========================================
+            function easeOutExpo(t) {
+                return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+            }
+
+            // ========================================
+            // 3D Transform - Optimized
+            // ========================================
+            function render() {
+                cards.forEach((card, index) => {
+                    const cardX = index * CARD_SPACING + offset;
+                    const normalized = cardX / CARD_SPACING;
+                    const absNorm = Math.abs(normalized);
+
+                    // Smoother depth curve
+                    const z = -absNorm * absNorm * PERSPECTIVE_DEPTH;
+
+                    // Gentler rotation
+                    const rotateY = normalized * -12;
+
+                    // Smooth scale falloff
+                    const scale = Math.max(0.75, 1 - absNorm * 0.12);
+
+                    // Smooth opacity
+                    const opacity = Math.max(0.4, 1 - absNorm * 0.2);
+
+                    card.style.transform = `
+                        translate3d(${cardX - CARD_WIDTH / 2}px, -50%, ${z}px)
+                        rotateY(${rotateY}deg)
+                        scale(${scale})
+                    `;
+                    card.style.opacity = opacity;
+                    card.style.zIndex = Math.round((1 - absNorm) * 100);
+                    card.classList.toggle('active', absNorm < 0.5);
+                });
+
+                // Update dots
+                const newIndex = Math.round(-offset / CARD_SPACING);
+                const clamped = Math.max(0, Math.min(totalCards - 1, newIndex));
+                if (clamped !== activeIndex) {
+                    activeIndex = clamped;
+                    dots.forEach((d, i) => d.classList.toggle('active', i === activeIndex));
+                }
+            }
+
+            // ========================================
+            // Animation Loop - Buttery smooth
+            // ========================================
+            function animate() {
+                if (!isDragging) {
+                    if (Math.abs(velocity) > MIN_VELOCITY) {
+                        // Apply velocity with friction
+                        offset += velocity;
+                        velocity *= FRICTION;
+
+                        // Boundary resistance (rubber band effect)
+                        const minOffset = -(totalCards - 1) * CARD_SPACING;
+                        if (offset > 0) {
+                            offset *= 0.7;
+                            velocity *= 0.5;
+                        } else if (offset < minOffset) {
+                            offset = minOffset + (offset - minOffset) * 0.7;
+                            velocity *= 0.5;
+                        }
+                    } else {
+                        // Smooth snap to nearest
+                        velocity = 0;
+                        const nearestIndex = Math.round(-offset / CARD_SPACING);
+                        const clamped = Math.max(0, Math.min(totalCards - 1, nearestIndex));
+                        targetOffset = -clamped * CARD_SPACING;
+
+                        const diff = targetOffset - offset;
+                        if (Math.abs(diff) > 0.1) {
+                            offset += diff * SNAP_SPEED;
+                        } else {
+                            offset = targetOffset;
+                        }
+                    }
+                }
+
+                render();
+                requestAnimationFrame(animate);
+            }
+
+            // ========================================
+            // Get average velocity from history
+            // ========================================
+            function getSmoothedVelocity() {
+                if (velocityHistory.length === 0) return 0;
+                const sum = velocityHistory.reduce((a, b) => a + b, 0);
+                return sum / velocityHistory.length;
+            }
+
+            // ========================================
+            // Smooth snap to card
+            // ========================================
+            function smoothSnapTo(index) {
+                velocity = 0;
+                targetOffset = -index * CARD_SPACING;
+            }
+
+            // ========================================
+            // Pointer Events (unified mouse + touch)
+            // ========================================
+            function getPointerX(e) {
+                return e.touches ? e.touches[0].clientX : e.clientX;
+            }
+
+            function onPointerDown(e) {
+                isDragging = true;
+                hasDragged = false;
+                pointerDownTime = Date.now();
+                dragStartX = getPointerX(e);
+                dragStartOffset = offset;
+                lastPointerX = dragStartX;
+                lastMoveTime = Date.now();
+                velocity = 0;
+                velocityHistory = [];
+                viewport.style.cursor = 'grabbing';
+            }
+
+            function onPointerMove(e) {
+                if (!isDragging) return;
+
+                const x = getPointerX(e);
+                const deltaX = x - dragStartX;
+
+                // Mark as dragged if moved more than 5px
+                if (Math.abs(deltaX) > 5) {
+                    hasDragged = true;
+                }
+
+                offset = dragStartOffset + deltaX * DRAG_MULTIPLIER;
+
+                // Calculate instantaneous velocity
+                const now = Date.now();
+                const dt = now - lastMoveTime;
+                if (dt > 0) {
+                    const instantVelocity = (x - lastPointerX) / dt * 16 * VELOCITY_MULTIPLIER;
+                    velocityHistory.push(instantVelocity);
+                    if (velocityHistory.length > VELOCITY_SAMPLES) {
+                        velocityHistory.shift();
+                    }
+                }
+
+                lastPointerX = x;
+                lastMoveTime = now;
+
+                if (e.cancelable) e.preventDefault();
+            }
+
+            function onPointerUp(e) {
+                if (!isDragging) return;
+                isDragging = false;
+                viewport.style.cursor = 'grab';
+
+                // Use smoothed velocity for natural feel
+                velocity = getSmoothedVelocity();
+
+                // Handle click (not drag) - open lightbox
+                const clickDuration = Date.now() - pointerDownTime;
+                if (!hasDragged && clickDuration < 300) {
+                    const card = e.target.closest('.carousel-card');
+                    if (card && card.classList.contains('active')) {
+                        const index = parseInt(card.dataset.index);
+                        openLightbox(index);
+                    }
+                }
+            }
+
+            // ========================================
+            // Lightbox Functions
+            // ========================================
+            function openLightbox(index) {
+                const img = images[index];
+                lightboxImage.src = img.src;
+                lightboxImage.alt = img.title;
+                lightboxTitle.textContent = img.title;
+                lightboxLocation.textContent = img.location;
+
+                // Trigger animation
+                requestAnimationFrame(() => {
+                    lightbox.classList.add('active');
+                });
+
+                // Prevent body scroll
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // Lightbox event listeners
+            lightbox.addEventListener('click', (e) => {
+                // Close if clicking outside the image content
+                if (e.target === lightbox || e.target === lightboxClose ||
+                    e.target.closest('.carousel-lightbox-close')) {
+                    closeLightbox();
+                }
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            // Prevent closing when clicking on image
+            lightboxContent.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            // ========================================
+            // Event Listeners
+            // ========================================
+            // Mouse
+            viewport.addEventListener('mousedown', onPointerDown);
+            window.addEventListener('mousemove', onPointerMove);
+            window.addEventListener('mouseup', onPointerUp);
+
+            // Touch
+            viewport.addEventListener('touchstart', onPointerDown, { passive: true });
+            viewport.addEventListener('touchmove', onPointerMove, { passive: false });
+            viewport.addEventListener('touchend', onPointerUp);
+
+            // Prevent native drag
+            viewport.addEventListener('dragstart', (e) => e.preventDefault());
+
+            // ========================================
+            // Initialize
+            // ========================================
+            offset = 0;
+            targetOffset = 0;
+            render();
+            animate();
+
+            window.addEventListener('resize', render);
+        })();
 
         // ========================================
         // AI Kitchen Assistant
