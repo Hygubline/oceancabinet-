@@ -964,10 +964,19 @@
             cursor: grab;
             user-select: none;
             -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            touch-action: pan-y pinch-zoom;
         }
 
         .carousel-viewport:active {
             cursor: grabbing;
+        }
+
+        /* Prevent pull-to-refresh on mobile */
+        @supports (-webkit-touch-callout: none) {
+            .carousel-viewport {
+                touch-action: pan-x;
+            }
         }
 
         .carousel-track {
@@ -1226,6 +1235,38 @@
 
             .carousel-hint {
                 display: none;
+            }
+
+            /* Mobile lightbox adjustments */
+            .carousel-lightbox-content {
+                max-width: 95vw;
+                max-height: 70vh;
+                border-radius: 12px;
+            }
+
+            .carousel-lightbox-content img {
+                max-width: 95vw;
+                max-height: 70vh;
+            }
+
+            .carousel-lightbox-info {
+                padding: 20px 16px;
+            }
+
+            .carousel-lightbox-info h3 {
+                font-size: 1.25rem;
+            }
+
+            .carousel-lightbox-close {
+                top: 16px;
+                right: 16px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .carousel-lightbox-hint {
+                bottom: 16px;
+                font-size: 0.75rem;
             }
         }
 
@@ -1608,13 +1649,23 @@
                 visibility: visible;
             }
 
-            /* On mobile, nav-hidden doesn't hide the toggle button */
+            /* On mobile, don't hide nav - always show */
+            .nav.nav-hidden {
+                background: rgba(250, 249, 247, 0.95) !important;
+                backdrop-filter: blur(10px);
+            }
+
             .nav.nav-hidden .nav-toggle {
                 opacity: 1;
             }
 
             .nav-toggle {
                 display: flex;
+            }
+
+            /* Smaller logo on mobile */
+            .nav-logo img {
+                height: 80px;
             }
 
             .hero-content {
@@ -1666,11 +1717,328 @@
             width: 0%;
             transition: width 100ms linear;
         }
+
+        /* ========================================
+           Floating Contact Button (Conversion CTA)
+        ======================================== */
+        .floating-cta {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .floating-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 24px;
+            border-radius: 50px;
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .floating-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .floating-btn-primary {
+            background: var(--color-accent);
+            color: #fff;
+            position: relative;
+        }
+
+        .floating-btn-primary:hover {
+            background: var(--color-accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(184, 151, 126, 0.4);
+        }
+
+        .floating-btn-secondary {
+            background: #fff;
+            color: var(--color-heading);
+        }
+
+        .floating-btn-secondary:hover {
+            background: var(--color-heading);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .floating-cta {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .floating-btn span {
+                display: none;
+            }
+
+            .floating-btn {
+                padding: 16px;
+                border-radius: 50%;
+            }
+        }
+
+        /* ========================================
+           Hero CTA Buttons
+        ======================================== */
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 32px;
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .hero-btn-primary {
+            background: var(--color-accent);
+            color: #fff;
+        }
+
+        .hero-btn-primary:hover {
+            background: var(--color-accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .hero-btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--color-heading);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-btn-secondary:hover {
+            background: #fff;
+        }
+
+        .hero-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .hero-btn {
+                justify-content: center;
+            }
+        }
+
+        /* ========================================
+           Simple Process Section (Conversion)
+        ======================================== */
+        .process-section {
+            background: var(--color-accent);
+            color: #fff;
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .process-header .label {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 16px;
+        }
+
+        .process-header h2 {
+            color: #fff;
+        }
+
+        .process-header p {
+            color: rgba(255, 255, 255, 0.85);
+            margin: 16px auto 0;
+            max-width: 500px;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step-number {
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            color: var(--color-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-step h4 {
+            color: #fff;
+            font-size: 1.125rem;
+            margin-bottom: 8px;
+        }
+
+        .process-step p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.875rem;
+            max-width: none;
+        }
+
+        .process-cta {
+            text-align: center;
+            margin-top: 56px;
+        }
+
+        .process-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 40px;
+            background: #fff;
+            color: var(--color-accent-dark);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .process-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .process-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        @media (max-width: 1024px) {
+            .process-steps {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 32px;
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .process-steps {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .process-step-number {
+                width: 64px;
+                height: 64px;
+                font-size: 1.5rem;
+            }
+
+            .process-step:last-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        /* ========================================
+           Reassurance Banner
+        ======================================== */
+        .reassurance {
+            background: var(--color-bg-alt);
+            padding: 48px;
+            text-align: center;
+            border-bottom: 1px solid var(--color-divider);
+        }
+
+        .reassurance-text {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--color-heading);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .reassurance-text strong {
+            color: var(--color-accent);
+        }
+
+        @media (max-width: 768px) {
+            .reassurance {
+                padding: 32px 24px;
+            }
+
+            .reassurance-text {
+                font-size: 1.25rem;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Scroll Progress -->
     <div class="scroll-progress"></div>
+
+    <!-- Floating Contact CTA (Always Visible) -->
+    <div class="floating-cta">
+        <a href="tel:+18565533899" class="floating-btn floating-btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+            </svg>
+            <span>Call Now</span>
+        </a>
+        <a href="#contact" class="floating-btn floating-btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+            </svg>
+            <span>Free Quote</span>
+        </a>
+    </div>
 
     <!-- Navigation -->
     <nav class="nav">
@@ -1678,12 +2046,9 @@
             <img src="ocean/logo.png" alt="Ocean Cabinet and Countertops">
         </a>
         <ul class="nav-links">
-            <li><a href="#services">Services</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#materials">Materials</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#ai-assistant">Get Started</a></li>
+            <li><a href="#projects">Our Work</a></li>
+            <li><a href="#process">How It Works</a></li>
+            <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-toggle" aria-label="Toggle navigation">
@@ -1702,20 +2067,49 @@
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-statement fade-in">Your Dream Kitchen & Bathroom, From Design to Reality</h1>
-            <p class="hero-subline fade-in">Full-service kitchen and bathroom renovation in Lindenwold, NJ. Custom cabinets, countertops, and complete remodeling solutions.</p>
+            <h1 class="hero-statement fade-in">Your Dream Kitchen, Without the Stress</h1>
+            <p class="hero-subline fade-in">You don't need to know anything about cabinets or countertops. We handle everything — measurement, design, and installation.</p>
+            <div class="hero-cta fade-in">
+                <a href="tel:+18565533899" class="hero-btn hero-btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                    </svg>
+                    Call (856) 553-3899
+                </a>
+                <a href="#contact" class="hero-btn hero-btn-secondary">
+                    Get Free Estimate
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
         </div>
     </section>
+
+    <!-- Reassurance Banner -->
+    <div class="reassurance">
+        <p class="reassurance-text fade-in">
+            <strong>No design experience needed.</strong> Tell us what you want, and we'll take care of the rest — from first measurement to final installation.
+        </p>
+    </div>
 
     <!-- Services Section -->
     <section class="philosophy" id="services">
         <div class="container">
             <div class="philosophy-content">
                 <div class="philosophy-text">
-                    <span class="text-muted label fade-in">Our Services</span>
-                    <h2 class="fade-in">Complete Kitchen & Bathroom Solutions</h2>
-                    <p class="fade-in">From initial design consultation to final installation, we provide comprehensive renovation services. Our team handles every aspect of your project, ensuring a seamless and stress-free experience.</p>
-                    <p class="fade-in">We specialize in custom cabinetry, premium countertops (quartz, granite, marble), bathroom vanities, smart toilets, shower panels, flooring, and all the hardware to complete your space.</p>
+                    <span class="text-muted label fade-in">Why Choose Us</span>
+                    <h2 class="fade-in">We Make Kitchen Renovation Easy</h2>
+                    <p class="fade-in">Feeling overwhelmed by choices? Don't worry. Most of our clients come to us without any idea where to start — and that's perfectly okay. <strong>We guide you through every decision.</strong></p>
+                    <p class="fade-in">Cabinets, countertops, handles, colors — we'll help you pick what works best for your home and budget. No pressure, no confusing jargon.</p>
+                    <div class="fade-in" style="margin-top: 24px;">
+                        <a href="#contact" class="btn-primary" style="text-decoration: none;">
+                            Talk to Us — It's Free
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;margin-left:8px;">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
                 <div class="philosophy-visual fade-in">
                     <img src="ocean/kitchen8.jpg"
@@ -1986,15 +2380,71 @@
                 </div>
                 <div class="craft-text">
                     <span class="text-muted label fade-in">About Us</span>
-                    <h2 class="fade-in">Experienced Team, Quality Results</h2>
-                    <p class="fade-in">Our team brings years of design and installation experience to every project. We're committed to providing high-quality renovation services and work closely with each client from start to finish, ensuring a transparent and smooth process.</p>
+                    <h2 class="fade-in">Local, Honest, and Here to Help</h2>
+                    <p class="fade-in">We're a family-owned business in Lindenwold, NJ. We've helped hundreds of homeowners create kitchens they love — without the stress of figuring it all out alone.</p>
                     <ul class="craft-highlights fade-in">
-                        <li>Free kitchen measurement guide - draw your layout and get an estimate</li>
-                        <li>One-stop service from design to installation</li>
-                        <li>Transparent pricing and project timeline</li>
-                        <li>Dedicated project manager for each renovation</li>
+                        <li><strong>Free in-home measurement</strong> — we come to you</li>
+                        <li><strong>Honest pricing</strong> — no hidden fees, no surprises</li>
+                        <li><strong>We handle everything</strong> — design, ordering, installation</li>
+                        <li><strong>Local showroom</strong> — come see and touch samples</li>
                     </ul>
+                    <div class="fade-in" style="margin-top: 32px;">
+                        <a href="#contact" class="btn-primary" style="text-decoration: none;">
+                            Schedule Free Consultation
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;margin-left:8px;">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works - Simple Process Section -->
+    <section class="process-section" id="process">
+        <div class="container">
+            <div class="process-header">
+                <span class="text-muted label fade-in">How It Works</span>
+                <h2 class="fade-in">5 Simple Steps to Your New Kitchen</h2>
+                <p class="fade-in">We handle everything. You just pick what you like.</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step fade-in">
+                    <div class="process-step-number">1</div>
+                    <h4>Free Consultation</h4>
+                    <p>Call us or visit our showroom. No pressure, just answers.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="process-step-number">2</div>
+                    <h4>We Measure</h4>
+                    <p>Our team comes to your home. Free, accurate measurements.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="process-step-number">3</div>
+                    <h4>Design & Quote</h4>
+                    <p>We create a design and give you a clear, honest price.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="process-step-number">4</div>
+                    <h4>You Approve</h4>
+                    <p>Review the design. Make changes. No surprises.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="process-step-number">5</div>
+                    <h4>We Install</h4>
+                    <p>Professional installation. Done right the first time.</p>
+                </div>
+            </div>
+
+            <div class="process-cta fade-in">
+                <a href="#contact" class="process-btn">
+                    Start with Step 1
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
@@ -2260,9 +2710,9 @@
         <div class="container">
             <div class="contact-content">
                 <div class="contact-text">
-                    <span class="text-muted label fade-in">Get In Touch</span>
-                    <h2 class="fade-in">Start Your Renovation Today</h2>
-                    <p class="fade-in">Ready to transform your kitchen or bathroom? Contact us for a free consultation. Visit our showroom or schedule an on-site design appointment.</p>
+                    <span class="text-muted label fade-in">Let's Talk</span>
+                    <h2 class="fade-in">No Commitment, Just a Conversation</h2>
+                    <p class="fade-in">Have questions? Not sure where to start? Just give us a call or send a message. We're happy to answer any questions — even if you're not ready to buy.</p>
                     <ul class="contact-details fade-in">
                         <li>
                             <div class="detail-label">Showroom</div>
@@ -2274,7 +2724,7 @@
                         </li>
                         <li>
                             <div class="detail-label">Telephone</div>
-                            <a href="tel:+18561234567">+1 (856) 123-4567</a>
+                            <a href="tel:+18565533899">(856) 553-3899</a>
                         </li>
                     </ul>
                 </div>
@@ -2313,33 +2763,33 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <div class="footer-logo">Ocean Cabinet</div>
-                <p class="footer-tagline">Kitchen & bathroom renovation specialists in Lindenwold, NJ. From design to installation.</p>
+                <p class="footer-tagline">Kitchen renovation made easy. Free estimates, no pressure. Call us today.</p>
             </div>
             <div class="footer-links">
                 <div class="footer-column">
-                    <h4>Services</h4>
+                    <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#services">Kitchen Remodeling</a></li>
-                        <li><a href="#bathroom">Bathroom Renovation</a></li>
-                        <li><a href="#materials">Countertops</a></li>
-                        <li><a href="#materials">Flooring</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Company</h4>
-                    <ul>
+                        <li><a href="#projects">Our Work</a></li>
+                        <li><a href="#process">How It Works</a></li>
                         <li><a href="#about">About Us</a></li>
-                        <li><a href="#projects">Gallery</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="#ai-assistant">Design Assistant</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h4>Connect</h4>
+                    <h4>Contact Us</h4>
                     <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Yelp</a></li>
+                        <li><a href="tel:+18565533899">(856) 553-3899</a></li>
+                        <li><a href="mailto:info@oceancabinet.com">info@oceancabinet.com</a></li>
+                        <li>555 Blackwood-Clementon Rd</li>
+                        <li>Lindenwold, NJ 08021</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Hours</h4>
+                    <ul>
+                        <li>Mon-Fri: 9am - 6pm</li>
+                        <li>Sat: 10am - 4pm</li>
+                        <li>Sun: Closed</li>
                     </ul>
                 </div>
             </div>
@@ -2352,7 +2802,7 @@
 
     <script>
         // ========================================
-        // Navigation: Hide on idle, show on scroll
+        // Navigation: Hide on idle, show on scroll (Desktop only)
         // ========================================
         const nav = document.querySelector('.nav');
         const navToggle = document.querySelector('.nav-toggle');
@@ -2360,7 +2810,12 @@
         const scrollProgress = document.querySelector('.scroll-progress');
 
         let hideTimeout = null;
-        const IDLE_DELAY = 1200; // Hide after 1.2s idle
+        const IDLE_DELAY = 1200;
+
+        // Check if mobile
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
 
         function showNav() {
             nav.classList.remove('nav-hidden');
@@ -2368,9 +2823,11 @@
         }
 
         function hideNavAfterDelay() {
+            // Don't hide on mobile
+            if (isMobile()) return;
+
             if (hideTimeout) clearTimeout(hideTimeout);
             hideTimeout = setTimeout(() => {
-                // Only hide if scrolled down and not hovering
                 if (window.scrollY > 100 && !nav.matches(':hover')) {
                     nav.classList.add('nav-hidden');
                 }
@@ -2389,8 +2846,8 @@
             // Show nav while scrolling
             showNav();
 
-            // Schedule hide after idle
-            if (window.scrollY > 100) {
+            // Schedule hide after idle (desktop only)
+            if (window.scrollY > 100 && !isMobile()) {
                 hideNavAfterDelay();
             }
 
@@ -2401,12 +2858,12 @@
             scrollProgress.style.width = scrollPercent + '%';
         });
 
-        // Show nav on hover
+        // Show nav on hover (desktop)
         nav.addEventListener('mouseenter', showNav);
 
-        // Hide after mouse leaves
+        // Hide after mouse leaves (desktop)
         nav.addEventListener('mouseleave', () => {
-            if (window.scrollY > 100) {
+            if (window.scrollY > 100 && !isMobile()) {
                 hideNavAfterDelay();
             }
         });
@@ -2415,6 +2872,13 @@
         navToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             showNav();
+        });
+
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
         });
 
         // Close mobile nav on link click
@@ -2746,10 +3210,19 @@
                 // Use smoothed velocity for natural feel
                 velocity = getSmoothedVelocity();
 
-                // Handle click (not drag) - open lightbox
+                // Handle tap/click (not drag) - open lightbox
                 const clickDuration = Date.now() - pointerDownTime;
-                if (!hasDragged && clickDuration < 300) {
-                    const card = e.target.closest('.carousel-card');
+                const isTapNotDrag = !hasDragged && clickDuration < 400;
+
+                if (isTapNotDrag) {
+                    // Find which card was tapped
+                    const touch = e.changedTouches ? e.changedTouches[0] : e;
+                    const target = document.elementFromPoint(
+                        touch.clientX || e.clientX,
+                        touch.clientY || e.clientY
+                    );
+                    const card = target ? target.closest('.carousel-card') : null;
+
                     if (card && card.classList.contains('active')) {
                         const index = parseInt(card.dataset.index);
                         openLightbox(index);
