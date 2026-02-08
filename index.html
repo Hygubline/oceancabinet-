@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ocean Cabinet and Countertops — Kitchen & Bathroom Renovation | Lindenwold, NJ</title>
+    <title>Ocean Cabinet and Countertops — Kitchen Renovation | Lindenwold, NJ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -25,9 +25,8 @@
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
             --max-width: 1280px;
-            --section-padding: 120px;
-            --section-padding-tablet: 72px;
-            --section-padding-mobile: 48px;
+            --section-padding: 100px;
+            --section-padding-mobile: 64px;
 
             --transition-slow: 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --transition-medium: 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -47,13 +46,12 @@
 
         body {
             font-family: var(--font-sans);
-            font-weight: 300;
+            font-weight: 400;
             font-size: 1rem;
-            line-height: 1.7;
+            line-height: 1.75;
             color: var(--color-body);
             background-color: var(--color-bg);
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         img {
@@ -72,38 +70,22 @@
         ======================================== */
         h1, h2, h3, h4 {
             font-family: var(--font-serif);
-            font-weight: 400;
+            font-weight: 500;
             color: var(--color-heading);
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
         }
 
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            line-height: 1.15;
-        }
+        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); line-height: 1.2; }
+        h2 { font-size: clamp(1.875rem, 3.5vw, 2.25rem); line-height: 1.25; }
+        h3 { font-size: clamp(1.375rem, 2.5vw, 1.625rem); line-height: 1.35; }
 
-        h2 {
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            line-height: 1.2;
-        }
-
-        h3 {
-            font-size: clamp(1.5rem, 2.5vw, 1.75rem);
-            line-height: 1.3;
-        }
-
-        p {
-            max-width: 600px;
-        }
-
-        .text-accent {
-            color: var(--color-accent);
-        }
+        p { max-width: 600px; }
 
         .text-muted {
             color: var(--color-muted);
-            font-size: 0.875rem;
-            letter-spacing: 0.08em;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
         }
 
@@ -130,34 +112,13 @@
             padding: 16px 48px;
         }
 
-        /* Hide entire nav bar when idle, only logo stays */
-        .nav {
-            transition: background 0.4s ease, padding 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        .nav.nav-hidden {
-            background: transparent !important;
-            backdrop-filter: none;
-        }
-
-        .nav.nav-hidden .nav-links {
-            opacity: 0;
-            transform: translateY(-10px);
-            pointer-events: none;
-        }
-
-        .nav-links {
-            transition: opacity 0.4s ease, transform 0.4s ease;
-        }
-
-        /* Logo always visible with its own background when nav hidden */
         .nav-logo {
             display: flex;
             align-items: center;
         }
 
         .nav-logo img {
-            height: 144px;
+            height: 100px;
             width: auto;
         }
 
@@ -165,8 +126,6 @@
             display: flex;
             gap: 48px;
             list-style: none;
-            margin-right: 80px;
-            /* Base styles for desktop - controlled by nav-visible class */
         }
 
         .nav-links a {
@@ -189,13 +148,8 @@
             transition: width var(--transition-fast);
         }
 
-        .nav-links a:hover {
-            color: var(--color-heading);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+        .nav-links a:hover { color: var(--color-heading); }
+        .nav-links a:hover::after { width: 100%; }
 
         .nav-toggle {
             display: none;
@@ -243,7 +197,7 @@
                 to bottom,
                 rgba(250, 249, 247, 0.1) 0%,
                 rgba(250, 249, 247, 0.3) 60%,
-                rgba(250, 249, 247, 0.7) 100%
+                rgba(250, 249, 247, 0.8) 100%
             );
             z-index: 2;
         }
@@ -259,18 +213,62 @@
 
         .hero-statement {
             font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 300;
-            line-height: 1.15;
+            font-size: clamp(2.5rem, 5.5vw, 3.5rem);
+            font-weight: 500;
+            line-height: 1.2;
             color: var(--color-heading);
-            max-width: 800px;
+            max-width: 700px;
         }
 
         .hero-subline {
-            margin-top: 24px;
+            margin-top: 20px;
             font-size: 1.0625rem;
+            line-height: 1.7;
             color: var(--color-body);
             max-width: 480px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 32px;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .hero-btn-primary {
+            background: var(--color-accent);
+            color: #fff;
+        }
+
+        .hero-btn-primary:hover {
+            background: var(--color-accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .hero-btn-secondary {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--color-heading);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-btn-secondary:hover { background: #fff; }
+
+        .hero-btn svg {
+            width: 18px;
+            height: 18px;
         }
 
         /* ========================================
@@ -297,664 +295,162 @@
         }
 
         /* ========================================
-           Philosophy Section
+           Reassurance Section
         ======================================== */
-        .philosophy {
-            background: var(--color-bg);
-        }
-
-        .philosophy-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 120px;
-            align-items: center;
-        }
-
-        .philosophy-text .label {
-            margin-bottom: 24px;
-        }
-
-        .philosophy-text h2 {
-            margin-bottom: 32px;
-        }
-
-        .philosophy-text p {
-            margin-bottom: 24px;
-        }
-
-        .philosophy-visual {
-            position: relative;
-        }
-
-        .philosophy-visual img {
-            aspect-ratio: 4/5;
-            object-fit: cover;
-        }
-
-        /* ========================================
-           Projects Section
-        ======================================== */
-        .projects {
+        .reassurance-section {
             background: var(--color-bg-alt);
-        }
-
-        .projects-header {
-            margin-bottom: 80px;
-        }
-
-        .projects-header .label {
-            margin-bottom: 16px;
-        }
-
-        .projects-grid {
-            display: grid;
-            gap: 48px;
-        }
-
-        .project-item {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .project-item.large {
-            grid-column: 1 / -1;
-        }
-
-        .project-image-wrapper {
-            overflow: hidden;
-            position: relative;
-        }
-
-        .project-image {
-            aspect-ratio: 16/10;
-            object-fit: cover;
-            transition: transform var(--transition-slow);
-        }
-
-        .project-item.large .project-image {
-            aspect-ratio: 21/9;
-        }
-
-        .project-item:hover .project-image {
-            transform: scale(1.03);
-        }
-
-        .project-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to top,
-                rgba(42, 42, 42, 0.6) 0%,
-                transparent 50%
-            );
-            opacity: 0;
-            transition: opacity var(--transition-medium);
-            display: flex;
-            align-items: flex-end;
-            padding: 32px;
-        }
-
-        .project-item:hover .project-overlay {
-            opacity: 1;
-        }
-
-        .project-info h3 {
-            color: #fff;
-            font-size: 1.5rem;
-            margin-bottom: 4px;
-        }
-
-        .project-info span {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.875rem;
-        }
-
-        .projects-two-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            margin-top: 32px;
-        }
-
-        .projects-two-col .project-image {
-            aspect-ratio: 4/3;
-        }
-
-        /* ========================================
-           Materials Section
-        ======================================== */
-        .materials {
-            background: var(--color-bg);
-        }
-
-        .materials-header {
+            padding: 80px 48px;
             text-align: center;
-            margin-bottom: 100px;
         }
 
-        .materials-header .label {
-            margin-bottom: 16px;
+        .reassurance-content h2 {
+            font-size: clamp(1.625rem, 3vw, 2rem);
+            margin-bottom: 20px;
         }
 
-        .materials-header h2 {
-            max-width: 600px;
+        .reassurance-content p {
+            font-size: 1.0625rem;
+            color: var(--color-body);
+            max-width: 520px;
             margin: 0 auto;
-        }
-
-        .material-item {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            margin-bottom: 120px;
-        }
-
-        .material-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .material-item:nth-child(even) {
-            direction: rtl;
-        }
-
-        .material-item:nth-child(even) > * {
-            direction: ltr;
-        }
-
-        .material-image-wrapper {
-            overflow: hidden;
-        }
-
-        .material-image {
-            aspect-ratio: 4/5;
-            object-fit: cover;
-            transition: transform var(--transition-slow);
-        }
-
-        .material-item:hover .material-image {
-            transform: scale(1.03);
-        }
-
-        .material-content h3 {
-            font-size: 1.75rem;
-            margin-bottom: 32px;
-        }
-
-        .material-attributes {
-            list-style: none;
-        }
-
-        .material-attributes li {
-            padding: 16px 0;
-            border-bottom: 1px solid var(--color-divider);
-            font-size: 0.9375rem;
-            color: var(--color-muted);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .material-attributes li::before {
-            content: '';
-            width: 16px;
-            height: 1px;
-            background: var(--color-accent);
+            line-height: 1.75;
         }
 
         /* ========================================
-           Collections Section
+           Simple Process Section
         ======================================== */
-        .collections {
-            background: var(--color-bg-alt);
-        }
-
-        .collections-header {
-            margin-bottom: 80px;
-        }
-
-        .collections-header .label {
-            margin-bottom: 16px;
-        }
-
-        .collections-header p {
-            margin-top: 24px;
-            max-width: 500px;
-        }
-
-        .collection-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .collection-item {
-            display: grid;
-            grid-template-columns: 200px 1fr auto;
-            gap: 48px;
-            align-items: center;
-            padding: 40px 0;
-            border-top: 1px solid var(--color-divider);
-            cursor: pointer;
-            transition: background var(--transition-fast);
-        }
-
-        .collection-item:last-child {
-            border-bottom: 1px solid var(--color-divider);
-        }
-
-        .collection-item:hover {
-            background: rgba(184, 151, 126, 0.05);
-        }
-
-        .collection-image-wrapper {
-            overflow: hidden;
-        }
-
-        .collection-image {
-            aspect-ratio: 4/3;
-            object-fit: cover;
-            transition: transform var(--transition-medium);
-        }
-
-        .collection-item:hover .collection-image {
-            transform: scale(1.03);
-        }
-
-        .collection-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-
-        .collection-content p {
-            font-size: 0.9375rem;
-            color: var(--color-muted);
-        }
-
-        .collection-cta {
-            font-size: 0.8125rem;
-            letter-spacing: 0.04em;
-            color: var(--color-accent);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: gap var(--transition-fast);
-        }
-
-        .collection-item:hover .collection-cta {
-            gap: 12px;
-        }
-
-        .collection-cta svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* ========================================
-           AI Kitchen Assistant Section
-        ======================================== */
-        .ai-assistant {
+        .process-section {
             background: var(--color-bg);
         }
 
-        .ai-assistant-content {
-            max-width: 720px;
-            margin: 0 auto;
-        }
-
-        .ai-assistant-header {
+        .process-header {
             text-align: center;
             margin-bottom: 64px;
         }
 
-        .ai-assistant-header .label {
+        .process-header .label {
             margin-bottom: 16px;
         }
 
-        .ai-assistant-header p {
-            margin: 24px auto 0;
-            max-width: 520px;
-        }
-
-        /* Step Progress Indicator */
-        .step-progress {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 48px;
-        }
-
-        .step-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--color-divider);
-            transition: background var(--transition-fast), transform var(--transition-fast);
-        }
-
-        .step-dot.active {
-            background: var(--color-accent);
-            transform: scale(1.25);
-        }
-
-        .step-dot.completed {
-            background: var(--color-accent-dark);
-        }
-
-        /* Question Card */
-        .question-card {
-            background: var(--color-bg-alt);
-            padding: 48px;
-            border: 1px solid var(--color-divider);
-            min-height: 320px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .question-card[hidden] {
-            display: none;
-        }
-
-        .question-number {
-            font-size: 0.75rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
+        .process-header p {
             color: var(--color-muted);
-            margin-bottom: 16px;
+            margin: 16px auto 0;
+            max-width: 480px;
         }
 
-        .question-text {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--color-heading);
-            margin-bottom: 32px;
-            line-height: 1.4;
-        }
-
-        /* Option Buttons */
-        .options-grid {
+        .process-steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
-            margin-bottom: auto;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            position: relative;
         }
 
-        .option-btn {
-            padding: 16px 20px;
-            background: var(--color-bg);
-            border: 1px solid var(--color-divider);
-            font-family: var(--font-sans);
-            font-size: 0.9375rem;
-            color: var(--color-body);
-            cursor: pointer;
-            transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 12%;
+            right: 12%;
+            height: 2px;
+            background: var(--color-divider);
+        }
+
+        .process-step {
             text-align: center;
+            position: relative;
         }
 
-        .option-btn:hover {
-            border-color: var(--color-accent);
-        }
-
-        .option-btn.selected {
+        .process-step-number {
+            width: 80px;
+            height: 80px;
             background: var(--color-accent);
-            border-color: var(--color-accent);
             color: #fff;
-        }
-
-        /* Navigation Buttons */
-        .question-nav {
+            border-radius: 50%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-top: 40px;
-            padding-top: 24px;
-            border-top: 1px solid var(--color-divider);
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
         }
 
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 0;
-            font-family: var(--font-sans);
-            font-size: 0.8125rem;
-            font-weight: 400;
-            letter-spacing: 0.04em;
+        .process-step h4 {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .process-step p {
             color: var(--color-muted);
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            transition: color var(--transition-fast);
-        }
-
-        .btn-secondary:hover {
-            color: var(--color-heading);
-        }
-
-        .btn-secondary:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-        }
-
-        .btn-secondary svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .btn-next {
-            margin-left: auto;
-        }
-
-        .btn-next svg {
-            order: 1;
-        }
-
-        /* Summary Card */
-        .summary-card {
-            background: var(--color-bg-alt);
-            padding: 48px;
-            border: 1px solid var(--color-divider);
-        }
-
-        .summary-card[hidden] {
-            display: none;
-        }
-
-        .summary-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 32px;
-        }
-
-        .summary-header svg {
-            width: 24px;
-            height: 24px;
-            color: var(--color-accent);
-        }
-
-        .summary-header h3 {
-            font-size: 1.25rem;
-            margin: 0;
-        }
-
-        .summary-content {
             font-size: 0.9375rem;
-            line-height: 1.8;
-            color: var(--color-body);
-            margin-bottom: 32px;
-        }
-
-        .summary-content p {
-            margin-bottom: 16px;
+            line-height: 1.6;
             max-width: none;
         }
 
-        .summary-loading {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--color-muted);
-            font-size: 0.875rem;
+        .process-cta {
+            text-align: center;
+            margin-top: 56px;
         }
 
-        .summary-loading::before {
-            content: '';
-            width: 16px;
-            height: 16px;
-            border: 2px solid var(--color-divider);
-            border-top-color: var(--color-accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .summary-disclaimer {
-            font-size: 0.8125rem;
-            color: var(--color-muted);
-            padding-top: 24px;
-            border-top: 1px solid var(--color-divider);
-            font-style: italic;
-        }
-
-        /* Measurement Guide */
-        .measurement-guide {
-            margin-top: 48px;
-            padding: 40px;
-            background: var(--color-bg);
-            border: 1px solid var(--color-divider);
-        }
-
-        .measurement-guide[hidden] {
-            display: none;
-        }
-
-        .measurement-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .measurement-header svg {
-            width: 20px;
-            height: 20px;
-            color: var(--color-accent);
-            flex-shrink: 0;
-            margin-top: 4px;
-        }
-
-        .measurement-header h4 {
-            font-family: var(--font-serif);
-            font-size: 1.125rem;
-            margin: 0;
-        }
-
-        .measurement-header p {
-            font-size: 0.875rem;
-            color: var(--color-muted);
-            margin-top: 4px;
-        }
-
-        .measurement-checklist {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .measurement-checklist li {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--color-divider);
-            font-size: 0.9375rem;
-        }
-
-        .measurement-checklist li:last-child {
-            border-bottom: none;
-        }
-
-        .measurement-checklist li::before {
-            content: '';
-            width: 18px;
-            height: 18px;
-            border: 1px solid var(--color-divider);
-            border-radius: 2px;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .measurement-item-text strong {
-            display: block;
-            color: var(--color-heading);
-            margin-bottom: 2px;
-        }
-
-        .measurement-item-text span {
-            font-size: 0.8125rem;
-            color: var(--color-muted);
-        }
-
-        /* Summary Actions */
-        .summary-actions {
-            display: flex;
-            gap: 16px;
-            margin-top: 32px;
-            flex-wrap: wrap;
-        }
-
-        .btn-outline {
+        .process-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 14px 24px;
-            font-family: var(--font-sans);
-            font-size: 0.8125rem;
-            font-weight: 400;
-            letter-spacing: 0.04em;
-            color: var(--color-heading);
-            background: transparent;
-            border: 1px solid var(--color-heading);
-            cursor: pointer;
-            transition: background var(--transition-fast), color var(--transition-fast);
-        }
-
-        .btn-outline:hover {
+            padding: 18px 40px;
             background: var(--color-heading);
             color: #fff;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        .btn-outline svg {
-            width: 14px;
-            height: 14px;
+        .process-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .process-btn svg {
+            width: 18px;
+            height: 18px;
         }
 
         /* ========================================
-           3D Photo Carousel (Drag-based)
+           Gallery Section
         ======================================== */
-        .carousel-section {
+        .gallery-section {
             background: var(--color-heading);
             overflow: hidden;
         }
 
-        .carousel-header {
+        .gallery-header {
             text-align: center;
             margin-bottom: 48px;
         }
 
-        .carousel-header .label {
+        .gallery-header .label {
             color: rgba(255, 255, 255, 0.5);
             margin-bottom: 16px;
         }
 
-        .carousel-header h2 {
+        .gallery-header h2 {
             color: #fff;
         }
 
-        /* 3D Carousel Container */
+        .gallery-header p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 500px;
+            margin: 16px auto 0;
+        }
+
+        /* 3D Carousel */
         .carousel-viewport {
             width: 100%;
             height: 480px;
@@ -965,20 +461,10 @@
             cursor: grab;
             user-select: none;
             -webkit-user-select: none;
-            -webkit-touch-callout: none;
             touch-action: pan-y pinch-zoom;
         }
 
-        .carousel-viewport:active {
-            cursor: grabbing;
-        }
-
-        /* Prevent pull-to-refresh on mobile */
-        @supports (-webkit-touch-callout: none) {
-            .carousel-viewport {
-                touch-action: pan-x;
-            }
-        }
+        .carousel-viewport:active { cursor: grabbing; }
 
         .carousel-track {
             position: absolute;
@@ -988,7 +474,6 @@
             will-change: transform;
         }
 
-        /* Individual Card */
         .carousel-card {
             position: absolute;
             width: 320px;
@@ -999,8 +484,6 @@
             will-change: transform, opacity;
             transform-style: preserve-3d;
             backface-visibility: hidden;
-            /* GPU acceleration */
-            transform: translate3d(0, 0, 0);
         }
 
         .carousel-card img {
@@ -1008,78 +491,48 @@
             height: 100%;
             object-fit: cover;
             pointer-events: none;
-            -webkit-user-drag: none;
         }
 
-        /* Card overlay with title */
         .carousel-card-info {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             padding: 32px 24px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
             transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.4s ease;
         }
 
-        .carousel-card.active .carousel-card-info {
-            transform: translateY(0);
-        }
-
-        .carousel-card.active {
-            cursor: pointer;
-        }
-
-        .carousel-card.active::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border: 2px solid transparent;
-            border-radius: 16px;
-            transition: border-color 0.3s ease;
-            pointer-events: none;
-        }
-
-        .carousel-card.active:hover::after {
-            border-color: var(--color-accent);
-        }
+        .carousel-card.active .carousel-card-info { transform: translateY(0); }
+        .carousel-card.active { cursor: pointer; }
 
         .carousel-card-info h4 {
             color: #fff;
             font-family: var(--font-serif);
-            font-size: 1.25rem;
-            font-weight: 400;
+            font-size: 1.1875rem;
+            font-weight: 500;
             margin-bottom: 4px;
         }
 
         .carousel-card-info span {
             color: rgba(255, 255, 255, 0.7);
             font-size: 0.875rem;
+            font-weight: 400;
         }
 
-        /* Drag hint */
         .carousel-hint {
             text-align: center;
             margin-top: 32px;
             color: rgba(255, 255, 255, 0.4);
             font-size: 0.8125rem;
-            letter-spacing: 0.04em;
         }
 
-        .carousel-hint svg {
-            width: 20px;
-            height: 20px;
-            margin-bottom: 8px;
-            opacity: 0.5;
-        }
-
-        /* Progress dots */
         .carousel-dots {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 32px;
+            margin-top: 24px;
         }
 
         .carousel-dot {
@@ -1098,9 +551,7 @@
             transform: scale(1.5);
         }
 
-        /* ========================================
-           Lightbox / Zoom View
-        ======================================== */
+        /* Lightbox */
         .carousel-lightbox {
             position: fixed;
             inset: 0;
@@ -1127,17 +578,15 @@
             max-height: 85vh;
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
-            transform: scale(0.8) translateY(40px);
+            transform: scale(0.8);
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .carousel-lightbox.active .carousel-lightbox-content {
-            transform: scale(1) translateY(0);
+            transform: scale(1);
         }
 
         .carousel-lightbox-content img {
-            display: block;
             max-width: 90vw;
             max-height: 85vh;
             object-fit: contain;
@@ -1155,14 +604,14 @@
         .carousel-lightbox-info h3 {
             color: #fff;
             font-family: var(--font-serif);
-            font-size: 1.75rem;
-            font-weight: 400;
+            font-size: 1.5rem;
+            font-weight: 500;
             margin-bottom: 8px;
         }
 
         .carousel-lightbox-info span {
             color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
+            font-weight: 400;
         }
 
         .carousel-lightbox-close {
@@ -1179,198 +628,132 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.3s ease, transform 0.3s ease;
+            transition: background 0.3s ease;
         }
 
-        .carousel-lightbox-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
-        }
-
-        .carousel-lightbox-close svg {
-            width: 24px;
-            height: 24px;
-            color: #fff;
-        }
-
-        .carousel-lightbox-hint {
-            position: absolute;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.8125rem;
-            pointer-events: none;
-        }
-
-        @media (max-width: 1024px) {
-            .carousel-viewport {
-                height: 420px;
-            }
-
-            .carousel-card {
-                width: 280px;
-                height: 360px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .carousel-viewport {
-                height: 380px;
-                perspective: 1000px;
-            }
-
-            .carousel-card {
-                width: 240px;
-                height: 320px;
-                border-radius: 12px;
-            }
-
-            .carousel-card-info {
-                padding: 24px 16px;
-            }
-
-            .carousel-card-info h4 {
-                font-size: 1.125rem;
-            }
-
-            .carousel-hint {
-                display: none;
-            }
-
-            /* Mobile lightbox adjustments */
-            .carousel-lightbox-content {
-                max-width: 95vw;
-                max-height: 70vh;
-                border-radius: 12px;
-            }
-
-            .carousel-lightbox-content img {
-                max-width: 95vw;
-                max-height: 70vh;
-            }
-
-            .carousel-lightbox-info {
-                padding: 20px 16px;
-            }
-
-            .carousel-lightbox-info h3 {
-                font-size: 1.25rem;
-            }
-
-            .carousel-lightbox-close {
-                top: 16px;
-                right: 16px;
-                width: 40px;
-                height: 40px;
-            }
-
-            .carousel-lightbox-hint {
-                bottom: 16px;
-                font-size: 0.75rem;
-            }
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .question-card,
-            .summary-card {
-                padding: 32px 24px;
-            }
-
-            .question-text {
-                font-size: 1.25rem;
-            }
-
-            .options-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .summary-actions {
-                flex-direction: column;
-            }
-
-            .summary-actions .btn-primary,
-            .summary-actions .btn-outline {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .measurement-guide {
-                padding: 24px;
-            }
-        }
+        .carousel-lightbox-close:hover { background: rgba(255, 255, 255, 0.2); }
+        .carousel-lightbox-close svg { width: 24px; height: 24px; color: #fff; }
 
         /* ========================================
-           Craft Section
+           Brands Section
         ======================================== */
-        .craft {
+        .brands-section {
             background: var(--color-bg);
-        }
-
-        .craft-content {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 100px;
-            align-items: center;
-        }
-
-        .craft-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .craft-gallery .craft-image-wrapper:first-child {
-            grid-column: 1 / -1;
-        }
-
-        .craft-image-wrapper {
+            padding: 64px 0;
+            border-top: 1px solid var(--color-divider);
+            border-bottom: 1px solid var(--color-divider);
             overflow: hidden;
         }
 
-        .craft-image {
-            aspect-ratio: 1;
+        .brands-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .brands-header p {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--color-muted);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .brands-carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .brands-track {
+            display: flex;
+            gap: 80px;
+            animation: scrollBrands 30s linear infinite;
+            width: max-content;
+        }
+
+        .brands-track:hover { animation-play-state: paused; }
+
+        @keyframes scrollBrands {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .brand-item {
+            flex-shrink: 0;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .brand-item:hover { opacity: 1; }
+
+        .brand-item a {
+            display: flex;
+            height: 100%;
+        }
+
+        .brand-item img {
+            height: 100%;
+            width: auto;
+            max-width: 160px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .brand-item:hover img { filter: grayscale(0%); }
+
+        /* ========================================
+           About Section
+        ======================================== */
+        .about-section {
+            background: var(--color-bg-alt);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image {
+            overflow: hidden;
+        }
+
+        .about-image img {
+            aspect-ratio: 4/5;
             object-fit: cover;
             transition: transform var(--transition-slow);
         }
 
-        .craft-gallery .craft-image-wrapper:first-child .craft-image {
-            aspect-ratio: 21/9;
-        }
+        .about-image:hover img { transform: scale(1.03); }
 
-        .craft-image-wrapper:hover .craft-image {
-            transform: scale(1.03);
-        }
+        .about-text .label { margin-bottom: 24px; }
+        .about-text h2 { margin-bottom: 24px; }
+        .about-text p { margin-bottom: 20px; }
 
-        .craft-text .label {
-            margin-bottom: 24px;
-        }
-
-        .craft-text h2 {
-            margin-bottom: 32px;
-        }
-
-        .craft-text p {
-            margin-bottom: 24px;
-        }
-
-        .craft-highlights {
+        .about-highlights {
             list-style: none;
-            margin-top: 40px;
-            padding-top: 40px;
+            margin-top: 32px;
+            padding-top: 32px;
             border-top: 1px solid var(--color-divider);
         }
 
-        .craft-highlights li {
+        .about-highlights li {
             display: flex;
             align-items: flex-start;
             gap: 16px;
             margin-bottom: 16px;
             font-size: 0.9375rem;
+            line-height: 1.6;
         }
 
-        .craft-highlights li::before {
+        .about-highlights li::before {
             content: '';
             width: 8px;
             height: 8px;
@@ -1381,29 +764,88 @@
         }
 
         /* ========================================
+           CTA Section
+        ======================================== */
+        .cta-section {
+            background: var(--color-accent);
+            padding: 80px 48px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            margin: 0 auto 40px;
+            max-width: 480px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 32px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn.primary {
+            background: #fff;
+            color: var(--color-accent-dark);
+        }
+
+        .cta-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .cta-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+
+        .cta-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* ========================================
            Contact Section
         ======================================== */
         .contact {
-            background: var(--color-bg-alt);
+            background: var(--color-bg);
         }
 
         .contact-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 120px;
+            gap: 100px;
         }
 
-        .contact-text .label {
-            margin-bottom: 24px;
-        }
-
-        .contact-text h2 {
-            margin-bottom: 32px;
-        }
-
-        .contact-text p {
-            margin-bottom: 48px;
-        }
+        .contact-text .label { margin-bottom: 24px; }
+        .contact-text h2 { margin-bottom: 24px; }
+        .contact-text p { margin-bottom: 40px; }
 
         .contact-details {
             list-style: none;
@@ -1415,7 +857,8 @@
 
         .contact-details .detail-label {
             font-size: 0.75rem;
-            letter-spacing: 0.08em;
+            font-weight: 500;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
             color: var(--color-muted);
             margin-bottom: 4px;
@@ -1425,9 +868,7 @@
             transition: color var(--transition-fast);
         }
 
-        .contact-details a:hover {
-            color: var(--color-accent);
-        }
+        .contact-details a:hover { color: var(--color-accent); }
 
         .contact-form {
             display: flex;
@@ -1435,14 +876,11 @@
             gap: 32px;
         }
 
-        .form-group {
-            position: relative;
-        }
-
         .form-group label {
             display: block;
             font-size: 0.75rem;
-            letter-spacing: 0.08em;
+            font-weight: 500;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
             color: var(--color-muted);
             margin-bottom: 8px;
@@ -1476,21 +914,21 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            padding: 16px 32px;
+            padding: 18px 32px;
             font-family: var(--font-sans);
-            font-size: 0.8125rem;
-            font-weight: 400;
-            letter-spacing: 0.04em;
+            font-size: 1rem;
+            font-weight: 500;
             color: #fff;
             background: var(--color-heading);
             border: none;
+            border-radius: 4px;
             cursor: pointer;
-            transition: background var(--transition-fast), gap var(--transition-fast);
+            transition: all var(--transition-fast);
         }
 
         .btn-primary:hover {
             background: var(--color-accent-dark);
-            gap: 16px;
+            transform: translateY(-2px);
         }
 
         .btn-primary svg {
@@ -1517,14 +955,16 @@
 
         .footer-logo {
             font-family: var(--font-serif);
-            font-size: 1.5rem;
+            font-size: 1.375rem;
+            font-weight: 500;
             color: #fff;
             margin-bottom: 16px;
         }
 
         .footer-tagline {
             font-size: 0.875rem;
-            max-width: 300px;
+            line-height: 1.6;
+            max-width: 280px;
         }
 
         .footer-links {
@@ -1535,29 +975,22 @@
         .footer-column h4 {
             font-family: var(--font-sans);
             font-size: 0.75rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.5);
             margin-bottom: 20px;
         }
 
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column li {
-            margin-bottom: 12px;
-        }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 12px; }
 
         .footer-column a {
             font-size: 0.875rem;
             transition: color var(--transition-fast);
         }
 
-        .footer-column a:hover {
-            color: #fff;
-        }
+        .footer-column a:hover { color: #fff; }
 
         .footer-bottom {
             max-width: var(--max-width);
@@ -1570,157 +1003,7 @@
         }
 
         /* ========================================
-           Responsive Design
-        ======================================== */
-        @media (max-width: 1024px) {
-            section {
-                padding: var(--section-padding-tablet) 32px;
-            }
-
-            .nav {
-                padding: 20px 32px;
-            }
-
-            .nav.scrolled {
-                padding: 16px 32px;
-            }
-
-            .philosophy-content,
-            .material-item,
-            .craft-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 48px;
-            }
-
-            .material-item:nth-child(even) {
-                direction: ltr;
-            }
-
-            .collection-item {
-                grid-template-columns: 160px 1fr auto;
-                gap: 32px;
-            }
-
-            .projects-two-col {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 48px;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 16px;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 768px) {
-            section {
-                padding: var(--section-padding-mobile) 24px;
-            }
-
-            .nav {
-                padding: 16px 24px;
-            }
-
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--color-bg);
-                flex-direction: column;
-                padding: 24px;
-                opacity: 0;
-                transform: translateY(-10px);
-                pointer-events: none;
-                visibility: hidden;
-                gap: 24px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            }
-
-            .nav-links.active {
-                opacity: 1;
-                transform: translateY(0);
-                pointer-events: auto;
-                visibility: visible;
-            }
-
-            /* On mobile, don't hide nav - always show */
-            .nav.nav-hidden {
-                background: rgba(250, 249, 247, 0.95) !important;
-                backdrop-filter: blur(10px);
-            }
-
-            .nav.nav-hidden .nav-toggle {
-                opacity: 1;
-            }
-
-            .nav-toggle {
-                display: flex;
-            }
-
-            /* Smaller logo on mobile */
-            .nav-logo img {
-                height: 80px;
-            }
-
-            .hero-content {
-                padding: 0 24px 48px;
-            }
-
-            .collection-item {
-                grid-template-columns: 1fr;
-                gap: 16px;
-                padding: 32px 0;
-            }
-
-            .collection-image-wrapper {
-                max-width: 200px;
-            }
-
-            .collection-cta {
-                justify-self: start;
-            }
-
-            .craft-gallery {
-                grid-template-columns: 1fr;
-            }
-
-            .craft-gallery .craft-image-wrapper:first-child .craft-image {
-                aspect-ratio: 4/3;
-            }
-
-            .footer {
-                padding: 48px 24px;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 32px;
-            }
-        }
-
-        /* ========================================
-           Scroll Progress Indicator
-        ======================================== */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 2px;
-            background: var(--color-accent);
-            z-index: 1001;
-            width: 0%;
-            transition: width 100ms linear;
-        }
-
-        /* ========================================
-           Floating Contact Button (Conversion CTA)
+           Floating CTA
         ======================================== */
         .floating-cta {
             position: fixed;
@@ -1745,25 +1028,18 @@
             text-decoration: none;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
         }
 
-        .floating-btn svg {
-            width: 20px;
-            height: 20px;
-        }
+        .floating-btn svg { width: 20px; height: 20px; }
 
         .floating-btn-primary {
             background: var(--color-accent);
             color: #fff;
-            position: relative;
         }
 
         .floating-btn-primary:hover {
             background: var(--color-accent-dark);
             transform: translateY(-2px);
-            box-shadow: 0 12px 40px rgba(184, 151, 126, 0.4);
         }
 
         .floating-btn-secondary {
@@ -1777,247 +1053,108 @@
             transform: translateY(-2px);
         }
 
-        @media (max-width: 768px) {
-            .floating-cta {
-                bottom: 20px;
-                right: 20px;
-            }
-
-            .floating-btn span {
-                display: none;
-            }
-
-            .floating-btn {
-                padding: 16px;
-                border-radius: 50%;
-            }
-        }
-
         /* ========================================
-           Hero CTA Buttons
+           Scroll Progress
         ======================================== */
-        .hero-cta {
-            display: flex;
-            gap: 16px;
-            margin-top: 32px;
-            flex-wrap: wrap;
-        }
-
-        .hero-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 18px 32px;
-            font-family: var(--font-sans);
-            font-size: 0.9375rem;
-            font-weight: 500;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .hero-btn-primary {
-            background: var(--color-accent);
-            color: #fff;
-        }
-
-        .hero-btn-primary:hover {
-            background: var(--color-accent-dark);
-            transform: translateY(-2px);
-        }
-
-        .hero-btn-secondary {
-            background: rgba(255, 255, 255, 0.9);
-            color: var(--color-heading);
-            backdrop-filter: blur(10px);
-        }
-
-        .hero-btn-secondary:hover {
-            background: #fff;
-        }
-
-        .hero-btn svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        @media (max-width: 768px) {
-            .hero-cta {
-                flex-direction: column;
-            }
-
-            .hero-btn {
-                justify-content: center;
-            }
-        }
-
-        /* ========================================
-           Simple Process Section (Conversion)
-        ======================================== */
-        .process-section {
-            background: var(--color-accent);
-            color: #fff;
-        }
-
-        .process-header {
-            text-align: center;
-            margin-bottom: 64px;
-        }
-
-        .process-header .label {
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 16px;
-        }
-
-        .process-header h2 {
-            color: #fff;
-        }
-
-        .process-header p {
-            color: rgba(255, 255, 255, 0.85);
-            margin: 16px auto 0;
-            max-width: 500px;
-        }
-
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 24px;
-            position: relative;
-        }
-
-        .process-steps::before {
-            content: '';
-            position: absolute;
-            top: 40px;
-            left: 10%;
-            right: 10%;
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
             height: 2px;
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .process-step {
-            text-align: center;
-            position: relative;
-        }
-
-        .process-step-number {
-            width: 80px;
-            height: 80px;
-            background: #fff;
-            color: var(--color-accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
-        }
-
-        .process-step h4 {
-            color: #fff;
-            font-size: 1.125rem;
-            margin-bottom: 8px;
-        }
-
-        .process-step p {
-            color: rgba(255, 255, 255, 0.75);
-            font-size: 0.875rem;
-            max-width: none;
-        }
-
-        .process-cta {
-            text-align: center;
-            margin-top: 56px;
-        }
-
-        .process-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 18px 40px;
-            background: #fff;
-            color: var(--color-accent-dark);
-            font-family: var(--font-sans);
-            font-size: 1rem;
-            font-weight: 500;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .process-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-        }
-
-        .process-btn svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        @media (max-width: 1024px) {
-            .process-steps {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 32px;
-            }
-
-            .process-steps::before {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .process-steps {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .process-step-number {
-                width: 64px;
-                height: 64px;
-                font-size: 1.5rem;
-            }
-
-            .process-step:last-child {
-                grid-column: 1 / -1;
-            }
+            background: var(--color-accent);
+            z-index: 1001;
+            width: 0%;
         }
 
         /* ========================================
-           Reassurance Banner
+           Responsive Design
         ======================================== */
-        .reassurance {
-            background: var(--color-bg-alt);
-            padding: 48px;
-            text-align: center;
-            border-bottom: 1px solid var(--color-divider);
-        }
+        @media (max-width: 1024px) {
+            section { padding: 80px 32px; }
+            .nav { padding: 20px 32px; }
 
-        .reassurance-text {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--color-heading);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.5;
-        }
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
 
-        .reassurance-text strong {
-            color: var(--color-accent);
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps::before { display: none; }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 48px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
         }
 
         @media (max-width: 768px) {
-            .reassurance {
-                padding: 32px 24px;
+            section { padding: var(--section-padding-mobile) 24px; }
+            .nav { padding: 16px 24px; }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-bg);
+                flex-direction: column;
+                padding: 24px;
+                opacity: 0;
+                transform: translateY(-10px);
+                pointer-events: none;
+                visibility: hidden;
+                gap: 24px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
             }
 
-            .reassurance-text {
-                font-size: 1.25rem;
+            .nav-links.active {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+                visibility: visible;
             }
+
+            .nav-toggle { display: flex; }
+            .nav-logo img { height: 72px; }
+
+            .hero-content { padding: 0 24px 48px; }
+
+            .hero-cta { flex-direction: column; }
+            .hero-btn { justify-content: center; }
+
+            .reassurance-section { padding: 56px 24px; }
+
+            .process-steps { grid-template-columns: 1fr; gap: 40px; }
+            .process-step-number { width: 64px; height: 64px; font-size: 1.5rem; }
+
+            .carousel-viewport { height: 380px; }
+            .carousel-card { width: 240px; height: 320px; }
+            .carousel-hint { display: none; }
+
+            .brands-track { gap: 48px; }
+            .brand-item { height: 36px; }
+            .brand-item img { max-width: 120px; }
+
+            .cta-section { padding: 56px 24px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .cta-btn { width: 100%; max-width: 280px; justify-content: center; }
+
+            .footer { padding: 48px 24px; }
+            .footer-links { flex-direction: column; gap: 32px; }
+
+            .floating-cta { bottom: 20px; right: 20px; }
+            .floating-btn span { display: none; }
+            .floating-btn { padding: 16px; border-radius: 50%; }
         }
     </style>
 </head>
@@ -2025,7 +1162,7 @@
     <!-- Scroll Progress -->
     <div class="scroll-progress"></div>
 
-    <!-- Floating Contact CTA (Always Visible) -->
+    <!-- Floating Contact CTA -->
     <div class="floating-cta">
         <a href="tel:+18565533899" class="floating-btn floating-btn-primary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2038,7 +1175,7 @@
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                 <polyline points="22,6 12,13 2,6"/>
             </svg>
-            <span>Email Us</span>
+            <span>Email</span>
         </a>
     </div>
 
@@ -2048,7 +1185,7 @@
             <img src="ocean/logo.png" alt="Ocean Cabinet and Countertops">
         </a>
         <ul class="nav-links">
-            <li><a href="#projects">Our Work</a></li>
+            <li><a href="#gallery">Our Work</a></li>
             <li><a href="#process">How It Works</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -2063,145 +1200,102 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-media">
-            <img src="ocean/kitchen.png"
-                 alt="Modern kitchen with custom cabinetry and countertops"
-                 loading="eager">
+            <img src="ocean/kitchen15.png" alt="Modern kitchen with custom cabinetry" loading="eager">
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-statement fade-in">Free Measurement & Design<br>One-Stop Kitchen Solutions</h1>
-            <p class="hero-subline fade-in">From cabinets to countertops, materials to installation — we handle your entire kitchen project from start to finish.</p>
+            <h1 class="hero-statement fade-in">Kitchen renovation, simplified.</h1>
+            <p class="hero-subline fade-in">Free measurement, design help, and professional installation. We handle everything.</p>
             <div class="hero-cta fade-in">
                 <a href="tel:+18565533899" class="hero-btn hero-btn-primary">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
                     </svg>
-                    (856) 553-3899
+                    Call or Text Us
                 </a>
-                <a href="mailto:oceancabinets888@gmail.com" class="hero-btn hero-btn-secondary">
+                <a href="#contact" class="hero-btn hero-btn-secondary">
+                    Request Free Measurement
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
-                    oceancabinets888@gmail.com
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="philosophy" id="services">
+    <!-- Reassurance Section -->
+    <section class="reassurance-section">
         <div class="container">
-            <div class="philosophy-content">
-                <div class="philosophy-text">
-                    <span class="text-muted label fade-in">Why Choose Us</span>
-                    <h2 class="fade-in">We Make Kitchen Renovation Easy</h2>
-                    <p class="fade-in">Feeling overwhelmed by choices? Don't worry. Most of our clients come to us without any idea where to start — and that's perfectly okay. <strong>We guide you through every decision.</strong></p>
-                    <p class="fade-in">Cabinets, countertops, handles, colors — we'll help you pick what works best for your home and budget. No pressure, no confusing jargon.</p>
-                    <div class="fade-in" style="margin-top: 24px;">
-                        <a href="#contact" class="btn-primary" style="text-decoration: none;">
-                            Talk to Us — It's Free
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;margin-left:8px;">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="philosophy-visual fade-in">
-                    <img src="ocean/kitchen8.jpg"
-                         alt="Modern kitchen with custom cabinetry"
-                         loading="lazy">
-                </div>
+            <div class="reassurance-content fade-in">
+                <h2>You don't need to know kitchens.</h2>
+                <p>Most people don't know where to start. That's fine. We'll measure your space, help you pick what works, and handle the rest.</p>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="projects" id="projects">
+    <!-- How It Works -->
+    <section class="process-section" id="process">
         <div class="container">
-            <div class="projects-header">
-                <span class="text-muted label fade-in">Project Gallery</span>
-                <h2 class="fade-in">Our Completed Work</h2>
+            <div class="process-header">
+                <span class="text-muted label fade-in">How It Works</span>
+                <h2 class="fade-in">Four simple steps</h2>
+                <p class="fade-in">No complicated process. Just tell us what you need.</p>
             </div>
-            <div class="projects-grid">
-                <div class="project-item large fade-in">
-                    <div class="project-image-wrapper">
-                        <img class="project-image"
-                             src="ocean/kitchen7.jpg"
-                             alt="Modern kitchen renovation in Lindenwold"
-                             loading="lazy">
-                        <div class="project-overlay">
-                            <div class="project-info">
-                                <h3>Modern Kitchen Remodel</h3>
-                                <span>Lindenwold, NJ</span>
-                            </div>
-                        </div>
-                    </div>
+
+            <div class="process-steps">
+                <div class="process-step fade-in">
+                    <div class="process-step-number">1</div>
+                    <h4>Call Us</h4>
+                    <p>Tell us about your project. No commitment.</p>
                 </div>
-                <div class="projects-two-col">
-                    <div class="project-item fade-in">
-                        <div class="project-image-wrapper">
-                            <img class="project-image"
-                                 src="ocean/kitchen2.png"
-                                 alt="Custom kitchen with navy island"
-                                 loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-info">
-                                    <h3>Navy Island Kitchen</h3>
-                                    <span>Marlton, NJ</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-item fade-in">
-                        <div class="project-image-wrapper">
-                            <img class="project-image"
-                                 src="ocean/kitchen1.png"
-                                 alt="Custom cabinet installation"
-                                 loading="lazy">
-                            <div class="project-overlay">
-                                <div class="project-info">
-                                    <h3>Custom Cabinet Installation</h3>
-                                    <span>Haddonfield, NJ</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="process-step fade-in">
+                    <div class="process-step-number">2</div>
+                    <h4>We Measure</h4>
+                    <p>Free in-home measurement at your convenience.</p>
                 </div>
+                <div class="process-step fade-in">
+                    <div class="process-step-number">3</div>
+                    <h4>Pick Your Style</h4>
+                    <p>We show you options that fit your budget.</p>
+                </div>
+                <div class="process-step fade-in">
+                    <div class="process-step-number">4</div>
+                    <h4>We Install</h4>
+                    <p>Professional installation. Done right.</p>
+                </div>
+            </div>
+
+            <div class="process-cta fade-in">
+                <a href="tel:+18565533899" class="process-btn">
+                    Start with a Call
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- 3D Photo Carousel Section -->
-    <section class="carousel-section" id="gallery">
+    <!-- Project Gallery -->
+    <section class="gallery-section" id="gallery">
         <div class="container">
-            <div class="carousel-header">
-                <span class="text-muted label fade-in">Gallery</span>
-                <h2 class="fade-in">Explore Our Projects</h2>
+            <div class="gallery-header">
+                <span class="text-muted label fade-in">Our Work</span>
+                <h2 class="fade-in">Recent Projects</h2>
+                <p class="fade-in">Real kitchens we've completed for local homeowners.</p>
             </div>
         </div>
 
-        <!-- Full-width carousel viewport -->
         <div class="carousel-viewport fade-in" id="carouselViewport">
-            <div class="carousel-track" id="carouselTrack">
-                <!-- Cards populated by JavaScript -->
-            </div>
+            <div class="carousel-track" id="carouselTrack"></div>
         </div>
 
         <div class="container">
-            <div class="carousel-hint fade-in">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M8 7h12M8 12h12M8 17h12M4 7h.01M4 12h.01M4 17h.01"/>
-                </svg>
-                <div>Drag to explore</div>
-            </div>
-
-            <div class="carousel-dots fade-in" id="carouselDots">
-                <!-- Dots populated by JavaScript -->
-            </div>
+            <div class="carousel-hint fade-in">Drag to explore</div>
+            <div class="carousel-dots fade-in" id="carouselDots"></div>
         </div>
 
-        <!-- Lightbox for zoomed view -->
+        <!-- Lightbox -->
         <div class="carousel-lightbox" id="carouselLightbox">
             <button class="carousel-lightbox-close" id="lightboxClose" aria-label="Close">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2215,489 +1309,76 @@
                     <span id="lightboxLocation"></span>
                 </div>
             </div>
-            <div class="carousel-lightbox-hint">Click anywhere to close</div>
         </div>
     </section>
 
-    <!-- Materials Section -->
-    <section class="materials" id="materials">
-        <div class="container">
-            <div class="materials-header">
-                <span class="text-muted label fade-in">Materials & Products</span>
-                <h2 class="fade-in">Premium Quality Selection</h2>
-            </div>
-
-            <div class="material-item fade-in">
-                <div class="material-image-wrapper">
-                    <img class="material-image"
-                         src="ocean/kitchen9.jpg"
-                         alt="Custom kitchen cabinets"
-                         loading="lazy">
-                </div>
-                <div class="material-content">
-                    <h3>Custom Cabinets</h3>
-                    <ul class="material-attributes">
-                        <li>Multiple Styles & Finishes</li>
-                        <li>Soft-Close Hardware</li>
-                        <li>Quality Brand Options</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="material-item fade-in">
-                <div class="material-image-wrapper">
-                    <img class="material-image"
-                         src="ocean/kitchen10.jpg"
-                         alt="Quartz and granite countertops"
-                         loading="lazy">
-                </div>
-                <div class="material-content">
-                    <h3>Countertops</h3>
-                    <ul class="material-attributes">
-                        <li>Quartz & Granite</li>
-                        <li>Marble & Natural Stone</li>
-                        <li>Custom Edge Profiles</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="material-item fade-in">
-                <div class="material-image-wrapper">
-                    <img class="material-image"
-                         src="ocean/kitchen2.png"
-                         alt="Flooring materials"
-                         loading="lazy">
-                </div>
-                <div class="material-content">
-                    <h3>Flooring & Hardware</h3>
-                    <ul class="material-attributes">
-                        <li>Hardwood & Tile</li>
-                        <li>Vinyl & Laminate</li>
-                        <li>Handles & Pulls</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- Trusted Brands -->
+    <section class="brands-section">
+        <div class="brands-header">
+            <p class="fade-in">Brands We Work With</p>
         </div>
-    </section>
-
-    <!-- Bathroom Products Section -->
-    <section class="collections" id="bathroom">
-        <div class="container">
-            <div class="collections-header">
-                <span class="text-muted label fade-in">Bathroom Renovation</span>
-                <h2 class="fade-in">Complete Bathroom Solutions</h2>
-                <p class="fade-in">From vanities to smart toilets, we supply and install everything you need for your dream bathroom.</p>
-            </div>
-
-            <div class="collection-list">
-                <div class="collection-item fade-in">
-                    <div class="collection-image-wrapper">
-                        <img class="collection-image"
-                             src="ocean/kitchen1.png"
-                             alt="Bathroom vanity"
-                             loading="lazy">
-                    </div>
-                    <div class="collection-content">
-                        <h3>Vanities & Sinks</h3>
-                        <p>Custom bathroom vanities and wash basins for every style.</p>
-                    </div>
-                    <span class="collection-cta">
-                        Learn More
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </span>
-                </div>
-
-                <div class="collection-item fade-in">
-                    <div class="collection-image-wrapper">
-                        <img class="collection-image"
-                             src="ocean/kitchen9.jpg"
-                             alt="Smart toilet"
-                             loading="lazy">
-                    </div>
-                    <div class="collection-content">
-                        <h3>Smart Toilets</h3>
-                        <p>Modern bidet toilets with advanced comfort features.</p>
-                    </div>
-                    <span class="collection-cta">
-                        Learn More
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </span>
-                </div>
-
-                <div class="collection-item fade-in">
-                    <div class="collection-image-wrapper">
-                        <img class="collection-image"
-                             src="ocean/kitchen10.jpg"
-                             alt="Shower panel"
-                             loading="lazy">
-                    </div>
-                    <div class="collection-content">
-                        <h3>Shower Systems</h3>
-                        <p>Premium shower panels and enclosures for a spa-like experience.</p>
-                    </div>
-                    <span class="collection-cta">
-                        Learn More
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                    </span>
-                </div>
+        <div class="brands-carousel">
+            <div class="brands-track" id="brandsTrack">
+                <div class="brand-item"><a href="https://fabuwood.com" target="_blank" rel="noopener"><img src="ocean/fabuwood.png" alt="Fabuwood"></a></div>
+                <div class="brand-item"><a href="https://www.cambriausa.com" target="_blank" rel="noopener"><img src="ocean/cambria.png" alt="Cambria"></a></div>
+                <div class="brand-item"><a href="#"><img src="ocean/makellos.png" alt="Makellos"></a></div>
+                <div class="brand-item"><a href="#"><img src="ocean/woodconcept.png" alt="Wood Concept"></a></div>
+                <div class="brand-item"><a href="#"><img src="ocean/jck.png" alt="JCK"></a></div>
+                <div class="brand-item"><a href="#"><img src="ocean/QUARTZ.png" alt="Quartz"></a></div>
+                <div class="brand-item"><a href="https://www.pentalquartz.com" target="_blank" rel="noopener"><img src="ocean/pentalquartz.png" alt="Pental Quartz"></a></div>
+                <div class="brand-item"><a href="https://www.topknobs.com" target="_blank" rel="noopener"><img src="ocean/topknobs.png" alt="Top Knobs"></a></div>
+                <!-- Duplicate for seamless scroll -->
+                <div class="brand-item"><a href="https://fabuwood.com" target="_blank" rel="noopener"><img src="ocean/fabuwood.png" alt="Fabuwood"></a></div>
+                <div class="brand-item"><a href="https://www.cambriausa.com" target="_blank" rel="noopener"><img src="ocean/cambria.png" alt="Cambria"></a></div>
+                <div class="brand-item"><a href="#"><img src="ocean/makellos.png" alt="Makellos"></a></div>
+                <div class="brand-item"><a href="#"><img src="ocean/woodconcept.png" alt="Wood Concept"></a></div>
+                <div class="brand-item"><a href="#"><img src="ocean/jck.png" alt="JCK"></a></div>
+                <div class="brand-item"><a href="#"><img src="ocean/QUARTZ.png" alt="Quartz"></a></div>
+                <div class="brand-item"><a href="https://www.pentalquartz.com" target="_blank" rel="noopener"><img src="ocean/pentalquartz.png" alt="Pental Quartz"></a></div>
+                <div class="brand-item"><a href="https://www.topknobs.com" target="_blank" rel="noopener"><img src="ocean/topknobs.png" alt="Top Knobs"></a></div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="craft" id="about">
+    <section class="about-section" id="about">
         <div class="container">
-            <div class="craft-content">
-                <div class="craft-gallery">
-                    <div class="craft-image-wrapper fade-in">
-                        <img class="craft-image"
-                             src="ocean/kitchen7.jpg"
-                             alt="Kitchen design consultation"
-                             loading="lazy">
-                    </div>
-                    <div class="craft-image-wrapper fade-in">
-                        <img class="craft-image"
-                             src="ocean/kitchen8.jpg"
-                             alt="Professional installation"
-                             loading="lazy">
-                    </div>
-                    <div class="craft-image-wrapper fade-in">
-                        <img class="craft-image"
-                             src="ocean/kitchen1.png"
-                             alt="Quality craftsmanship"
-                             loading="lazy">
-                    </div>
+            <div class="about-content">
+                <div class="about-image fade-in">
+                    <img src="ocean/kitchen16.png" alt="Our showroom" loading="lazy">
                 </div>
-                <div class="craft-text">
+                <div class="about-text">
                     <span class="text-muted label fade-in">About Us</span>
-                    <h2 class="fade-in">Local, Honest, and Here to Help</h2>
-                    <p class="fade-in">We're a family-owned business in Lindenwold, NJ. We've helped hundreds of homeowners create kitchens they love — without the stress of figuring it all out alone.</p>
-                    <ul class="craft-highlights fade-in">
-                        <li><strong>Free in-home measurement</strong> — we come to you</li>
-                        <li><strong>Honest pricing</strong> — no hidden fees, no surprises</li>
-                        <li><strong>We handle everything</strong> — design, ordering, installation</li>
-                        <li><strong>Local showroom</strong> — come see and touch samples</li>
+                    <h2 class="fade-in">Local. Honest. Here to help.</h2>
+                    <p class="fade-in">We're a family-owned cabinet store in Lindenwold, NJ. We've helped hundreds of homeowners create kitchens they love — without the stress.</p>
+                    <ul class="about-highlights fade-in">
+                        <li>Free in-home measurement</li>
+                        <li>Honest pricing — no hidden fees</li>
+                        <li>We handle design, ordering, and installation</li>
+                        <li>Local showroom — come see samples in person</li>
                     </ul>
-                    <div class="fade-in" style="margin-top: 32px;">
-                        <a href="#contact" class="btn-primary" style="text-decoration: none;">
-                            Schedule Free Consultation
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:16px;height:16px;margin-left:8px;">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works - Simple Process Section -->
-    <section class="process-section" id="process">
-        <div class="container">
-            <div class="process-header">
-                <span class="text-muted label fade-in">How It Works</span>
-                <h2 class="fade-in">5 Simple Steps to Your New Kitchen</h2>
-                <p class="fade-in">We handle everything. You just pick what you like.</p>
-            </div>
-
-            <div class="process-steps">
-                <div class="process-step fade-in">
-                    <div class="process-step-number">1</div>
-                    <h4>Free Consultation</h4>
-                    <p>Call us or visit our showroom. No pressure, just answers.</p>
-                </div>
-                <div class="process-step fade-in">
-                    <div class="process-step-number">2</div>
-                    <h4>We Measure</h4>
-                    <p>Our team comes to your home. Free, accurate measurements.</p>
-                </div>
-                <div class="process-step fade-in">
-                    <div class="process-step-number">3</div>
-                    <h4>Design & Quote</h4>
-                    <p>We create a design and give you a clear, honest price.</p>
-                </div>
-                <div class="process-step fade-in">
-                    <div class="process-step-number">4</div>
-                    <h4>You Approve</h4>
-                    <p>Review the design. Make changes. No surprises.</p>
-                </div>
-                <div class="process-step fade-in">
-                    <div class="process-step-number">5</div>
-                    <h4>We Install</h4>
-                    <p>Professional installation. Done right the first time.</p>
-                </div>
-            </div>
-
-            <div class="process-cta fade-in">
-                <a href="#contact" class="process-btn">
-                    Start with Step 1
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- AI Kitchen Assistant Section -->
-    <section class="ai-assistant" id="ai-assistant">
-        <div class="container">
-            <div class="ai-assistant-content">
-                <div class="ai-assistant-header">
-                    <span class="text-muted label fade-in">Design Assistant</span>
-                    <h2 class="fade-in">Help Us Understand Your Project</h2>
-                    <p class="fade-in">Answer a few questions to help our design team prepare for your consultation. This takes about 2 minutes.</p>
-                </div>
-
-                <!-- Step Progress -->
-                <div class="step-progress fade-in" id="stepProgress">
-                    <span class="step-dot active" data-step="1"></span>
-                    <span class="step-dot" data-step="2"></span>
-                    <span class="step-dot" data-step="3"></span>
-                    <span class="step-dot" data-step="4"></span>
-                    <span class="step-dot" data-step="5"></span>
-                    <span class="step-dot" data-step="6"></span>
-                    <span class="step-dot" data-step="7"></span>
-                </div>
-
-                <!-- Question Cards -->
-                <div id="questionContainer" class="fade-in">
-                    <!-- Question 1: Property Type -->
-                    <div class="question-card" data-step="1">
-                        <span class="question-number">Question 1 of 7</span>
-                        <h3 class="question-text">What type of property is this project for?</h3>
-                        <div class="options-grid">
-                            <button type="button" class="option-btn" data-value="condo">Condo</button>
-                            <button type="button" class="option-btn" data-value="townhouse">Townhouse</button>
-                            <button type="button" class="option-btn" data-value="single-family">Single Family Home</button>
-                            <button type="button" class="option-btn" data-value="other">Other</button>
-                        </div>
-                        <div class="question-nav">
-                            <button type="button" class="btn-secondary" disabled>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                                </svg>
-                                Back
-                            </button>
-                            <button type="button" class="btn-secondary btn-next" data-next="2" disabled>
-                                Next
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Question 2: Primary Residence -->
-                    <div class="question-card" data-step="2" hidden>
-                        <span class="question-number">Question 2 of 7</span>
-                        <h3 class="question-text">Will this be your primary residence?</h3>
-                        <div class="options-grid">
-                            <button type="button" class="option-btn" data-value="primary">Yes, primary residence</button>
-                            <button type="button" class="option-btn" data-value="investment">Investment property</button>
-                            <button type="button" class="option-btn" data-value="vacation">Vacation home</button>
-                        </div>
-                        <div class="question-nav">
-                            <button type="button" class="btn-secondary btn-back" data-back="1">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                                </svg>
-                                Back
-                            </button>
-                            <button type="button" class="btn-secondary btn-next" data-next="3" disabled>
-                                Next
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Question 3: Kitchen Size -->
-                    <div class="question-card" data-step="3" hidden>
-                        <span class="question-number">Question 3 of 7</span>
-                        <h3 class="question-text">How would you describe your kitchen size?</h3>
-                        <div class="options-grid">
-                            <button type="button" class="option-btn" data-value="small">Small (under 100 sq ft)</button>
-                            <button type="button" class="option-btn" data-value="medium">Medium (100–200 sq ft)</button>
-                            <button type="button" class="option-btn" data-value="large">Large (over 200 sq ft)</button>
-                            <button type="button" class="option-btn" data-value="unsure">Not sure</button>
-                        </div>
-                        <div class="question-nav">
-                            <button type="button" class="btn-secondary btn-back" data-back="2">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                                </svg>
-                                Back
-                            </button>
-                            <button type="button" class="btn-secondary btn-next" data-next="4" disabled>
-                                Next
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Question 4: Style Preference -->
-                    <div class="question-card" data-step="4" hidden>
-                        <span class="question-number">Question 4 of 7</span>
-                        <h3 class="question-text">What design style are you drawn to?</h3>
-                        <div class="options-grid">
-                            <button type="button" class="option-btn" data-value="modern">Modern / Contemporary</button>
-                            <button type="button" class="option-btn" data-value="transitional">Transitional</button>
-                            <button type="button" class="option-btn" data-value="traditional">Traditional / Classic</button>
-                            <button type="button" class="option-btn" data-value="undecided">Open to suggestions</button>
-                        </div>
-                        <div class="question-nav">
-                            <button type="button" class="btn-secondary btn-back" data-back="3">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                                </svg>
-                                Back
-                            </button>
-                            <button type="button" class="btn-secondary btn-next" data-next="5" disabled>
-                                Next
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Question 5: Priority -->
-                    <div class="question-card" data-step="5" hidden>
-                        <span class="question-number">Question 5 of 7</span>
-                        <h3 class="question-text">What matters most to you in this project?</h3>
-                        <div class="options-grid">
-                            <button type="button" class="option-btn" data-value="design">Design & aesthetics</button>
-                            <button type="button" class="option-btn" data-value="durability">Durability & quality</button>
-                            <button type="button" class="option-btn" data-value="budget">Value for budget</button>
-                            <button type="button" class="option-btn" data-value="balanced">Balanced approach</button>
-                        </div>
-                        <div class="question-nav">
-                            <button type="button" class="btn-secondary btn-back" data-back="4">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                                </svg>
-                                Back
-                            </button>
-                            <button type="button" class="btn-secondary btn-next" data-next="6" disabled>
-                                Next
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Question 6: Timeline -->
-                    <div class="question-card" data-step="6" hidden>
-                        <span class="question-number">Question 6 of 7</span>
-                        <h3 class="question-text">When are you hoping to start the project?</h3>
-                        <div class="options-grid">
-                            <button type="button" class="option-btn" data-value="asap">As soon as possible</button>
-                            <button type="button" class="option-btn" data-value="1-3months">Within 1–3 months</button>
-                            <button type="button" class="option-btn" data-value="3-6months">Within 3–6 months</button>
-                            <button type="button" class="option-btn" data-value="flexible">Flexible / Planning ahead</button>
-                        </div>
-                        <div class="question-nav">
-                            <button type="button" class="btn-secondary btn-back" data-back="5">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                                </svg>
-                                Back
-                            </button>
-                            <button type="button" class="btn-secondary btn-next" data-next="7" disabled>
-                                Next
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Question 7: Budget Range -->
-                    <div class="question-card" data-step="7" hidden>
-                        <span class="question-number">Question 7 of 7</span>
-                        <h3 class="question-text">What budget range are you considering?</h3>
-                        <div class="options-grid">
-                            <button type="button" class="option-btn" data-value="value">Value-focused</button>
-                            <button type="button" class="option-btn" data-value="mid">Mid-range</button>
-                            <button type="button" class="option-btn" data-value="premium">Premium / High-end</button>
-                            <button type="button" class="option-btn" data-value="flexible">Flexible / Undecided</button>
-                        </div>
-                        <div class="question-nav">
-                            <button type="button" class="btn-secondary btn-back" data-back="6">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M19 12H5M12 19l-7-7 7-7"/>
-                                </svg>
-                                Back
-                            </button>
-                            <button type="button" class="btn-primary btn-submit">
-                                Generate Summary
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Summary (shown after completion) -->
-                <div class="summary-card fade-in" id="summaryCard" hidden>
-                    <div class="summary-header">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        <h3>Your Project Summary</h3>
-                    </div>
-                    <div class="summary-content" id="summaryContent">
-                        <p class="summary-loading">Preparing your personalized summary...</p>
-                    </div>
-                    <p class="summary-disclaimer">
-                        This summary is provided for consultation purposes only. Final design recommendations, pricing, and project specifications will be determined by our professional design team during your in-person consultation.
-                    </p>
-
-                    <!-- Smart Measurement Guide -->
-                    <div class="measurement-guide" id="measurementGuide" hidden>
-                        <div class="measurement-header">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M4 6h16M4 12h16M4 18h7"/>
-                                <path d="M15 15l3 3m0 0l3-3m-3 3V9"/>
-                            </svg>
-                            <div>
-                                <h4>Your Measurement Checklist</h4>
-                                <p>Bring these measurements to your consultation for a more accurate initial assessment.</p>
-                            </div>
-                        </div>
-                        <ul class="measurement-checklist" id="measurementChecklist">
-                            <!-- Dynamically populated based on answers -->
-                        </ul>
-                    </div>
-
-                    <div class="summary-actions">
-                        <a href="#contact" class="btn-primary">
-                            Schedule Consultation
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                        <button type="button" class="btn-outline" id="startOverBtn">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                            </svg>
-                            Start Over
-                        </button>
-                    </div>
-                </div>
-            </div>
+    <!-- Final CTA -->
+    <section class="cta-section">
+        <h2 class="fade-in">Ready to get started?</h2>
+        <p class="fade-in">A quick conversation is all it takes. No pressure, no commitment.</p>
+        <div class="cta-buttons fade-in">
+            <a href="tel:+18565533899" class="cta-btn primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+                </svg>
+                Call (856) 553-3899
+            </a>
+            <a href="#contact" class="cta-btn secondary">
+                Send a Message
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
         </div>
     </section>
 
@@ -2706,31 +1387,26 @@
         <div class="container">
             <div class="contact-content">
                 <div class="contact-text">
-                    <span class="text-muted label fade-in">Let's Talk</span>
-                    <h2 class="fade-in">No Commitment, Just a Conversation</h2>
-                    <p class="fade-in">Have questions? Not sure where to start? Just give us a call or send a message. We're happy to answer any questions — even if you're not ready to buy.</p>
+                    <span class="text-muted label fade-in">Contact</span>
+                    <h2 class="fade-in">Let's talk</h2>
+                    <p class="fade-in">Have questions? Not sure where to start? Just reach out. We're happy to help.</p>
                     <ul class="contact-details fade-in">
                         <li>
                             <div class="detail-label">Showroom</div>
                             <div>555 Blackwood-Clementon Road<br>Lindenwold, NJ 08021</div>
                         </li>
                         <li>
+                            <div class="detail-label">Phone</div>
+                            <a href="tel:+18565533899">(856) 553-3899</a>
+                        </li>
+                        <li>
                             <div class="detail-label">Email</div>
                             <a href="mailto:oceancabinets888@gmail.com">oceancabinets888@gmail.com</a>
                         </li>
-                        <li>
-                            <div class="detail-label">Telephone</div>
-                            <a href="tel:+18565533899">(856) 553-3899</a>
-                        </li>
                     </ul>
                 </div>
-                <!-- Form connected to Formspree for email delivery -->
                 <form class="contact-form fade-in" action="https://formspree.io/f/mwvneyzq" method="POST">
-                    <!-- Hidden field: redirect after submission -->
                     <input type="hidden" name="_redirect" value="/thank-you.html">
-                    <!-- Hidden field: for AI-generated project summary (populated via JS if available) -->
-                    <input type="hidden" name="ai_summary" id="aiSummary">
-
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required>
@@ -2740,11 +1416,15 @@
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="message">Tell us about your project</label>
+                        <label for="phone">Phone (optional)</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">How can we help?</label>
                         <textarea id="message" name="message" required></textarea>
                     </div>
                     <button type="submit" class="btn-primary">
-                        Request Free Estimate
+                        Send Message
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
@@ -2759,20 +1439,20 @@
         <div class="footer-content">
             <div class="footer-brand">
                 <div class="footer-logo">Ocean Cabinet</div>
-                <p class="footer-tagline">Kitchen renovation made easy. Free estimates, no pressure. Call us today.</p>
+                <p class="footer-tagline">Local kitchen cabinet retail and installation in South Jersey.</p>
             </div>
             <div class="footer-links">
                 <div class="footer-column">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#projects">Our Work</a></li>
+                        <li><a href="#gallery">Our Work</a></li>
                         <li><a href="#process">How It Works</a></li>
-                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h4>Contact Us</h4>
+                    <h4>Contact</h4>
                     <ul>
                         <li><a href="tel:+18565533899">(856) 553-3899</a></li>
                         <li><a href="mailto:oceancabinets888@gmail.com">oceancabinets888@gmail.com</a></li>
@@ -2792,938 +1472,216 @@
         </div>
         <div class="footer-bottom">
             <span>&copy; 2024 Ocean Cabinet and Countertops. All rights reserved.</span>
-            <span>Serving Lindenwold, NJ & Surrounding Areas</span>
+            <span>Serving Lindenwold & South Jersey</span>
         </div>
     </footer>
 
     <script>
         // ========================================
-        // Navigation: Hide on idle, show on scroll (Desktop only)
+        // Fade-in animations
+        // ========================================
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+        // ========================================
+        // Navigation
         // ========================================
         const nav = document.querySelector('.nav');
         const navToggle = document.querySelector('.nav-toggle');
         const navLinks = document.querySelector('.nav-links');
         const scrollProgress = document.querySelector('.scroll-progress');
 
-        let hideTimeout = null;
-        const IDLE_DELAY = 1200;
-
-        // Check if mobile
-        function isMobile() {
-            return window.innerWidth <= 768;
-        }
-
-        function showNav() {
-            nav.classList.remove('nav-hidden');
-            if (hideTimeout) clearTimeout(hideTimeout);
-        }
-
-        function hideNavAfterDelay() {
-            // Don't hide on mobile
-            if (isMobile()) return;
-
-            if (hideTimeout) clearTimeout(hideTimeout);
-            hideTimeout = setTimeout(() => {
-                if (window.scrollY > 100 && !nav.matches(':hover')) {
-                    nav.classList.add('nav-hidden');
-                }
-            }, IDLE_DELAY);
-        }
-
+        // Scroll effects
+        let lastScroll = 0;
         window.addEventListener('scroll', () => {
-            // Background when scrolled
-            if (window.scrollY > 100) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-                nav.classList.remove('nav-hidden');
-            }
-
-            // Show nav while scrolling
-            showNav();
-
-            // Schedule hide after idle (desktop only)
-            if (window.scrollY > 100 && !isMobile()) {
-                hideNavAfterDelay();
-            }
+            const scrolled = window.scrollY > 100;
+            nav.classList.toggle('scrolled', scrolled);
 
             // Progress bar
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            scrollProgress.style.width = scrollPercent + '%';
+            const height = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.scrollY / height) * 100;
+            scrollProgress.style.width = progress + '%';
         });
 
-        // Show nav on hover (desktop)
-        nav.addEventListener('mouseenter', showNav);
-
-        // Hide after mouse leaves (desktop)
-        nav.addEventListener('mouseleave', () => {
-            if (window.scrollY > 100 && !isMobile()) {
-                hideNavAfterDelay();
-            }
-        });
-
-        // Mobile nav toggle
+        // Mobile toggle
         navToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            showNav();
         });
 
-        // Close mobile menu when clicking a link
+        // Close menu on link click
         navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Close mobile nav on link click
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
         });
 
         // ========================================
-        // Scroll Reveal Animation
+        // 3D Photo Carousel
         // ========================================
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+        const carouselProjects = [
+            { image: 'ocean/kitchen15.png', title: 'Modern Gray Kitchen', location: 'Lindenwold, NJ' },
+            { image: 'ocean/kitchen14.png', title: 'White Built-In Cabinets', location: 'Marlton, NJ' },
+            { image: 'ocean/kitchen.png', title: 'Contemporary White Kitchen', location: 'Haddon Heights, NJ' },
+            { image: 'ocean/kitchen12.png', title: 'Gray Shaker Style', location: 'Voorhees, NJ' },
+            { image: 'ocean/kitchen1.png', title: 'Classic White Cabinets', location: 'Stratford, NJ' },
+            { image: 'ocean/kitchen13.png', title: 'Gray Cabinet Hutch', location: 'Haddonfield, NJ' },
+            { image: 'ocean/kitchen2.png', title: 'Modern Island Design', location: 'Clementon, NJ' },
+            { image: 'ocean/kitchen16.png', title: 'Dark Wood Classic', location: 'Cherry Hill, NJ' },
+            { image: 'ocean/kitchen7.jpg', title: 'Transitional Kitchen', location: 'Blackwood, NJ' },
+            { image: 'ocean/kitchen17.png', title: 'White Pantry Cabinet', location: 'Collingswood, NJ' },
+            { image: 'ocean/kitchen8.jpg', title: 'Open Concept Layout', location: 'Somerdale, NJ' },
+            { image: 'ocean/kitchen9.jpg', title: 'Custom Storage Solutions', location: 'Magnolia, NJ' },
+            { image: 'ocean/kitchen10.jpg', title: 'Elegant Countertops', location: 'Barrington, NJ' }
+        ];
 
-        const observerCallback = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        };
+        const track = document.getElementById('carouselTrack');
+        const dotsContainer = document.getElementById('carouselDots');
+        const viewport = document.getElementById('carouselViewport');
+        const lightbox = document.getElementById('carouselLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxLocation = document.getElementById('lightboxLocation');
+        const lightboxClose = document.getElementById('lightboxClose');
 
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        let currentIndex = 0;
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        let dragOffset = 0;
+        let velocity = 0;
+        let animationFrame = null;
 
-        document.querySelectorAll('.fade-in').forEach(element => {
-            observer.observe(element);
+        // Create cards
+        carouselProjects.forEach((project, i) => {
+            const card = document.createElement('div');
+            card.className = 'carousel-card';
+            card.dataset.index = i;
+            card.innerHTML = `
+                <img src="${project.image}" alt="${project.title}" loading="lazy">
+                <div class="carousel-card-info">
+                    <h4>${project.title}</h4>
+                    <span>${project.location}</span>
+                </div>
+            `;
+            track.appendChild(card);
+
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
         });
 
-        // ========================================
-        // Smooth Scroll for Anchor Links
-        // ========================================
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const navHeight = nav.offsetHeight;
-                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
+        const cards = document.querySelectorAll('.carousel-card');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const cardWidth = 320;
+        const cardGap = 40;
+        const totalCards = carouselProjects.length;
 
-        // ========================================
-        // Form Submission
-        // ========================================
-        // REMOVED: Fake form handler that called preventDefault()
-        // Form now submits natively to Formspree (action/method on <form> tag)
-        // After submission, user is redirected to /thank-you.html
+        function updateCarousel(offset = 0) {
+            cards.forEach((card, i) => {
+                const diff = i - currentIndex;
+                const x = diff * (cardWidth + cardGap) + offset;
+                const absX = Math.abs(x);
+                const scale = Math.max(0.75, 1 - absX * 0.0008);
+                const z = -absX * 0.5;
+                const opacity = Math.max(0.4, 1 - absX * 0.002);
 
-        // Populate AI summary hidden field before form submits (if user completed questionnaire)
-        const contactFormElement = document.querySelector('.contact-form');
-        if (contactFormElement) {
-            contactFormElement.addEventListener('submit', function() {
-                // Copy AI summary content to hidden field if it exists
-                const summaryEl = document.getElementById('summaryContent');
-                const aiSummaryField = document.getElementById('aiSummary');
-                if (summaryEl && aiSummaryField && summaryEl.textContent.trim()) {
-                    // Only include if summary has content (user completed questionnaire)
-                    aiSummaryField.value = summaryEl.textContent.trim();
-                }
-                // Form continues to submit normally to Formspree
+                card.style.transform = `translate3d(${x - cardWidth/2}px, -50%, ${z}px) scale(${scale})`;
+                card.style.opacity = opacity;
+                card.classList.toggle('active', i === currentIndex && offset === 0);
             });
+
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
         }
 
-        // ========================================
-        // Staggered Animation for Lists
-        // ========================================
-        const staggerElements = document.querySelectorAll('.collection-item, .material-item');
-        staggerElements.forEach((el, index) => {
-            el.style.transitionDelay = `${index * 100}ms`;
+        function goToSlide(index) {
+            currentIndex = Math.max(0, Math.min(totalCards - 1, index));
+            updateCarousel();
+        }
+
+        // Drag handling
+        function handleDragStart(e) {
+            if (animationFrame) cancelAnimationFrame(animationFrame);
+            isDragging = true;
+            startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            currentX = startX;
+            velocity = 0;
+            viewport.style.cursor = 'grabbing';
+        }
+
+        function handleDragMove(e) {
+            if (!isDragging) return;
+            const x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            const delta = x - currentX;
+            velocity = delta;
+            currentX = x;
+            dragOffset = x - startX;
+            updateCarousel(dragOffset);
+        }
+
+        function handleDragEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            viewport.style.cursor = 'grab';
+
+            const threshold = cardWidth / 3;
+            if (Math.abs(dragOffset) > threshold || Math.abs(velocity) > 10) {
+                if (dragOffset > 0 || velocity > 10) {
+                    currentIndex = Math.max(0, currentIndex - 1);
+                } else {
+                    currentIndex = Math.min(totalCards - 1, currentIndex + 1);
+                }
+            }
+
+            dragOffset = 0;
+            updateCarousel();
+        }
+
+        // Event listeners
+        viewport.addEventListener('mousedown', handleDragStart);
+        viewport.addEventListener('mousemove', handleDragMove);
+        viewport.addEventListener('mouseup', handleDragEnd);
+        viewport.addEventListener('mouseleave', handleDragEnd);
+        viewport.addEventListener('touchstart', handleDragStart, { passive: true });
+        viewport.addEventListener('touchmove', handleDragMove, { passive: true });
+        viewport.addEventListener('touchend', handleDragEnd);
+
+        // Lightbox
+        cards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                if (Math.abs(dragOffset) > 5) return;
+                const index = parseInt(card.dataset.index);
+                if (index === currentIndex) {
+                    const project = carouselProjects[index];
+                    lightboxImage.src = project.image;
+                    lightboxTitle.textContent = project.title;
+                    lightboxLocation.textContent = project.location;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
         });
 
-        // ========================================
-        // 3D Photo Carousel (Silky Smooth + Lightbox)
-        // ========================================
-        (function() {
-            const viewport = document.getElementById('carouselViewport');
-            const track = document.getElementById('carouselTrack');
-            const dotsContainer = document.getElementById('carouselDots');
-
-            // Lightbox elements
-            const lightbox = document.getElementById('carouselLightbox');
-            const lightboxImage = document.getElementById('lightboxImage');
-            const lightboxTitle = document.getElementById('lightboxTitle');
-            const lightboxLocation = document.getElementById('lightboxLocation');
-            const lightboxClose = document.getElementById('lightboxClose');
-            const lightboxContent = document.getElementById('lightboxContent');
-
-            if (!viewport || !track) return;
-
-            // ========================================
-            // Configuration - Tuned for silky feel
-            // ========================================
-            const images = [
-                { src: 'ocean/kitchen.png', title: 'Modern Blue Island', location: 'Lindenwold, NJ' },
-                { src: 'ocean/kitchen7.jpg', title: 'Open Concept Kitchen', location: 'Marlton, NJ' },
-                { src: 'ocean/kitchen8.jpg', title: 'White Transitional', location: 'Haddonfield, NJ' },
-                { src: 'ocean/kitchen1.png', title: 'Green Cabinet Design', location: 'Voorhees, NJ' },
-                { src: 'ocean/kitchen2.png', title: 'Navy Island Kitchen', location: 'Moorestown, NJ' },
-                { src: 'ocean/kitchen9.jpg', title: 'Navy Tall Cabinets', location: 'Lindenwold, NJ' },
-                { src: 'ocean/kitchen10.jpg', title: 'Gold Accent Kitchen', location: 'Medford, NJ' }
-            ];
-
-            const CARD_WIDTH = 320;
-            const CARD_GAP = 50;
-            const CARD_SPACING = CARD_WIDTH + CARD_GAP;
-            const PERSPECTIVE_DEPTH = 350;
-            const MAX_ROTATION = 40;
-
-            // Smoother physics parameters
-            const DRAG_MULTIPLIER = 1.0;      // Direct 1:1 drag feel
-            const VELOCITY_MULTIPLIER = 0.4;  // Velocity sensitivity
-            const FRICTION = 0.95;            // Higher = more slide (0.95 is silky)
-            const SNAP_SPEED = 0.08;          // Lower = smoother snap
-            const MIN_VELOCITY = 0.1;         // When to start snapping
-
-            // ========================================
-            // State
-            // ========================================
-            let offset = 0;
-            let targetOffset = 0;
-            let velocity = 0;
-            let isDragging = false;
-            let dragStartX = 0;
-            let dragStartOffset = 0;
-            let lastPointerX = 0;
-            let lastMoveTime = 0;
-            let activeIndex = 0;
-            let hasDragged = false;  // Track if user dragged (vs just clicked)
-            let pointerDownTime = 0;
-
-            // Velocity history for smoother inertia
-            let velocityHistory = [];
-            const VELOCITY_SAMPLES = 5;
-
-            // ========================================
-            // Create Cards & Dots
-            // ========================================
-            images.forEach((img, index) => {
-                const card = document.createElement('div');
-                card.className = 'carousel-card';
-                card.dataset.index = index;
-                card.innerHTML = `
-                    <img src="${img.src}" alt="${img.title}" loading="lazy">
-                    <div class="carousel-card-info">
-                        <h4>${img.title}</h4>
-                        <span>${img.location}</span>
-                    </div>
-                `;
-                track.appendChild(card);
-
-                const dot = document.createElement('button');
-                dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
-                dot.addEventListener('click', () => smoothSnapTo(index));
-                dotsContainer.appendChild(dot);
-            });
-
-            const cards = track.querySelectorAll('.carousel-card');
-            const dots = dotsContainer.querySelectorAll('.carousel-dot');
-            const totalCards = images.length;
-
-            // ========================================
-            // Smooth easing function
-            // ========================================
-            function easeOutExpo(t) {
-                return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-            }
-
-            // ========================================
-            // 3D Transform - Optimized
-            // ========================================
-            function render() {
-                cards.forEach((card, index) => {
-                    const cardX = index * CARD_SPACING + offset;
-                    const normalized = cardX / CARD_SPACING;
-                    const absNorm = Math.abs(normalized);
-
-                    // Smoother depth curve
-                    const z = -absNorm * absNorm * PERSPECTIVE_DEPTH;
-
-                    // Gentler rotation
-                    const rotateY = normalized * -12;
-
-                    // Smooth scale falloff
-                    const scale = Math.max(0.75, 1 - absNorm * 0.12);
-
-                    // Smooth opacity
-                    const opacity = Math.max(0.4, 1 - absNorm * 0.2);
-
-                    card.style.transform = `
-                        translate3d(${cardX - CARD_WIDTH / 2}px, -50%, ${z}px)
-                        rotateY(${rotateY}deg)
-                        scale(${scale})
-                    `;
-                    card.style.opacity = opacity;
-                    card.style.zIndex = Math.round((1 - absNorm) * 100);
-                    card.classList.toggle('active', absNorm < 0.5);
-                });
-
-                // Update dots
-                const newIndex = Math.round(-offset / CARD_SPACING);
-                const clamped = Math.max(0, Math.min(totalCards - 1, newIndex));
-                if (clamped !== activeIndex) {
-                    activeIndex = clamped;
-                    dots.forEach((d, i) => d.classList.toggle('active', i === activeIndex));
-                }
-            }
-
-            // ========================================
-            // Animation Loop - Buttery smooth
-            // ========================================
-            function animate() {
-                if (!isDragging) {
-                    if (Math.abs(velocity) > MIN_VELOCITY) {
-                        // Apply velocity with friction
-                        offset += velocity;
-                        velocity *= FRICTION;
-
-                        // Boundary resistance (rubber band effect)
-                        const minOffset = -(totalCards - 1) * CARD_SPACING;
-                        if (offset > 0) {
-                            offset *= 0.7;
-                            velocity *= 0.5;
-                        } else if (offset < minOffset) {
-                            offset = minOffset + (offset - minOffset) * 0.7;
-                            velocity *= 0.5;
-                        }
-                    } else {
-                        // Smooth snap to nearest
-                        velocity = 0;
-                        const nearestIndex = Math.round(-offset / CARD_SPACING);
-                        const clamped = Math.max(0, Math.min(totalCards - 1, nearestIndex));
-                        targetOffset = -clamped * CARD_SPACING;
-
-                        const diff = targetOffset - offset;
-                        if (Math.abs(diff) > 0.1) {
-                            offset += diff * SNAP_SPEED;
-                        } else {
-                            offset = targetOffset;
-                        }
-                    }
-                }
-
-                render();
-                requestAnimationFrame(animate);
-            }
-
-            // ========================================
-            // Get average velocity from history
-            // ========================================
-            function getSmoothedVelocity() {
-                if (velocityHistory.length === 0) return 0;
-                const sum = velocityHistory.reduce((a, b) => a + b, 0);
-                return sum / velocityHistory.length;
-            }
-
-            // ========================================
-            // Smooth snap to card
-            // ========================================
-            function smoothSnapTo(index) {
-                velocity = 0;
-                targetOffset = -index * CARD_SPACING;
-            }
-
-            // ========================================
-            // Pointer Events (unified mouse + touch)
-            // ========================================
-            function getPointerX(e) {
-                return e.touches ? e.touches[0].clientX : e.clientX;
-            }
-
-            function onPointerDown(e) {
-                isDragging = true;
-                hasDragged = false;
-                pointerDownTime = Date.now();
-                dragStartX = getPointerX(e);
-                dragStartOffset = offset;
-                lastPointerX = dragStartX;
-                lastMoveTime = Date.now();
-                velocity = 0;
-                velocityHistory = [];
-                viewport.style.cursor = 'grabbing';
-            }
-
-            function onPointerMove(e) {
-                if (!isDragging) return;
-
-                const x = getPointerX(e);
-                const deltaX = x - dragStartX;
-
-                // Mark as dragged if moved more than 5px
-                if (Math.abs(deltaX) > 5) {
-                    hasDragged = true;
-                }
-
-                offset = dragStartOffset + deltaX * DRAG_MULTIPLIER;
-
-                // Calculate instantaneous velocity
-                const now = Date.now();
-                const dt = now - lastMoveTime;
-                if (dt > 0) {
-                    const instantVelocity = (x - lastPointerX) / dt * 16 * VELOCITY_MULTIPLIER;
-                    velocityHistory.push(instantVelocity);
-                    if (velocityHistory.length > VELOCITY_SAMPLES) {
-                        velocityHistory.shift();
-                    }
-                }
-
-                lastPointerX = x;
-                lastMoveTime = now;
-
-                if (e.cancelable) e.preventDefault();
-            }
-
-            function onPointerUp(e) {
-                if (!isDragging) return;
-                isDragging = false;
-                viewport.style.cursor = 'grab';
-
-                // Use smoothed velocity for natural feel
-                velocity = getSmoothedVelocity();
-
-                // Handle tap/click (not drag) - open lightbox
-                const clickDuration = Date.now() - pointerDownTime;
-                const isTapNotDrag = !hasDragged && clickDuration < 400;
-
-                if (isTapNotDrag) {
-                    // Find which card was tapped
-                    const touch = e.changedTouches ? e.changedTouches[0] : e;
-                    const target = document.elementFromPoint(
-                        touch.clientX || e.clientX,
-                        touch.clientY || e.clientY
-                    );
-                    const card = target ? target.closest('.carousel-card') : null;
-
-                    if (card && card.classList.contains('active')) {
-                        const index = parseInt(card.dataset.index);
-                        openLightbox(index);
-                    }
-                }
-            }
-
-            // ========================================
-            // Lightbox Functions
-            // ========================================
-            function openLightbox(index) {
-                const img = images[index];
-                lightboxImage.src = img.src;
-                lightboxImage.alt = img.title;
-                lightboxTitle.textContent = img.title;
-                lightboxLocation.textContent = img.location;
-
-                // Trigger animation
-                requestAnimationFrame(() => {
-                    lightbox.classList.add('active');
-                });
-
-                // Prevent body scroll
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeLightbox() {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            // Lightbox event listeners
-            lightbox.addEventListener('click', (e) => {
-                // Close if clicking outside the image content
-                if (e.target === lightbox || e.target === lightboxClose ||
-                    e.target.closest('.carousel-lightbox-close')) {
-                    closeLightbox();
-                }
-            });
-
-            // Close on Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                    closeLightbox();
-                }
-            });
-
-            // Prevent closing when clicking on image
-            lightboxContent.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-
-            // ========================================
-            // Event Listeners
-            // ========================================
-            // Mouse
-            viewport.addEventListener('mousedown', onPointerDown);
-            window.addEventListener('mousemove', onPointerMove);
-            window.addEventListener('mouseup', onPointerUp);
-
-            // Touch
-            viewport.addEventListener('touchstart', onPointerDown, { passive: true });
-            viewport.addEventListener('touchmove', onPointerMove, { passive: false });
-            viewport.addEventListener('touchend', onPointerUp);
-
-            // Prevent native drag
-            viewport.addEventListener('dragstart', (e) => e.preventDefault());
-
-            // ========================================
-            // Initialize
-            // ========================================
-            offset = 0;
-            targetOffset = 0;
-            render();
-            animate();
-
-            window.addEventListener('resize', render);
-        })();
-
-        // ========================================
-        // AI Kitchen Assistant
-        // ========================================
-        (function() {
-            // State management for the questionnaire
-            const assistantState = {
-                currentStep: 1,
-                totalSteps: 7,
-                answers: {}
-            };
-
-            // DOM Elements
-            const questionContainer = document.getElementById('questionContainer');
-            const stepProgress = document.getElementById('stepProgress');
-            const summaryCard = document.getElementById('summaryCard');
-            const summaryContent = document.getElementById('summaryContent');
-            const measurementGuide = document.getElementById('measurementGuide');
-            const measurementChecklist = document.getElementById('measurementChecklist');
-            const startOverBtn = document.getElementById('startOverBtn');
-
-            if (!questionContainer) return; // Exit if section not present
-
-            // Answer display labels (for human-readable summary)
-            const answerLabels = {
-                propertyType: {
-                    'condo': 'Condominium',
-                    'townhouse': 'Townhouse',
-                    'single-family': 'Single Family Home',
-                    'other': 'Other Property Type'
-                },
-                residence: {
-                    'primary': 'Primary Residence',
-                    'investment': 'Investment Property',
-                    'vacation': 'Vacation Home'
-                },
-                kitchenSize: {
-                    'small': 'Small Kitchen (under 100 sq ft)',
-                    'medium': 'Medium Kitchen (100–200 sq ft)',
-                    'large': 'Large Kitchen (over 200 sq ft)',
-                    'unsure': 'Size to be determined'
-                },
-                style: {
-                    'modern': 'Modern / Contemporary',
-                    'transitional': 'Transitional',
-                    'traditional': 'Traditional / Classic',
-                    'undecided': 'Open to design suggestions'
-                },
-                priority: {
-                    'design': 'Design & Aesthetics',
-                    'durability': 'Durability & Quality',
-                    'budget': 'Value for Budget',
-                    'balanced': 'Balanced Approach'
-                },
-                timeline: {
-                    'asap': 'As soon as possible',
-                    '1-3months': 'Within 1–3 months',
-                    '3-6months': 'Within 3–6 months',
-                    'flexible': 'Flexible timeline'
-                },
-                budget: {
-                    'value': 'Value-focused',
-                    'mid': 'Mid-range',
-                    'premium': 'Premium / High-end',
-                    'flexible': 'Flexible budget'
-                }
-            };
-
-            // Map step numbers to answer keys
-            const stepToKey = {
-                1: 'propertyType',
-                2: 'residence',
-                3: 'kitchenSize',
-                4: 'style',
-                5: 'priority',
-                6: 'timeline',
-                7: 'budget'
-            };
-
-            // Handle option selection
-            questionContainer.addEventListener('click', function(e) {
-                const optionBtn = e.target.closest('.option-btn');
-                if (optionBtn) {
-                    const card = optionBtn.closest('.question-card');
-                    const step = parseInt(card.dataset.step);
-                    const key = stepToKey[step];
-                    const value = optionBtn.dataset.value;
-
-                    // Deselect all options in this card
-                    card.querySelectorAll('.option-btn').forEach(btn => {
-                        btn.classList.remove('selected');
-                    });
-
-                    // Select this option
-                    optionBtn.classList.add('selected');
-
-                    // Store answer
-                    assistantState.answers[key] = value;
-
-                    // Enable next button
-                    const nextBtn = card.querySelector('.btn-next');
-                    if (nextBtn) {
-                        nextBtn.disabled = false;
-                    }
-                }
-
-                // Handle back button
-                const backBtn = e.target.closest('.btn-back');
-                if (backBtn) {
-                    const targetStep = parseInt(backBtn.dataset.back);
-                    navigateToStep(targetStep);
-                }
-
-                // Handle next button
-                const nextBtn = e.target.closest('.btn-next');
-                if (nextBtn && !nextBtn.disabled) {
-                    const targetStep = parseInt(nextBtn.dataset.next);
-                    navigateToStep(targetStep);
-                }
-
-                // Handle submit button
-                const submitBtn = e.target.closest('.btn-submit');
-                if (submitBtn) {
-                    // Ensure last question is answered
-                    if (assistantState.answers.budget) {
-                        showSummary();
-                    }
-                }
-            });
-
-            // Navigate between steps
-            function navigateToStep(step) {
-                // Hide all cards
-                questionContainer.querySelectorAll('.question-card').forEach(card => {
-                    card.hidden = true;
-                });
-
-                // Show target card
-                const targetCard = questionContainer.querySelector(`[data-step="${step}"]`);
-                if (targetCard) {
-                    targetCard.hidden = false;
-                }
-
-                // Update progress dots
-                stepProgress.querySelectorAll('.step-dot').forEach(dot => {
-                    const dotStep = parseInt(dot.dataset.step);
-                    dot.classList.remove('active', 'completed');
-                    if (dotStep < step) {
-                        dot.classList.add('completed');
-                    } else if (dotStep === step) {
-                        dot.classList.add('active');
-                    }
-                });
-
-                assistantState.currentStep = step;
-            }
-
-            // Show the summary
-            function showSummary() {
-                questionContainer.hidden = true;
-                stepProgress.style.display = 'none';
-                summaryCard.hidden = false;
-
-                // Show loading state
-                summaryContent.innerHTML = '<p class="summary-loading">Preparing your personalized summary...</p>';
-
-                // Generate summary (simulated delay for UX)
-                setTimeout(() => {
-                    generateAISummary(assistantState.answers)
-                        .then(summary => {
-                            summaryContent.innerHTML = summary;
-                            generateMeasurementGuide(assistantState.answers);
-                            measurementGuide.hidden = false;
-                        })
-                        .catch(error => {
-                            // Fallback to local generation if API fails
-                            summaryContent.innerHTML = generateLocalSummary(assistantState.answers);
-                            generateMeasurementGuide(assistantState.answers);
-                            measurementGuide.hidden = false;
-                        });
-                }, 800);
-            }
-
-            // ========================================
-            // AI Summary Generation
-            // ========================================
-
-            /**
-             * Generate AI-powered project summary
-             *
-             * INTEGRATION POINT: Replace this function body with actual API call.
-             *
-             * Example with Claude API:
-             *
-             * async function generateAISummary(answers) {
-             *     const response = await fetch('YOUR_BACKEND_ENDPOINT', {
-             *         method: 'POST',
-             *         headers: {
-             *             'Content-Type': 'application/json',
-             *             // Note: NEVER put API keys in client-side code
-             *             // Use a backend proxy to handle API authentication
-             *         },
-             *         body: JSON.stringify({
-             *             prompt: buildPromptFromAnswers(answers),
-             *             // Additional parameters as needed
-             *         })
-             *     });
-             *     const data = await response.json();
-             *     return formatAIResponse(data.content);
-             * }
-             *
-             * The backend should:
-             * 1. Receive the client request
-             * 2. Add the API key server-side
-             * 3. Call Claude/OpenAI API with a system prompt like:
-             *    "You are a professional kitchen design consultant writing an
-             *     internal lead summary. Be concise and professional. Never
-             *     mention specific prices or make guarantees. Focus on
-             *     understanding the client's needs."
-             * 4. Return the formatted response
-             */
-            async function generateAISummary(answers) {
-                // --------------------------------------------------------
-                // PLACEHOLDER: This uses local generation.
-                // Replace with API call to your backend proxy.
-                // --------------------------------------------------------
-
-                // Simulate API delay for realistic UX
-                await new Promise(resolve => setTimeout(resolve, 400));
-
-                // For now, use local generation
-                return generateLocalSummary(answers);
-            }
-
-            /**
-             * Local summary generation (fallback / demo mode)
-             * Produces professional consultant-style summary without AI API
-             */
-            function generateLocalSummary(answers) {
-                const labels = answerLabels;
-
-                // Build contextual summary paragraphs
-                let summary = '';
-
-                // Opening context
-                const propertyLabel = labels.propertyType[answers.propertyType] || 'property';
-                const residenceContext = answers.residence === 'primary'
-                    ? 'as their primary residence'
-                    : answers.residence === 'investment'
-                        ? 'as an investment property'
-                        : 'as a vacation home';
-
-                summary += `<p><strong>Project Overview:</strong> Client is considering a kitchen renovation for their ${propertyLabel.toLowerCase()} ${residenceContext}. `;
-
-                // Size context
-                if (answers.kitchenSize === 'unsure') {
-                    summary += 'Kitchen dimensions to be confirmed during on-site consultation.</p>';
-                } else {
-                    const sizeDesc = answers.kitchenSize === 'small' ? 'compact' :
-                                    answers.kitchenSize === 'medium' ? 'medium-sized' : 'spacious';
-                    summary += `The project involves a ${sizeDesc} kitchen space.</p>`;
-                }
-
-                // Style and priorities
-                const styleLabel = labels.style[answers.style] || 'undetermined';
-                const priorityLabel = labels.priority[answers.priority] || 'balanced';
-
-                summary += `<p><strong>Design Direction:</strong> Client expresses interest in ${styleLabel.toLowerCase()} design elements. `;
-
-                if (answers.priority === 'design') {
-                    summary += 'Primary emphasis on aesthetic impact and visual appeal. Recommend showcasing premium finish options and design-forward solutions.</p>';
-                } else if (answers.priority === 'durability') {
-                    summary += 'Primary emphasis on long-term durability and build quality. Recommend highlighting warranty coverage and material specifications.</p>';
-                } else if (answers.priority === 'budget') {
-                    summary += 'Primary emphasis on value optimization. Recommend presenting tiered options with clear value propositions at each level.</p>';
-                } else {
-                    summary += 'Looking for a balanced approach across design, quality, and value considerations.</p>';
-                }
-
-                // Timeline and budget signals
-                const timelineLabel = labels.timeline[answers.timeline];
-                const budgetLabel = labels.budget[answers.budget];
-
-                summary += `<p><strong>Project Readiness:</strong> `;
-
-                if (answers.timeline === 'asap') {
-                    summary += 'Client indicates urgency—ready to move forward promptly. ';
-                } else if (answers.timeline === '1-3months') {
-                    summary += 'Client is actively planning with a near-term start date in mind. ';
-                } else if (answers.timeline === '3-6months') {
-                    summary += 'Client is in planning phase with a medium-term timeline. ';
-                } else {
-                    summary += 'Client is exploring options with flexible timing. ';
-                }
-
-                if (answers.budget === 'premium') {
-                    summary += 'Budget positioning suggests interest in premium-tier solutions.</p>';
-                } else if (answers.budget === 'mid') {
-                    summary += 'Budget positioning aligns with mid-range product selection.</p>';
-                } else if (answers.budget === 'value') {
-                    summary += 'Budget positioning emphasizes value-conscious options.</p>';
-                } else {
-                    summary += 'Budget flexibility allows for presenting options across tiers.</p>';
-                }
-
-                // Consultation recommendation
-                summary += '<p><strong>Recommended Next Steps:</strong> Schedule in-person consultation to review space, discuss specific product preferences, and develop preliminary design concepts.</p>';
-
-                return summary;
-            }
-
-            /**
-             * Generate customized measurement checklist based on answers
-             */
-            function generateMeasurementGuide(answers) {
-                const measurements = [];
-
-                // Core measurements (always included)
-                measurements.push({
-                    title: 'Overall kitchen dimensions',
-                    detail: 'Length and width of the room, wall to wall'
-                });
-
-                measurements.push({
-                    title: 'Ceiling height',
-                    detail: 'Floor to ceiling measurement'
-                });
-
-                // Window and door measurements
-                measurements.push({
-                    title: 'Window locations and sizes',
-                    detail: 'Width, height, and distance from floor and adjacent walls'
-                });
-
-                measurements.push({
-                    title: 'Door openings',
-                    detail: 'Width and which direction doors swing'
-                });
-
-                // Based on kitchen size
-                if (answers.kitchenSize === 'large') {
-                    measurements.push({
-                        title: 'Island space (if applicable)',
-                        detail: 'Available floor area and clearance on all sides'
-                    });
-                }
-
-                // Appliance locations
-                measurements.push({
-                    title: 'Existing appliance locations',
-                    detail: 'Position of stove, refrigerator, dishwasher, and sink from walls'
-                });
-
-                // Electrical and plumbing
-                measurements.push({
-                    title: 'Electrical outlet positions',
-                    detail: 'Height from floor and distance from corners'
-                });
-
-                measurements.push({
-                    title: 'Plumbing rough-in location',
-                    detail: 'Distance from walls to center of drain pipe'
-                });
-
-                // Property-specific
-                if (answers.propertyType === 'condo') {
-                    measurements.push({
-                        title: 'Any fixed structural columns',
-                        detail: 'Location and dimensions of any columns or bulkheads'
-                    });
-                }
-
-                // Render checklist
-                measurementChecklist.innerHTML = measurements.map(item => `
-                    <li>
-                        <div class="measurement-item-text">
-                            <strong>${item.title}</strong>
-                            <span>${item.detail}</span>
-                        </div>
-                    </li>
-                `).join('');
-            }
-
-            // Start over functionality
-            if (startOverBtn) {
-                startOverBtn.addEventListener('click', function() {
-                    // Reset state
-                    assistantState.currentStep = 1;
-                    assistantState.answers = {};
-
-                    // Reset UI
-                    questionContainer.querySelectorAll('.option-btn').forEach(btn => {
-                        btn.classList.remove('selected');
-                    });
-                    questionContainer.querySelectorAll('.btn-next').forEach(btn => {
-                        btn.disabled = true;
-                    });
-
-                    // Show first question
-                    questionContainer.hidden = false;
-                    stepProgress.style.display = 'flex';
-                    summaryCard.hidden = true;
-                    measurementGuide.hidden = true;
-
-                    navigateToStep(1);
-
-                    // Scroll to section
-                    const section = document.getElementById('ai-assistant');
-                    if (section) {
-                        const navHeight = document.querySelector('.nav').offsetHeight;
-                        const targetPosition = section.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            }
-
-            // Re-observe new elements for fade-in animation
-            const aiSection = document.querySelector('.ai-assistant');
-            if (aiSection) {
-                aiSection.querySelectorAll('.fade-in').forEach(element => {
-                    observer.observe(element);
-                });
-            }
-        })();
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Initialize
+        updateCarousel();
     </script>
 </body>
 </html>
