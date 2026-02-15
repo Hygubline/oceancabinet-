@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You — Ocean Cabinet and Countertops</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-bg: #FAF9F7;
+            --color-heading: #2A2A2A;
+            --color-body: #4A4A4A;
+            --color-muted: #6B6B6B;
+            --color-accent: #B8977E;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--color-body);
+            background-color: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 120px auto;
+            padding: 0 24px;
+            flex: 1;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 400;
+            color: var(--color-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 32px;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            max-width: 560px;
+        }
+
+        .muted {
+            color: var(--color-muted);
+            font-size: 0.9375rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 40px;
+            font-size: 0.875rem;
+            color: var(--color-heading);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--color-accent);
+        }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 249, 247, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .nav-logo img { height: 120px; width: auto; }
+        .nav-links { display: flex; gap: 48px; list-style: none; }
+        .nav-links a {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--color-body);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--color-heading); }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-toggle span {
+            width: 24px;
+            height: 1px;
+            background: var(--color-heading);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 140px auto 80px;
+            }
+            .nav { padding: 16px 24px; }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-bg);
+                flex-direction: column;
+                padding: 24px;
+                opacity: 0;
+                visibility: hidden;
+                gap: 20px;
+            }
+            .nav-links.active { opacity: 1; visibility: visible; }
+            .nav-toggle { display: flex; }
+            .nav-logo img { height: 80px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="ocean/logo.png" alt="Ocean Cabinet">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="service-area.html">Service Area</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Thank you.</h1>
+
+        <p>
+            We've received your request.
+            Our design team will review the details and reach out if additional information is needed.
+        </p>
+
+        <p class="muted">
+            Custom cabinetry is a collaborative process.
+            Every project is reviewed individually to ensure proper fit, function, and long-term quality.
+        </p>
+
+        <a href="index.html" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Return to homepage
+        </a>
+    </div>
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        navToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+    </script>
+</body>
+</html>

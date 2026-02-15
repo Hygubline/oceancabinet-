@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment — Ocean Cabinet and Countertops</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #FAF9F7;
+            --color-bg-alt: #F5F4F1;
+            --color-heading: #2A2A2A;
+            --color-body: #4A4A4A;
+            --color-muted: #6B6B6B;
+            --color-accent: #B8977E;
+            --color-accent-dark: #9A7D66;
+            --color-accent-light: #D4C4B5;
+            --color-divider: #E8E6E3;
+            --color-success: #4CAF50;
+            --color-error: #E57373;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --max-width: 1280px;
+            --transition-fast: 300ms ease-out;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--color-body);
+            background-color: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            color: var(--color-heading);
+        }
+        h1 { font-size: clamp(2rem, 4vw, 2.75rem); }
+        h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+        h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 249, 247, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .nav-logo img { height: 120px; width: auto; }
+        .nav-links { display: flex; gap: 48px; list-style: none; }
+        .nav-links a {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-body);
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-accent);
+            transition: width var(--transition-fast);
+        }
+        .nav-links a:hover { color: var(--color-heading); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--color-accent); }
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-toggle span {
+            width: 24px;
+            height: 1px;
+            background: var(--color-heading);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 160px 48px 60px;
+            text-align: center;
+            background: var(--color-bg-alt);
+        }
+        .page-header .label {
+            color: var(--color-muted);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .page-header p {
+            color: var(--color-muted);
+            max-width: 500px;
+            margin: 16px auto 0;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            padding: 60px 48px 100px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Steps Indicator */
+        .booking-steps {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 48px;
+        }
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            position: relative;
+        }
+        .step::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            width: 40px;
+            height: 1px;
+            background: var(--color-divider);
+        }
+        .step:last-child::after { display: none; }
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--color-divider);
+            color: var(--color-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .step.active .step-number {
+            background: var(--color-accent);
+            color: #fff;
+        }
+        .step.completed .step-number {
+            background: var(--color-success);
+            color: #fff;
+        }
+        .step-label {
+            font-size: 0.875rem;
+            color: var(--color-muted);
+            transition: color 0.3s ease;
+        }
+        .step.active .step-label { color: var(--color-heading); font-weight: 500; }
+
+        /* Booking Form Container */
+        .booking-form-container {
+            background: #fff;
+            border-radius: 16px;
+            padding: 48px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Step Content */
+        .step-content {
+            display: none;
+        }
+        .step-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Calendar */
+        .calendar-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .calendar-header h3 { font-size: 1.25rem; }
+        .calendar-nav {
+            display: flex;
+            gap: 8px;
+        }
+        .calendar-nav button {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--color-divider);
+            background: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .calendar-nav button:hover { background: var(--color-bg-alt); border-color: var(--color-accent); }
+        .calendar-nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+        .calendar-nav svg { width: 20px; height: 20px; color: var(--color-heading); }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        .weekday {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 8px 0;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+        .calendar-day {
+            aspect-ratio: 1;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.9375rem;
+            color: var(--color-body);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .calendar-day:hover:not(:disabled) { background: var(--color-bg-alt); }
+        .calendar-day.selected {
+            background: var(--color-accent);
+            color: #fff;
+            font-weight: 500;
+        }
+        .calendar-day:disabled {
+            color: var(--color-divider);
+            cursor: not-allowed;
+        }
+        .calendar-day.today::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--color-accent);
+            border-radius: 50%;
+        }
+        .calendar-day.selected.today::after { background: #fff; }
+        .calendar-day.other-month { color: var(--color-muted); opacity: 0.5; }
+
+        /* Time Slots */
+        .time-slots-container {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--color-divider);
+        }
+        .time-slots-container h4 {
+            font-family: var(--font-sans);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 8px;
+        }
+        .time-slot {
+            padding: 12px 16px;
+            border: 1px solid var(--color-divider);
+            background: #fff;
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 0.875rem;
+            color: var(--color-body);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        .time-slot:hover:not(:disabled) {
+            border-color: var(--color-accent);
+            background: var(--color-bg-alt);
+        }
+        .time-slot.selected {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: #fff;
+        }
+        .time-slot:disabled {
+            background: var(--color-bg-alt);
+            color: var(--color-muted);
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        /* Service Selection */
+        .service-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .service-option {
+            padding: 24px;
+            border: 2px solid var(--color-divider);
+            background: #fff;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .service-option:hover { border-color: var(--color-accent-light); }
+        .service-option.selected {
+            border-color: var(--color-accent);
+            background: rgba(184, 151, 126, 0.05);
+        }
+        .service-option h4 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-heading);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .service-option h4 .check {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-divider);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .service-option.selected h4 .check {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+        .service-option.selected h4 .check svg { display: block; }
+        .service-option h4 .check svg { display: none; width: 12px; height: 12px; color: #fff; }
+        .service-option p {
+            font-size: 0.875rem;
+            color: var(--color-muted);
+            line-height: 1.6;
+        }
+        .service-option .duration {
+            margin-top: 12px;
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+
+        /* Form Fields */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .form-grid .full-width { grid-column: 1 / -1; }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-group label {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 16px;
+            border: 1px solid var(--color-divider);
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--color-body);
+            background: #fff;
+            transition: border-color 0.2s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Confirmation Summary */
+        .confirmation-summary {
+            background: var(--color-bg-alt);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-divider);
+        }
+        .summary-row:last-child { border-bottom: none; }
+        .summary-label {
+            font-size: 0.875rem;
+            color: var(--color-muted);
+        }
+        .summary-value {
+            font-weight: 500;
+            color: var(--color-heading);
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 16px;
+        }
+        .btn {
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn svg { width: 18px; height: 18px; }
+        .btn-primary {
+            background: var(--color-accent);
+            color: #fff;
+            border: none;
+        }
+        .btn-primary:hover { background: var(--color-accent-dark); transform: translateY(-2px); }
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-body);
+            border: 1px solid var(--color-divider);
+        }
+        .btn-secondary:hover { border-color: var(--color-body); }
+
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 40px;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--color-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+        .success-icon svg { width: 40px; height: 40px; color: #fff; }
+        .success-message h2 { margin-bottom: 16px; }
+        .success-message p { color: var(--color-muted); max-width: 400px; margin: 0 auto; }
+
+        /* Footer */
+        .footer {
+            background: var(--color-heading);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 60px 48px;
+        }
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: #fff;
+        }
+        .footer-links { display: flex; gap: 32px; list-style: none; }
+        .footer-links a { font-size: 0.875rem; transition: color 0.3s; }
+        .footer-links a:hover { color: #fff; }
+
+        /* Contact Info */
+        .contact-info {
+            background: var(--color-bg-alt);
+            padding: 32px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+        .contact-info h4 {
+            font-family: var(--font-sans);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+        .contact-info p {
+            font-size: 0.9375rem;
+            margin-bottom: 8px;
+        }
+        .contact-info a { color: var(--color-accent); }
+
+        @media (max-width: 768px) {
+            .nav { padding: 16px 24px; }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-bg);
+                flex-direction: column;
+                padding: 24px;
+                opacity: 0;
+                visibility: hidden;
+                gap: 20px;
+            }
+            .nav-links.active { opacity: 1; visibility: visible; }
+            .nav-toggle { display: flex; }
+            .nav-logo img { height: 80px; }
+
+            .page-header { padding: 120px 24px 48px; }
+            .booking-section { padding: 40px 24px 80px; }
+            .booking-form-container { padding: 32px 24px; }
+
+            .booking-steps { flex-wrap: wrap; gap: 16px; }
+            .step { padding: 8px 12px; }
+            .step::after { display: none; }
+            .step-label { display: none; }
+
+            .form-grid { grid-template-columns: 1fr; }
+            .service-options { grid-template-columns: 1fr; }
+
+            .button-group { flex-direction: column-reverse; }
+            .btn { justify-content: center; }
+
+            .footer { padding: 40px 24px; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="ocean/logo.png" alt="Ocean Cabinet">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="booking.html" class="active">Book Appointment</a></li>
+            <li><a href="service-area.html">Service Area</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="label">Free Consultation</div>
+        <h1>Book Your Appointment</h1>
+        <p>Schedule a free in-home measurement or showroom visit. No obligation, no pressure.</p>
+    </header>
+
+    <!-- Booking Section -->
+    <section class="booking-section">
+        <!-- Steps Indicator -->
+        <div class="booking-steps">
+            <div class="step active" data-step="1">
+                <div class="step-number">1</div>
+                <span class="step-label">Service</span>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-number">2</div>
+                <span class="step-label">Date & Time</span>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-number">3</div>
+                <span class="step-label">Your Info</span>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-number">4</div>
+                <span class="step-label">Confirm</span>
+            </div>
+        </div>
+
+        <div class="booking-form-container">
+            <!-- Step 1: Service Selection -->
+            <div class="step-content active" id="step1">
+                <h3 style="margin-bottom: 24px;">What would you like to schedule?</h3>
+                <div class="service-options">
+                    <div class="service-option" data-service="measurement">
+                        <h4>
+                            <span class="check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                            Free In-Home Measurement
+                        </h4>
+                        <p>We come to your home to measure your space and discuss your vision. Completely free.</p>
+                        <div class="duration">30-45 minutes</div>
+                    </div>
+                    <div class="service-option" data-service="showroom">
+                        <h4>
+                            <span class="check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                            Showroom Visit
+                        </h4>
+                        <p>Visit our showroom to see samples, explore options, and get expert advice.</p>
+                        <div class="duration">45-60 minutes</div>
+                    </div>
+                    <div class="service-option" data-service="design">
+                        <h4>
+                            <span class="check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </span>
+                            Design Consultation
+                        </h4>
+                        <p>Already have measurements? Meet with our designer to plan your dream kitchen.</p>
+                        <div class="duration">60-90 minutes</div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <div></div>
+                    <button class="btn btn-primary" onclick="nextStep()" id="step1Next" disabled>
+                        Continue
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Date & Time Selection -->
+            <div class="step-content" id="step2">
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <h3 id="calendarMonth">February 2026</h3>
+                        <div class="calendar-nav">
+                            <button id="prevMonth">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M15 18l-6-6 6-6"/>
+                                </svg>
+                            </button>
+                            <button id="nextMonth">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 18l6-6-6-6"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="calendar-weekdays">
+                        <div class="weekday">Sun</div>
+                        <div class="weekday">Mon</div>
+                        <div class="weekday">Tue</div>
+                        <div class="weekday">Wed</div>
+                        <div class="weekday">Thu</div>
+                        <div class="weekday">Fri</div>
+                        <div class="weekday">Sat</div>
+                    </div>
+                    <div class="calendar-days" id="calendarDays"></div>
+
+                    <div class="time-slots-container" id="timeSlotsContainer" style="display: none;">
+                        <h4>Available Times for <span id="selectedDateText"></span></h4>
+                        <div class="time-slots" id="timeSlots"></div>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="prevStep()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="step2Next" disabled>
+                        Continue
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Contact Information -->
+            <div class="step-content" id="step3">
+                <h3 style="margin-bottom: 24px;">Your Information</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone *</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="address">Address (for in-home visits)</label>
+                        <input type="text" id="address" placeholder="Street address, City, State, ZIP">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="notes">Additional Notes</label>
+                        <textarea id="notes" placeholder="Tell us about your project, any specific questions, or special requirements..."></textarea>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="prevStep()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </button>
+                    <button class="btn btn-primary" onclick="nextStep()" id="step3Next">
+                        Review Booking
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Confirmation -->
+            <div class="step-content" id="step4">
+                <h3 style="margin-bottom: 24px;">Confirm Your Booking</h3>
+                <div class="confirmation-summary">
+                    <div class="summary-row">
+                        <span class="summary-label">Service</span>
+                        <span class="summary-value" id="summaryService">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Date</span>
+                        <span class="summary-value" id="summaryDate">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Time</span>
+                        <span class="summary-value" id="summaryTime">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Name</span>
+                        <span class="summary-value" id="summaryName">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Email</span>
+                        <span class="summary-value" id="summaryEmail">-</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Phone</span>
+                        <span class="summary-value" id="summaryPhone">-</span>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-secondary" onclick="prevStep()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                    </button>
+                    <button class="btn btn-primary" onclick="submitBooking()">
+                        Confirm Booking
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Success Message -->
+            <div class="step-content" id="stepSuccess">
+                <div class="success-message">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    </div>
+                    <h2>Booking Confirmed!</h2>
+                    <p>Thank you for scheduling with Ocean Cabinet. We'll send a confirmation email shortly.</p>
+                </div>
+                <div class="contact-info">
+                    <h4>Questions?</h4>
+                    <p>Call us at <a href="tel:+18565533899">(856) 553-3899</a></p>
+                    <p>Email: <a href="mailto:oceancabinets888@gmail.com">oceancabinets888@gmail.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Ocean Cabinet</div>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="booking.html">Book</a></li>
+                <li><a href="service-area.html">Service Area</a></li>
+                <li><a href="tel:+18565533899">(856) 553-3899</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        navToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+        // Booking state
+        let currentStep = 1;
+        let bookingData = {
+            service: null,
+            date: null,
+            time: null,
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            address: '',
+            notes: ''
+        };
+
+        // Service names
+        const serviceNames = {
+            'measurement': 'Free In-Home Measurement',
+            'showroom': 'Showroom Visit',
+            'design': 'Design Consultation'
+        };
+
+        // Service selection
+        const serviceOptions = document.querySelectorAll('.service-option');
+        serviceOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                serviceOptions.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+                bookingData.service = option.dataset.service;
+                document.getElementById('step1Next').disabled = false;
+            });
+        });
+
+        // Calendar
+        let currentDate = new Date();
+        let selectedDate = null;
+        let selectedTime = null;
+
+        const calendarDays = document.getElementById('calendarDays');
+        const calendarMonth = document.getElementById('calendarMonth');
+        const prevMonthBtn = document.getElementById('prevMonth');
+        const nextMonthBtn = document.getElementById('nextMonth');
+        const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+        const timeSlots = document.getElementById('timeSlots');
+        const selectedDateText = document.getElementById('selectedDateText');
+
+        const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                       'July', 'August', 'September', 'October', 'November', 'December'];
+
+        // Simulated booked slots (in real app, fetch from server)
+        const bookedSlots = {
+            '2026-02-16': ['10:00 AM', '2:00 PM'],
+            '2026-02-18': ['9:00 AM', '11:00 AM', '3:00 PM'],
+            '2026-02-20': ['10:00 AM'],
+            '2026-02-23': ['9:00 AM', '10:00 AM', '11:00 AM', '2:00 PM', '3:00 PM', '4:00 PM']
+        };
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            calendarMonth.textContent = `${months[month]} ${year}`;
+
+            // Disable prev button if current month
+            const thisMonth = new Date();
+            thisMonth.setDate(1);
+            thisMonth.setHours(0, 0, 0, 0);
+            const displayMonth = new Date(year, month, 1);
+            prevMonthBtn.disabled = displayMonth <= thisMonth;
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+            calendarDays.innerHTML = '';
+
+            // Previous month days
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const day = document.createElement('button');
+                day.className = 'calendar-day other-month';
+                day.textContent = daysInPrevMonth - i;
+                day.disabled = true;
+                calendarDays.appendChild(day);
+            }
+
+            // Current month days
+            for (let i = 1; i <= daysInMonth; i++) {
+                const day = document.createElement('button');
+                day.className = 'calendar-day';
+                day.textContent = i;
+
+                const date = new Date(year, month, i);
+                date.setHours(0, 0, 0, 0);
+
+                // Disable past dates and Sundays
+                if (date < today || date.getDay() === 0) {
+                    day.disabled = true;
+                }
+
+                // Mark today
+                if (date.getTime() === today.getTime()) {
+                    day.classList.add('today');
+                }
+
+                // Mark selected
+                if (selectedDate && date.getTime() === selectedDate.getTime()) {
+                    day.classList.add('selected');
+                }
+
+                day.addEventListener('click', () => selectDate(date, day));
+                calendarDays.appendChild(day);
+            }
+
+            // Next month days
+            const totalCells = 42;
+            const filledCells = firstDay + daysInMonth;
+            for (let i = 1; i <= totalCells - filledCells; i++) {
+                const day = document.createElement('button');
+                day.className = 'calendar-day other-month';
+                day.textContent = i;
+                day.disabled = true;
+                calendarDays.appendChild(day);
+            }
+        }
+
+        function selectDate(date, dayElement) {
+            selectedDate = date;
+            selectedTime = null;
+            bookingData.date = date;
+            bookingData.time = null;
+            document.getElementById('step2Next').disabled = true;
+
+            // Update visual selection
+            document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+            dayElement.classList.add('selected');
+
+            // Show time slots
+            const dateStr = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+            selectedDateText.textContent = dateStr;
+            renderTimeSlots(date);
+            timeSlotsContainer.style.display = 'block';
+        }
+
+        function renderTimeSlots(date) {
+            const dateKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+            const booked = bookedSlots[dateKey] || [];
+
+            const slots = ['9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'];
+
+            // Saturday has limited hours
+            const isSaturday = date.getDay() === 6;
+            const availableSlots = isSaturday ? ['10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM'] : slots;
+
+            timeSlots.innerHTML = '';
+            availableSlots.forEach(slot => {
+                const btn = document.createElement('button');
+                btn.className = 'time-slot';
+                btn.textContent = slot;
+
+                if (booked.includes(slot)) {
+                    btn.disabled = true;
+                    btn.title = 'Already booked';
+                }
+
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    selectedTime = slot;
+                    bookingData.time = slot;
+                    document.getElementById('step2Next').disabled = false;
+                });
+
+                timeSlots.appendChild(btn);
+            });
+        }
+
+        prevMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+
+        nextMonthBtn.addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+
+        // Step navigation
+        function updateStepIndicators() {
+            document.querySelectorAll('.step').forEach((step, index) => {
+                step.classList.remove('active', 'completed');
+                if (index + 1 < currentStep) step.classList.add('completed');
+                if (index + 1 === currentStep) step.classList.add('active');
+            });
+        }
+
+        function nextStep() {
+            if (currentStep === 3) {
+                // Validate form
+                const firstName = document.getElementById('firstName').value.trim();
+                const lastName = document.getElementById('lastName').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const phone = document.getElementById('phone').value.trim();
+
+                if (!firstName || !lastName || !email || !phone) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+
+                bookingData.firstName = firstName;
+                bookingData.lastName = lastName;
+                bookingData.email = email;
+                bookingData.phone = phone;
+                bookingData.address = document.getElementById('address').value.trim();
+                bookingData.notes = document.getElementById('notes').value.trim();
+
+                // Update summary
+                document.getElementById('summaryService').textContent = serviceNames[bookingData.service];
+                document.getElementById('summaryDate').textContent = bookingData.date.toLocaleDateString('en-US', {
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+                });
+                document.getElementById('summaryTime').textContent = bookingData.time;
+                document.getElementById('summaryName').textContent = `${bookingData.firstName} ${bookingData.lastName}`;
+                document.getElementById('summaryEmail').textContent = bookingData.email;
+                document.getElementById('summaryPhone').textContent = bookingData.phone;
+            }
+
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep++;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateStepIndicators();
+        }
+
+        function prevStep() {
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            currentStep--;
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            updateStepIndicators();
+        }
+
+        function submitBooking() {
+            // In production, send to server
+            console.log('Booking submitted:', bookingData);
+
+            // Show success
+            document.getElementById('step4').classList.remove('active');
+            document.getElementById('stepSuccess').classList.add('active');
+            document.querySelectorAll('.step').forEach(s => s.classList.add('completed'));
+        }
+
+        // Initialize
+        renderCalendar();
+    </script>
+</body>
+</html>

@@ -118,7 +118,7 @@
         }
 
         .nav-logo img {
-            height: 100px;
+            height: 120px;
             width: auto;
         }
 
@@ -150,6 +150,8 @@
 
         .nav-links a:hover { color: var(--color-heading); }
         .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--color-accent); }
+        .nav-links a.active::after { width: 100%; }
 
         .nav-toggle {
             display: none;
@@ -450,189 +452,82 @@
             margin: 16px auto 0;
         }
 
-        /* 3D Carousel */
-        .carousel-viewport {
-            width: 100%;
-            height: 480px;
+        /* Gallery Preview Grid */
+        .gallery-preview {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 40px;
+        }
+
+        .gallery-preview-item {
             position: relative;
-            perspective: 1200px;
-            perspective-origin: center center;
+            aspect-ratio: 1;
             overflow: hidden;
-            cursor: grab;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: pan-y pinch-zoom;
+            border-radius: 12px;
         }
 
-        .carousel-viewport:active { cursor: grabbing; }
-
-        .carousel-track {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform-style: preserve-3d;
-            will-change: transform;
-        }
-
-        .carousel-card {
-            position: absolute;
-            width: 320px;
-            height: 420px;
-            border-radius: 16px;
-            overflow: hidden;
-            background: var(--color-bg);
-            will-change: transform, opacity;
-            transform-style: preserve-3d;
-            backface-visibility: hidden;
-        }
-
-        .carousel-card img {
+        .gallery-preview-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            pointer-events: none;
+            transition: transform 0.5s ease;
         }
 
-        .carousel-card-info {
+        .gallery-preview-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-preview-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 32px 24px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .carousel-card.active .carousel-card-info { transform: translateY(0); }
-        .carousel-card.active { cursor: pointer; }
+        .gallery-preview-item:hover .gallery-preview-overlay {
+            opacity: 1;
+        }
 
-        .carousel-card-info h4 {
+        .gallery-preview-overlay span {
             color: #fff;
             font-family: var(--font-serif);
-            font-size: 1.1875rem;
+            font-size: 1rem;
             font-weight: 500;
-            margin-bottom: 4px;
         }
 
-        .carousel-card-info span {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.875rem;
-            font-weight: 400;
-        }
-
-        .carousel-hint {
+        .gallery-cta {
             text-align: center;
-            margin-top: 32px;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.8125rem;
+            margin-top: 40px;
         }
 
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
+        .gallery-btn {
+            display: inline-flex;
+            align-items: center;
             gap: 10px;
-            margin-top: 24px;
-        }
-
-        .carousel-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.25);
-            border: none;
-            padding: 0;
-            cursor: pointer;
+            padding: 16px 32px;
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
             transition: all 0.3s ease;
         }
 
-        .carousel-dot.active {
-            background: var(--color-accent);
-            transform: scale(1.5);
-        }
-
-        /* Lightbox */
-        .carousel-lightbox {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: rgba(0, 0, 0, 0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: background 0.4s ease, opacity 0.4s ease;
-            cursor: zoom-out;
-        }
-
-        .carousel-lightbox.active {
-            opacity: 1;
-            visibility: visible;
-            background: rgba(0, 0, 0, 0.92);
-        }
-
-        .carousel-lightbox-content {
-            position: relative;
-            max-width: 90vw;
-            max-height: 85vh;
-            border-radius: 16px;
-            overflow: hidden;
-            transform: scale(0.8);
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .carousel-lightbox.active .carousel-lightbox-content {
-            transform: scale(1);
-        }
-
-        .carousel-lightbox-content img {
-            max-width: 90vw;
-            max-height: 85vh;
-            object-fit: contain;
-        }
-
-        .carousel-lightbox-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 32px;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
-        }
-
-        .carousel-lightbox-info h3 {
-            color: #fff;
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .carousel-lightbox-info span {
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 400;
-        }
-
-        .carousel-lightbox-close {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            width: 48px;
-            height: 48px;
-            border: none;
+        .gallery-btn:hover {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
+            border-color: #fff;
         }
 
-        .carousel-lightbox-close:hover { background: rgba(255, 255, 255, 0.2); }
-        .carousel-lightbox-close svg { width: 24px; height: 24px; color: #fff; }
+        .gallery-btn svg {
+            width: 18px;
+            height: 18px;
+        }
 
         /* ========================================
            Brands Section
@@ -682,10 +577,10 @@
 
         .brand-item {
             flex-shrink: 0;
-            height: 50px;
+            height: 140px;
             display: flex;
             align-items: center;
-            opacity: 0.6;
+            opacity: 0.7;
             transition: opacity 0.3s ease;
         }
 
@@ -699,7 +594,7 @@
         .brand-item img {
             height: 100%;
             width: auto;
-            max-width: 160px;
+            max-width: 320px;
             object-fit: contain;
             filter: grayscale(100%);
             transition: filter 0.3s ease;
@@ -1073,6 +968,8 @@
             section { padding: 80px 32px; }
             .nav { padding: 20px 32px; }
 
+            .gallery-preview { grid-template-columns: repeat(2, 1fr); }
+
             .about-content,
             .contact-content {
                 grid-template-columns: 1fr;
@@ -1125,7 +1022,7 @@
             }
 
             .nav-toggle { display: flex; }
-            .nav-logo img { height: 72px; }
+            .nav-logo img { height: 80px; }
 
             .hero-content { padding: 0 24px 48px; }
 
@@ -1137,13 +1034,13 @@
             .process-steps { grid-template-columns: 1fr; gap: 40px; }
             .process-step-number { width: 64px; height: 64px; font-size: 1.5rem; }
 
-            .carousel-viewport { height: 380px; }
-            .carousel-card { width: 240px; height: 320px; }
-            .carousel-hint { display: none; }
+            .gallery-preview { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .gallery-preview-overlay { padding: 12px; }
+            .gallery-preview-overlay span { font-size: 0.875rem; }
 
-            .brands-track { gap: 48px; }
-            .brand-item { height: 36px; }
-            .brand-item img { max-width: 120px; }
+            .brands-track { gap: 60px; }
+            .brand-item { height: 100px; }
+            .brand-item img { max-width: 240px; }
 
             .cta-section { padding: 56px 24px; }
             .cta-buttons { flex-direction: column; align-items: center; }
@@ -1164,18 +1061,20 @@
 
     <!-- Floating Contact CTA -->
     <div class="floating-cta">
-        <a href="tel:+18565533899" class="floating-btn floating-btn-primary">
+        <a href="booking.html" class="floating-btn floating-btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>Book Now</span>
+        </a>
+        <a href="tel:+18565533899" class="floating-btn floating-btn-secondary">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
             </svg>
-            <span>Call Now</span>
-        </a>
-        <a href="mailto:oceancabinets888@gmail.com" class="floating-btn floating-btn-secondary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                <polyline points="22,6 12,13 2,6"/>
-            </svg>
-            <span>Email</span>
+            <span>Call</span>
         </a>
     </div>
 
@@ -1185,9 +1084,10 @@
             <img src="ocean/logo.png" alt="Ocean Cabinet and Countertops">
         </a>
         <ul class="nav-links">
-            <li><a href="#gallery">Our Work</a></li>
-            <li><a href="#process">How It Works</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="service-area.html">Service Area</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-toggle" aria-label="Toggle navigation">
@@ -1200,24 +1100,27 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-media">
-            <img src="ocean/kitchen15.png" alt="Modern kitchen with custom cabinetry" loading="eager">
+            <img src="ocean/kitchen.png" alt="Modern kitchen with custom cabinetry" loading="eager">
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-statement fade-in">Kitchen renovation, simplified.</h1>
             <p class="hero-subline fade-in">Free measurement, design help, and professional installation. We handle everything.</p>
             <div class="hero-cta fade-in">
-                <a href="tel:+18565533899" class="hero-btn hero-btn-primary">
+                <a href="booking.html" class="hero-btn hero-btn-primary">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    Book Free Consultation
+                </a>
+                <a href="tel:+18565533899" class="hero-btn hero-btn-secondary">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
                     </svg>
-                    Call or Text Us
-                </a>
-                <a href="#contact" class="hero-btn hero-btn-secondary">
-                    Request Free Measurement
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
+                    Call (856) 553-3899
                 </a>
             </div>
         </div>
@@ -1276,7 +1179,7 @@
         </div>
     </section>
 
-    <!-- Project Gallery -->
+    <!-- Project Gallery Preview -->
     <section class="gallery-section" id="gallery">
         <div class="container">
             <div class="gallery-header">
@@ -1286,28 +1189,41 @@
             </div>
         </div>
 
-        <div class="carousel-viewport fade-in" id="carouselViewport">
-            <div class="carousel-track" id="carouselTrack"></div>
-        </div>
-
+        <!-- Simple Gallery Grid Preview -->
         <div class="container">
-            <div class="carousel-hint fade-in">Drag to explore</div>
-            <div class="carousel-dots fade-in" id="carouselDots"></div>
-        </div>
-
-        <!-- Lightbox -->
-        <div class="carousel-lightbox" id="carouselLightbox">
-            <button class="carousel-lightbox-close" id="lightboxClose" aria-label="Close">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 6L6 18M6 6l12 12"/>
-                </svg>
-            </button>
-            <div class="carousel-lightbox-content" id="lightboxContent">
-                <img src="" alt="" id="lightboxImage">
-                <div class="carousel-lightbox-info">
-                    <h3 id="lightboxTitle"></h3>
-                    <span id="lightboxLocation"></span>
-                </div>
+            <div class="gallery-preview fade-in">
+                <a href="gallery.html" class="gallery-preview-item">
+                    <img src="ocean/kitchen15.png" alt="Modern Gray Kitchen" loading="lazy">
+                    <div class="gallery-preview-overlay">
+                        <span>Modern Gray Kitchen</span>
+                    </div>
+                </a>
+                <a href="gallery.html" class="gallery-preview-item">
+                    <img src="ocean/kitchen14.png" alt="White Built-In Cabinets" loading="lazy">
+                    <div class="gallery-preview-overlay">
+                        <span>White Built-In Cabinets</span>
+                    </div>
+                </a>
+                <a href="gallery.html" class="gallery-preview-item">
+                    <img src="ocean/kitchen.png" alt="Contemporary White Kitchen" loading="lazy">
+                    <div class="gallery-preview-overlay">
+                        <span>Contemporary White Kitchen</span>
+                    </div>
+                </a>
+                <a href="gallery.html" class="gallery-preview-item">
+                    <img src="ocean/kitchen12.png" alt="Gray Shaker Style" loading="lazy">
+                    <div class="gallery-preview-overlay">
+                        <span>Gray Shaker Style</span>
+                    </div>
+                </a>
+            </div>
+            <div class="gallery-cta fade-in">
+                <a href="gallery.html" class="gallery-btn">
+                    View All Projects
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
@@ -1321,19 +1237,19 @@
             <div class="brands-track" id="brandsTrack">
                 <div class="brand-item"><a href="https://fabuwood.com" target="_blank" rel="noopener"><img src="ocean/fabuwood.png" alt="Fabuwood"></a></div>
                 <div class="brand-item"><a href="https://www.cambriausa.com" target="_blank" rel="noopener"><img src="ocean/cambria.png" alt="Cambria"></a></div>
-                <div class="brand-item"><a href="#"><img src="ocean/makellos.png" alt="Makellos"></a></div>
-                <div class="brand-item"><a href="#"><img src="ocean/woodconcept.png" alt="Wood Concept"></a></div>
-                <div class="brand-item"><a href="#"><img src="ocean/jck.png" alt="JCK"></a></div>
-                <div class="brand-item"><a href="#"><img src="ocean/QUARTZ.png" alt="Quartz"></a></div>
+                <div class="brand-item"><a href="https://www.makelloskitchens.com" target="_blank" rel="noopener"><img src="ocean/makellos.png" alt="Makellos"></a></div>
+                <div class="brand-item"><a href="https://www.woodconceptcabinets.com" target="_blank" rel="noopener"><img src="ocean/woodconcept.png" alt="Wood Concept"></a></div>
+                <div class="brand-item"><a href="https://www.jckcabinetry.com" target="_blank" rel="noopener"><img src="ocean/jck.png" alt="JCK"></a></div>
+                <div class="brand-item"><a href="https://www.caesarstoneus.com" target="_blank" rel="noopener"><img src="ocean/QUARTZ.png" alt="Quartz"></a></div>
                 <div class="brand-item"><a href="https://www.pentalquartz.com" target="_blank" rel="noopener"><img src="ocean/pentalquartz.png" alt="Pental Quartz"></a></div>
                 <div class="brand-item"><a href="https://www.topknobs.com" target="_blank" rel="noopener"><img src="ocean/topknobs.png" alt="Top Knobs"></a></div>
                 <!-- Duplicate for seamless scroll -->
                 <div class="brand-item"><a href="https://fabuwood.com" target="_blank" rel="noopener"><img src="ocean/fabuwood.png" alt="Fabuwood"></a></div>
                 <div class="brand-item"><a href="https://www.cambriausa.com" target="_blank" rel="noopener"><img src="ocean/cambria.png" alt="Cambria"></a></div>
-                <div class="brand-item"><a href="#"><img src="ocean/makellos.png" alt="Makellos"></a></div>
-                <div class="brand-item"><a href="#"><img src="ocean/woodconcept.png" alt="Wood Concept"></a></div>
-                <div class="brand-item"><a href="#"><img src="ocean/jck.png" alt="JCK"></a></div>
-                <div class="brand-item"><a href="#"><img src="ocean/QUARTZ.png" alt="Quartz"></a></div>
+                <div class="brand-item"><a href="https://www.makelloskitchens.com" target="_blank" rel="noopener"><img src="ocean/makellos.png" alt="Makellos"></a></div>
+                <div class="brand-item"><a href="https://www.woodconceptcabinets.com" target="_blank" rel="noopener"><img src="ocean/woodconcept.png" alt="Wood Concept"></a></div>
+                <div class="brand-item"><a href="https://www.jckcabinetry.com" target="_blank" rel="noopener"><img src="ocean/jck.png" alt="JCK"></a></div>
+                <div class="brand-item"><a href="https://www.caesarstoneus.com" target="_blank" rel="noopener"><img src="ocean/QUARTZ.png" alt="Quartz"></a></div>
                 <div class="brand-item"><a href="https://www.pentalquartz.com" target="_blank" rel="noopener"><img src="ocean/pentalquartz.png" alt="Pental Quartz"></a></div>
                 <div class="brand-item"><a href="https://www.topknobs.com" target="_blank" rel="noopener"><img src="ocean/topknobs.png" alt="Top Knobs"></a></div>
             </div>
@@ -1367,17 +1283,20 @@
         <h2 class="fade-in">Ready to get started?</h2>
         <p class="fade-in">A quick conversation is all it takes. No pressure, no commitment.</p>
         <div class="cta-buttons fade-in">
-            <a href="tel:+18565533899" class="cta-btn primary">
+            <a href="booking.html" class="cta-btn primary">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                Schedule Free Consultation
+            </a>
+            <a href="tel:+18565533899" class="cta-btn secondary">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
                 </svg>
                 Call (856) 553-3899
-            </a>
-            <a href="#contact" class="cta-btn secondary">
-                Send a Message
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
             </a>
         </div>
     </section>
@@ -1445,9 +1364,9 @@
                 <div class="footer-column">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="#gallery">Our Work</a></li>
-                        <li><a href="#process">How It Works</a></li>
-                        <li><a href="#about">About</a></li>
+                        <li><a href="gallery.html">Our Work</a></li>
+                        <li><a href="booking.html">Book Appointment</a></li>
+                        <li><a href="service-area.html">Service Area</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
@@ -1519,169 +1438,6 @@
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => navLinks.classList.remove('active'));
         });
-
-        // ========================================
-        // 3D Photo Carousel
-        // ========================================
-        const carouselProjects = [
-            { image: 'ocean/kitchen15.png', title: 'Modern Gray Kitchen', location: 'Lindenwold, NJ' },
-            { image: 'ocean/kitchen14.png', title: 'White Built-In Cabinets', location: 'Marlton, NJ' },
-            { image: 'ocean/kitchen.png', title: 'Contemporary White Kitchen', location: 'Haddon Heights, NJ' },
-            { image: 'ocean/kitchen12.png', title: 'Gray Shaker Style', location: 'Voorhees, NJ' },
-            { image: 'ocean/kitchen1.png', title: 'Classic White Cabinets', location: 'Stratford, NJ' },
-            { image: 'ocean/kitchen13.png', title: 'Gray Cabinet Hutch', location: 'Haddonfield, NJ' },
-            { image: 'ocean/kitchen2.png', title: 'Modern Island Design', location: 'Clementon, NJ' },
-            { image: 'ocean/kitchen16.png', title: 'Dark Wood Classic', location: 'Cherry Hill, NJ' },
-            { image: 'ocean/kitchen7.jpg', title: 'Transitional Kitchen', location: 'Blackwood, NJ' },
-            { image: 'ocean/kitchen17.png', title: 'White Pantry Cabinet', location: 'Collingswood, NJ' },
-            { image: 'ocean/kitchen8.jpg', title: 'Open Concept Layout', location: 'Somerdale, NJ' },
-            { image: 'ocean/kitchen9.jpg', title: 'Custom Storage Solutions', location: 'Magnolia, NJ' },
-            { image: 'ocean/kitchen10.jpg', title: 'Elegant Countertops', location: 'Barrington, NJ' }
-        ];
-
-        const track = document.getElementById('carouselTrack');
-        const dotsContainer = document.getElementById('carouselDots');
-        const viewport = document.getElementById('carouselViewport');
-        const lightbox = document.getElementById('carouselLightbox');
-        const lightboxImage = document.getElementById('lightboxImage');
-        const lightboxTitle = document.getElementById('lightboxTitle');
-        const lightboxLocation = document.getElementById('lightboxLocation');
-        const lightboxClose = document.getElementById('lightboxClose');
-
-        let currentIndex = 0;
-        let isDragging = false;
-        let startX = 0;
-        let currentX = 0;
-        let dragOffset = 0;
-        let velocity = 0;
-        let animationFrame = null;
-
-        // Create cards
-        carouselProjects.forEach((project, i) => {
-            const card = document.createElement('div');
-            card.className = 'carousel-card';
-            card.dataset.index = i;
-            card.innerHTML = `
-                <img src="${project.image}" alt="${project.title}" loading="lazy">
-                <div class="carousel-card-info">
-                    <h4>${project.title}</h4>
-                    <span>${project.location}</span>
-                </div>
-            `;
-            track.appendChild(card);
-
-            const dot = document.createElement('button');
-            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
-        });
-
-        const cards = document.querySelectorAll('.carousel-card');
-        const dots = document.querySelectorAll('.carousel-dot');
-        const cardWidth = 320;
-        const cardGap = 40;
-        const totalCards = carouselProjects.length;
-
-        function updateCarousel(offset = 0) {
-            cards.forEach((card, i) => {
-                const diff = i - currentIndex;
-                const x = diff * (cardWidth + cardGap) + offset;
-                const absX = Math.abs(x);
-                const scale = Math.max(0.75, 1 - absX * 0.0008);
-                const z = -absX * 0.5;
-                const opacity = Math.max(0.4, 1 - absX * 0.002);
-
-                card.style.transform = `translate3d(${x - cardWidth/2}px, -50%, ${z}px) scale(${scale})`;
-                card.style.opacity = opacity;
-                card.classList.toggle('active', i === currentIndex && offset === 0);
-            });
-
-            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
-        }
-
-        function goToSlide(index) {
-            currentIndex = Math.max(0, Math.min(totalCards - 1, index));
-            updateCarousel();
-        }
-
-        // Drag handling
-        function handleDragStart(e) {
-            if (animationFrame) cancelAnimationFrame(animationFrame);
-            isDragging = true;
-            startX = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-            currentX = startX;
-            velocity = 0;
-            viewport.style.cursor = 'grabbing';
-        }
-
-        function handleDragMove(e) {
-            if (!isDragging) return;
-            const x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
-            const delta = x - currentX;
-            velocity = delta;
-            currentX = x;
-            dragOffset = x - startX;
-            updateCarousel(dragOffset);
-        }
-
-        function handleDragEnd() {
-            if (!isDragging) return;
-            isDragging = false;
-            viewport.style.cursor = 'grab';
-
-            const threshold = cardWidth / 3;
-            if (Math.abs(dragOffset) > threshold || Math.abs(velocity) > 10) {
-                if (dragOffset > 0 || velocity > 10) {
-                    currentIndex = Math.max(0, currentIndex - 1);
-                } else {
-                    currentIndex = Math.min(totalCards - 1, currentIndex + 1);
-                }
-            }
-
-            dragOffset = 0;
-            updateCarousel();
-        }
-
-        // Event listeners
-        viewport.addEventListener('mousedown', handleDragStart);
-        viewport.addEventListener('mousemove', handleDragMove);
-        viewport.addEventListener('mouseup', handleDragEnd);
-        viewport.addEventListener('mouseleave', handleDragEnd);
-        viewport.addEventListener('touchstart', handleDragStart, { passive: true });
-        viewport.addEventListener('touchmove', handleDragMove, { passive: true });
-        viewport.addEventListener('touchend', handleDragEnd);
-
-        // Lightbox
-        cards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                if (Math.abs(dragOffset) > 5) return;
-                const index = parseInt(card.dataset.index);
-                if (index === currentIndex) {
-                    const project = carouselProjects[index];
-                    lightboxImage.src = project.image;
-                    lightboxTitle.textContent = project.title;
-                    lightboxLocation.textContent = project.location;
-                    lightbox.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                }
-            });
-        });
-
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        lightboxClose.addEventListener('click', closeLightbox);
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) closeLightbox();
-        });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeLightbox();
-        });
-
-        // Initialize
-        updateCarousel();
     </script>
 </body>
 </html>

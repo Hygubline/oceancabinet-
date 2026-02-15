@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Work — Ocean Cabinet and Countertops</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #FAF9F7;
+            --color-bg-alt: #F5F4F1;
+            --color-heading: #2A2A2A;
+            --color-body: #4A4A4A;
+            --color-muted: #6B6B6B;
+            --color-accent: #B8977E;
+            --color-accent-dark: #9A7D66;
+            --color-divider: #E8E6E3;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --max-width: 1280px;
+            --transition-fast: 300ms ease-out;
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--color-body);
+            background-color: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        a { color: inherit; text-decoration: none; }
+
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            color: var(--color-heading);
+        }
+        h1 { font-size: clamp(2rem, 4vw, 2.75rem); }
+        h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 249, 247, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .nav-logo img { height: 120px; width: auto; }
+        .nav-links { display: flex; gap: 48px; list-style: none; }
+        .nav-links a {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-body);
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--color-accent);
+            transition: width var(--transition-fast);
+        }
+        .nav-links a:hover { color: var(--color-heading); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--color-accent); }
+        .nav-links a.active::after { width: 100%; }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-toggle span {
+            width: 24px;
+            height: 1px;
+            background: var(--color-heading);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 160px 48px 80px;
+            text-align: center;
+            background: var(--color-bg-alt);
+        }
+        .page-header .label {
+            color: var(--color-muted);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .page-header p {
+            color: var(--color-muted);
+            max-width: 500px;
+            margin: 16px auto 0;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background: var(--color-heading);
+            padding: 80px 48px;
+            overflow: hidden;
+        }
+
+        /* 3D Carousel */
+        .carousel-viewport {
+            width: 100%;
+            height: 380px;
+            position: relative;
+            perspective: 2000px;
+            perspective-origin: center center;
+            overflow: hidden;
+            cursor: grab;
+            user-select: none;
+            touch-action: pan-y pinch-zoom;
+        }
+        .carousel-viewport:active { cursor: grabbing; }
+
+        .carousel-track {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            transform-style: preserve-3d;
+        }
+
+        .carousel-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 180px;
+            height: 240px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--color-bg);
+            will-change: transform, opacity;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+        .carousel-card.active { box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4); cursor: pointer; }
+        .carousel-card img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+
+        .carousel-card-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 16px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        .carousel-card.active .carousel-card-info { transform: translateY(0); }
+        .carousel-card-info h4 {
+            color: #fff;
+            font-family: var(--font-serif);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        .carousel-card-info span {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.75rem;
+        }
+
+        .carousel-hint {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.875rem;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 24px;
+        }
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .carousel-dot.active { background: var(--color-accent); transform: scale(1.5); }
+
+        /* Lightbox */
+        .carousel-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            cursor: zoom-out;
+        }
+        .carousel-lightbox.active {
+            opacity: 1;
+            visibility: visible;
+            background: rgba(0, 0, 0, 0.92);
+        }
+        .carousel-lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 16px;
+            overflow: hidden;
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .carousel-lightbox.active .carousel-lightbox-content { transform: scale(1); }
+        .carousel-lightbox-content img { max-width: 90vw; max-height: 85vh; object-fit: contain; }
+        .carousel-lightbox-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 32px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+        }
+        .carousel-lightbox-info h3 {
+            color: #fff;
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        .carousel-lightbox-info span { color: rgba(255, 255, 255, 0.7); }
+        .carousel-lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+        .carousel-lightbox-close:hover { background: rgba(255, 255, 255, 0.2); }
+        .carousel-lightbox-close svg { width: 24px; height: 24px; color: #fff; }
+
+        /* Grid Gallery */
+        .grid-gallery {
+            padding: 80px 48px;
+            background: var(--color-bg);
+        }
+        .grid-gallery h2 {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .gallery-grid {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+        .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+        .gallery-item-overlay h4 { color: #fff; font-family: var(--font-serif); font-size: 1.125rem; }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--color-accent);
+            padding: 80px 48px;
+            text-align: center;
+        }
+        .cta-section h2 { color: #fff; margin-bottom: 16px; }
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 480px;
+            margin: 0 auto 32px;
+        }
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 32px;
+            background: #fff;
+            color: var(--color-accent-dark);
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); }
+        .cta-btn svg { width: 18px; height: 18px; }
+
+        /* Footer */
+        .footer {
+            background: var(--color-heading);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 60px 48px;
+        }
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: #fff;
+        }
+        .footer-links { display: flex; gap: 32px; list-style: none; }
+        .footer-links a { font-size: 0.875rem; transition: color 0.3s; }
+        .footer-links a:hover { color: #fff; }
+
+        @media (max-width: 768px) {
+            .nav { padding: 16px 24px; }
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-bg);
+                flex-direction: column;
+                padding: 24px;
+                opacity: 0;
+                visibility: hidden;
+                gap: 20px;
+            }
+            .nav-links.active { opacity: 1; visibility: visible; }
+            .nav-toggle { display: flex; }
+            .nav-logo img { height: 80px; }
+
+            .page-header { padding: 120px 24px 60px; }
+            .gallery-section { padding: 60px 24px; }
+            .carousel-viewport { height: 300px; }
+            .carousel-card { width: 140px; height: 190px; }
+            .grid-gallery { padding: 60px 24px; }
+            .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
+            .cta-section { padding: 60px 24px; }
+            .footer { padding: 40px 24px; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="ocean/logo.png" alt="Ocean Cabinet">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html" class="active">Gallery</a></li>
+            <li><a href="booking.html">Book Appointment</a></li>
+            <li><a href="service-area.html">Service Area</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="label">Our Work</div>
+        <h1>Recent Projects</h1>
+        <p>Real kitchens we've completed for local homeowners across South Jersey.</p>
+    </header>
+
+    <!-- 3D Carousel Gallery -->
+    <section class="gallery-section">
+        <div class="carousel-viewport" id="carouselViewport">
+            <div class="carousel-track" id="carouselTrack"></div>
+        </div>
+        <div class="carousel-hint">Drag to explore</div>
+        <div class="carousel-dots" id="carouselDots"></div>
+
+        <!-- Lightbox -->
+        <div class="carousel-lightbox" id="carouselLightbox">
+            <button class="carousel-lightbox-close" id="lightboxClose">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="carousel-lightbox-content" id="lightboxContent">
+                <img src="" alt="" id="lightboxImage">
+                <div class="carousel-lightbox-info">
+                    <h3 id="lightboxTitle"></h3>
+                    <span id="lightboxLocation"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grid Gallery -->
+    <section class="grid-gallery">
+        <h2>All Projects</h2>
+        <div class="gallery-grid" id="galleryGrid"></div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <h2>Love what you see?</h2>
+        <p>Let's create something beautiful for your home. Book a free consultation today.</p>
+        <a href="booking.html" class="cta-btn">
+            Schedule Free Consultation
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Ocean Cabinet</div>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="booking.html">Book</a></li>
+                <li><a href="service-area.html">Service Area</a></li>
+                <li><a href="tel:+18565533899">(856) 553-3899</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        navToggle.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+        // Project data
+        const carouselProjects = [
+            { image: 'ocean/kitchen15.png', title: 'Modern Gray Kitchen', location: 'Lindenwold, NJ' },
+            { image: 'ocean/kitchen14.png', title: 'White Built-In Cabinets', location: 'Marlton, NJ' },
+            { image: 'ocean/kitchen.png', title: 'Contemporary White Kitchen', location: 'Haddon Heights, NJ' },
+            { image: 'ocean/kitchen12.png', title: 'Gray Shaker Style', location: 'Voorhees, NJ' },
+            { image: 'ocean/kitchen23.png', title: 'Classic White Cabinets', location: 'Stratford, NJ' },
+            { image: 'ocean/kitchen13.png', title: 'Gray Cabinet Hutch', location: 'Haddonfield, NJ' },
+            { image: 'ocean/kitchen2.png', title: 'Modern Island Design', location: 'Clementon, NJ' },
+            { image: 'ocean/kitchen16.png', title: 'Dark Wood Classic', location: 'Cherry Hill, NJ' },
+            { image: 'ocean/kitchen7.jpg', title: 'Transitional Kitchen', location: 'Blackwood, NJ' },
+            { image: 'ocean/kitchen8.jpg', title: 'Open Concept Layout', location: 'Somerdale, NJ' },
+            { image: 'ocean/kitchen9.jpg', title: 'Custom Storage Solutions', location: 'Magnolia, NJ' },
+            { image: 'ocean/kitchen10.jpg', title: 'Elegant Countertops', location: 'Barrington, NJ' },
+            { image: 'ocean/kitchen22.jpg', title: 'Contemporary Design', location: 'Runnemede, NJ' }
+        ];
+
+        const track = document.getElementById('carouselTrack');
+        const dotsContainer = document.getElementById('carouselDots');
+        const viewport = document.getElementById('carouselViewport');
+        const lightbox = document.getElementById('carouselLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxLocation = document.getElementById('lightboxLocation');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const galleryGrid = document.getElementById('galleryGrid');
+
+        // 3D Carousel
+        const totalCards = carouselProjects.length;
+        const angleStep = 360 / totalCards;  // Pure 360° distribution, no overlap
+        let baseAngle = 0;
+        let velocity = 0;
+        let isDragging = false;
+        let startX = 0;
+        let lastX = 0;
+        let hasDragged = false;
+
+        function getRadius() {
+            if (window.innerWidth <= 768) return 450;
+            if (window.innerWidth <= 1024) return 550;
+            return 650;  // Larger radius for better spacing
+        }
+        let radius = getRadius();
+        window.addEventListener('resize', () => radius = getRadius());
+
+        // Create carousel cards
+        carouselProjects.forEach((project, i) => {
+            const card = document.createElement('div');
+            card.className = 'carousel-card';
+            card.dataset.index = i;
+            card.innerHTML = `
+                <img src="${project.image}" alt="${project.title}" loading="lazy">
+                <div class="carousel-card-info">
+                    <h4>${project.title}</h4>
+                    <span>${project.location}</span>
+                </div>
+            `;
+            track.appendChild(card);
+
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', () => animateToSlide(i));
+            dotsContainer.appendChild(dot);
+
+            // Grid gallery item
+            const gridItem = document.createElement('div');
+            gridItem.className = 'gallery-item';
+            gridItem.innerHTML = `
+                <img src="${project.image}" alt="${project.title}" loading="lazy">
+                <div class="gallery-item-overlay">
+                    <h4>${project.title}</h4>
+                </div>
+            `;
+            gridItem.addEventListener('click', () => openLightbox(i));
+            galleryGrid.appendChild(gridItem);
+        });
+
+        const cards = document.querySelectorAll('.carousel-card');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function normalizeAngle(angle) { return ((angle % 360) + 360) % 360; }
+        function getFrontCardIndex() {
+            const normalized = normalizeAngle(-baseAngle);
+            return Math.round(normalized / angleStep) % totalCards;
+        }
+
+        function renderCarousel() {
+            cards.forEach((card, i) => {
+                // Pure geometric angle - no compression
+                const rawAngle = baseAngle + i * angleStep;
+                let angle = rawAngle % 360;
+                if (angle > 180) angle -= 360;
+                if (angle < -180) angle += 360;
+
+                // Simple depth calculation
+                const radians = (angle * Math.PI) / 180;
+                const depthFactor = (Math.cos(radians) + 1) / 2;
+
+                // Fixed radius - no Z boost
+                const translateZ = radius;
+
+                // Clean scale and opacity
+                const scale = 0.85 + depthFactor * 0.15;
+                const opacity = 0.35 + depthFactor * 0.65;
+
+                // Clean transform - no scaleX
+                card.style.transform = `translateX(-50%) translateY(-50%) rotateY(${angle}deg) translateZ(${translateZ}px) scale(${scale})`;
+                card.style.opacity = opacity;
+                card.style.zIndex = Math.round(depthFactor * 100);
+                card.classList.toggle('active', Math.abs(angle) < 15 && !isDragging);
+            });
+
+            const frontIndex = getFrontCardIndex();
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === frontIndex));
+        }
+
+        function animateToSlide(index) {
+            const targetAngle = -index * angleStep;
+            let diff = targetAngle - baseAngle;
+            if (diff > 180) diff -= 360;
+            if (diff < -180) diff += 360;
+            velocity = diff * 0.15;
+        }
+
+        function animate() {
+            if (!isDragging) {
+                // Stronger damping for stability
+                velocity *= 0.88;
+                baseAngle += velocity;
+                if (Math.abs(velocity) < 0.5) {
+                    const snapAngle = Math.round(baseAngle / angleStep) * angleStep;
+                    baseAngle += (snapAngle - baseAngle) * 0.08;
+                }
+            }
+            renderCarousel();
+            requestAnimationFrame(animate);
+        }
+
+        function handleDragStart(e) {
+            isDragging = true;
+            hasDragged = false;
+            velocity = 0;
+            const x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            startX = x;
+            lastX = x;
+        }
+
+        function handleDragMove(e) {
+            if (!isDragging) return;
+            const x = e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            const deltaX = x - lastX;
+            // Lighter, stickier drag
+            baseAngle += deltaX * 0.12;
+            velocity = deltaX * 0.15;
+            lastX = x;
+            if (Math.abs(x - startX) > 5) hasDragged = true;
+        }
+
+        function handleDragEnd() {
+            isDragging = false;
+        }
+
+        viewport.addEventListener('mousedown', handleDragStart);
+        document.addEventListener('mousemove', handleDragMove);
+        document.addEventListener('mouseup', handleDragEnd);
+        viewport.addEventListener('touchstart', handleDragStart, { passive: true });
+        viewport.addEventListener('touchmove', handleDragMove, { passive: true });
+        viewport.addEventListener('touchend', handleDragEnd);
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (hasDragged) return;
+                const index = parseInt(card.dataset.index);
+                if (index === getFrontCardIndex()) openLightbox(index);
+                else animateToSlide(index);
+            });
+        });
+
+        function openLightbox(index) {
+            const project = carouselProjects[index];
+            lightboxImage.src = project.image;
+            lightboxTitle.textContent = project.title;
+            lightboxLocation.textContent = project.location;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+        animate();
+    </script>
+</body>
+</html>
